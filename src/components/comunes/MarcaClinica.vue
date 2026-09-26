@@ -1,5 +1,8 @@
 <script setup>
-// Sin props ni estado: solo el logo y el nombre de la marca.
+defineProps({
+  // Etiqueta opcional debajo del nombre (ej. el rol en el menú lateral).
+  etiqueta: { type: String, default: '' }
+})
 </script>
 
 <template>
@@ -40,7 +43,13 @@
         d="M8 10h11M8 14h11M8 18h7"
       />
     </svg>
-    <span class="nombre">Clínica Demo</span>
+    <div class="textos">
+      <span class="nombre">Clínica Demo</span>
+      <span
+        v-if="etiqueta"
+        class="etiqueta"
+      >{{ etiqueta }}</span>
+    </div>
   </div>
 </template>
 
@@ -75,9 +84,19 @@
   stroke-width: 1.5;
 }
 
+.textos {
+  display: flex;
+  flex-direction: column;
+}
+
 .nombre {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.01em;
+}
+
+.etiqueta {
+  font-size: 13px;
+  color: var(--color-texto-secundario);
 }
 </style>
