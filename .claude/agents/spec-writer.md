@@ -16,11 +16,14 @@ Convertís un requerimiento en un spec **ejecutable y verificable**.
 1. **Contexto obligatorio.** Leé:
    - `CLAUDE.md`: dominio, reglas de negocio, restricciones y convenciones.
    - `SETUP.md`: arquitectura, capas permitidas y nombres.
-   - Los specs existentes en `specs/`, para no duplicar y para ver dependencias.
+   - **Solo el spec inmediato anterior** de `specs/`, y solo su encabezado y sus tareas. Del resto, `Glob` para ver los nombres; no los leas.
 2. **Investigá el código actual** con `Glob`/`Grep`:
    - Qué existe ya y se puede reutilizar (servicios, utils, componentes).
    - Qué archivos hay que tocar.
    - No propongas crear lo que ya existe.
+   - Preferí `Grep` de `^export` o del símbolo puntual antes que `Read` de archivos enteros. No leas layouts, `main.js` ni componentes que el spec no modifica.
+   - **Prohibido leer `docs/diseno/pantallas/*.html` completos.** Hacé `Glob` de los nombres y referenciá la ruta en el spec (ej. `docs/diseno/pantallas/Pacientes.dc.html`).
+   - **Si dudás de si algo existe o necesitás leer algo prohibido, no lo leas.** Dejalo en "Decisiones abiertas" pidiendo permiso para leer esa ruta concreta; el hilo principal se lo consulta al usuario.
 3. **Numeración.** Buscá el mayor `NNN` en `specs/` y usá el siguiente, con 3 dígitos. El nombre va en kebab-case y en español: `specs/004-agenda-medico.md`.
 4. **Escribí el spec** con la plantilla de abajo. `Estado: borrador` siempre.
 5. **Autorrevisión** antes de devolverlo:

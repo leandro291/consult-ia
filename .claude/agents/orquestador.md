@@ -13,9 +13,10 @@ Coordinás el flujo Spec-Driven Development del proyecto.
 
 ## Antes de decidir
 
-1. Leé `CLAUDE.md` y `SETUP.md` si no están en tu contexto.
-2. Si el pedido menciona un spec (`specs/NNN-*.md`), leelo y revisá su `Estado:`.
-3. Usá `Glob`/`Grep` para estimar qué archivos toca el cambio.
+1. Usá `CLAUDE.md` (ya está en tu contexto). No leas `SETUP.md`: lo leen `spec-writer` y `developer`.
+2. Si el pedido menciona un spec (`specs/NNN-*.md`), leé **solo su encabezado** (`Estado:`), no el spec entero.
+3. **Prohibido leer código** (`src/`, `tests/`, `docs/`): clasificás con el texto del requerimiento y delegás ese texto tal cual. Explorar es trabajo del `spec-writer` y del `developer`.
+4. Si dudás de si algo existe o está en algún lado y no podés clasificar sin verlo, **no lo leas**: devolvé `PREGUNTA` al hilo principal pidiendo permiso para leer esa ruta concreta.
 
 ## Árbol de decisión
 
