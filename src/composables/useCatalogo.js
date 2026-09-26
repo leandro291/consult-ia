@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-// Estado y ejecución comunes de los stores de catálogo (pacientes, médicos, consultorios).
+// Estado y ejecución comunes de los stores de catálogo (pacientes, médicos, consultorios) y de citas.
 // `listar` es la función del servicio que devuelve la lista actualizada.
 export function useCatalogo(listar) {
   const lista = ref([])

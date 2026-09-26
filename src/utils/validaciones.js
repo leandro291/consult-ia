@@ -74,3 +74,37 @@ export function validarPaciente(datos) {
   if (!vacio(datos.email) && !FORMATO_EMAIL.test(datos.email.trim())) errores.email = 'Ingrese un correo válido.'
   return errores
 }
+
+// Campos obligatorios de una cita y que su inicio no sea anterior al momento actual. El motivo es opcional.
+export function validarCita(datos) {
+  const errores = {}
+  if (vacio(datos.pacienteId)) errores.pacienteId = 'Seleccione un paciente.'
+  if (vacio(datos.medicoId)) errores.medicoId = 'Seleccione un médico.'
+  if (vacio(datos.fecha)) errores.fecha = 'La fecha es obligatoria.'
+  if (vacio(datos.hora)) errores.hora = 'La hora es obligatoria.'
+  if (!errores.fecha && !errores.hora && dayjs(`${datos.fecha}T${datos.hora}`).isBefore(dayjs())) {
+    errores.fecha = 'La cita no puede empezar en el pasado.'
+  }
+  return errores
+}
+
+// "HH:mm" -> minutos desde las 00:00.
+function aMinutos(hora) {
+  const [h, m] = hora.split(':').map(Number)
+  return h * 60 + m
+}
+
+// Dos citas se solapan si son de la misma fecha y sus intervalos [hora, hora + duracionMin) se cruzan.
+export function citasSeSolapan(a, b) {
+  if (a.fecha !== b.fecha) return false
+  const inicioA = aMinutos(a.hora)
+  const inicioB = aMinutos(b.hora)
+  return inicioA < inicioB + b.duracionMin && inicioB < inicioA + a.duracionMin
+}
+
+// La cita cae en un día de atención del médico y cabe entre `inicio` y `fin` de su horario.
+export function citaDentroDelHorario({ fecha, hora, duracionMin }, horario) {
+  if (!horario.dias.includes(dayjs(fecha).day())) return false
+  const inicio = aMinutos(hora)
+  return inicio >= aMinutos(horario.inicio) && inicio + duracionMin <= aMinutos(horario.fin)
+}
