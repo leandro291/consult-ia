@@ -5,6 +5,23 @@ export function formatearFecha(fecha) {
   return dayjs(fecha).format('DD/MM/YYYY')
 }
 
+// Edad en años cumplidos a partir de la fecha de nacimiento (ISO).
+export function calcularEdad(fechaNacimiento) {
+  return dayjs().diff(dayjs(fechaNacimiento), 'year')
+}
+
+// Minúsculas y sin tildes, para comparar textos al buscar.
+export function normalizarTexto(texto) {
+  return (texto ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+}
+
+export const SEXOS = [
+  { valor: 'F', etiqueta: 'Femenino' },
+  { valor: 'M', etiqueta: 'Masculino' }
+]
+
+export const GRUPOS_SANGUINEOS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+
 export const DIAS_SEMANA = [
   { numero: 1, abreviatura: 'Lu', nombre: 'lunes' },
   { numero: 2, abreviatura: 'Ma', nombre: 'martes' },

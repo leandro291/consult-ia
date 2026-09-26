@@ -109,6 +109,8 @@ consult-ia/
 │   │   └── recetas.js
 │   │
 │   ├── composables/          # Lógica reactiva reutilizable
+│   │   ├── useCatalogo.js    # Estado y ejecución comunes de los stores de catálogo
+│   │   ├── useEliminarPaciente.js # Eliminación de paciente en dos pasos (confirmar o avisar)
 │   │   ├── useFecha.js
 │   │   ├── useConfirmacion.js
 │   │   ├── useDictado.js     # Envoltura de Web Speech API
@@ -121,12 +123,12 @@ consult-ia/
 │   ├── views/                # Una vista por ruta
 │   │   ├── LoginView.vue
 │   │   ├── EnConstruccionView.vue # Provisional para rutas de fases futuras
-│   │   ├── recepcion/        # ConsultoriosView, MedicosView, DashboardView, PacientesView, AgendaView, ...
+│   │   ├── recepcion/        # ConsultoriosView, MedicosView, DashboardView, PacientesView, PacienteDetalleView, AgendaView, ...
 │   │   └── medico/           # MiAgendaView, AtencionView, HistoriaView, ...
 │   │
 │   ├── components/           # Componentes reutilizables, agrupados por dominio
-│   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion (esqueleto por rol: menú lateral + contenido), AlertaAlergias, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, CampoTexto (etiqueta + InputText + error), PaginaListado (cabecera, hoja con tabla y estado vacío), DialogoFormulario, BotonEditar, ...
-│   │   ├── pacientes/        # PacienteForm.vue, ...
+│   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion (esqueleto por rol: menú lateral + contenido), AlertaAlergias, ChipAlergia, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, CampoTexto (etiqueta + InputText + error), PaginaListado (cabecera, hoja con tabla y estado vacío), DialogoFormulario, BotonEditar, ...
+│   │   ├── pacientes/        # PacienteForm.vue, AlergiasField.vue, AvisoNoEliminable.vue, BuscadorPacientes.vue
 │   │   ├── medicos/          # MedicoForm.vue, HorarioFields.vue
 │   │   ├── citas/
 │   │   ├── consultas/
@@ -144,7 +146,7 @@ consult-ia/
 │   │
 │   ├── utils/                # Funciones puras, sin Vue ni persistencia
 │   │   ├── validaciones.js
-│   │   ├── formato.js        # formatearFecha
+│   │   ├── formato.js        # formatearFecha, calcularEdad
 │   │   ├── roles.js          # Ruta de inicio por rol
 │   │   ├── alergias.js       # Cruce receta vs alergias (local, sin IA)
 │   │   └── anonimizar.js     # Quita datos identificables antes de llamar a la IA
@@ -176,7 +178,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 2 en curso (spec 003: consultorios y médicos)**; fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 2 implementada (specs 003 y 004)**; fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 

@@ -4,6 +4,8 @@ import { resolverAcceso } from '@/router/acceso.js'
 import LoginView from '@/views/LoginView.vue'
 import EnConstruccionView from '@/views/EnConstruccionView.vue'
 import ConsultoriosView from '@/views/recepcion/ConsultoriosView.vue'
+import PacientesView from '@/views/recepcion/PacientesView.vue'
+import PacienteDetalleView from '@/views/recepcion/PacienteDetalleView.vue'
 import MedicosView from '@/views/recepcion/MedicosView.vue'
 import RecepcionLayout from '@/layouts/RecepcionLayout.vue'
 import MedicoLayout from '@/layouts/MedicoLayout.vue'
@@ -20,7 +22,9 @@ const routes = [
     meta: { rol: 'recepcion' },
     redirect: '/recepcion/dashboard',
     children: [
-      ...['dashboard', 'pacientes', 'pacientes/:id', 'agenda', 'respaldo'].map((path) => hija(path)),
+      ...['dashboard', 'agenda', 'respaldo'].map((path) => hija(path)),
+      hija('pacientes', PacientesView),
+      hija('pacientes/:id', PacienteDetalleView),
       hija('medicos', MedicosView),
       hija('consultorios', ConsultoriosView)
     ]
