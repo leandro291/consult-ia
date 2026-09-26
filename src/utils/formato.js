@@ -1,4 +1,8 @@
 import dayjs from 'dayjs'
+import 'dayjs/locale/es'
+
+// Meses y días en español para todo formato de Day.js.
+dayjs.locale('es')
 
 // Formatea una fecha (Date, string ISO u objeto Day.js) como DD/MM/YYYY.
 export function formatearFecha(fecha) {
@@ -42,4 +46,21 @@ export function listarDias(dias) {
     ? `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`
     : nombres[0] ?? ''
   return texto.charAt(0).toUpperCase() + texto.slice(1)
+}
+
+// "Sábado": día de la semana con la primera letra en mayúscula.
+export function nombreDia(fecha) {
+  const dia = dayjs(fecha).format('dddd')
+  return dia.charAt(0).toUpperCase() + dia.slice(1)
+}
+
+// "21 – 26 de septiembre de 2026"; con un solo día: "26 de septiembre de 2026".
+export function formatearRango(inicio, fin) {
+  const a = dayjs(inicio)
+  const b = dayjs(fin)
+  const completa = 'D [de] MMMM [de] YYYY'
+  if (a.isSame(b, 'day')) return b.format(completa)
+  if (a.isSame(b, 'month')) return `${a.format('D')} – ${b.format(completa)}`
+  if (a.isSame(b, 'year')) return `${a.format('D [de] MMMM')} – ${b.format(completa)}`
+  return `${a.format(completa)} – ${b.format(completa)}`
 }
