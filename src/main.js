@@ -3,6 +3,8 @@ import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import ToastService from 'primevue/toastservice'
 import ConfirmationService from 'primevue/confirmationservice'
+import '@/assets/main.css'
+import presetClinica from '@/assets/presetClinica.js'
 import App from '@/App.vue'
 import router from '@/router/index.js'
 import { inicializarDatos } from '@/services/semillaService.js'
@@ -13,7 +15,15 @@ inicializarDatos()
 createApp(App)
   .use(createPinia())
   .use(router)
-  .use(PrimeVue) // sin tema: el diseño lo aporta el usuario
+  .use(PrimeVue, {
+    theme: {
+      preset: presetClinica,
+      options: {
+        darkModeSelector: false, // DESIGN.md prohíbe el modo oscuro por defecto
+        cssLayer: { name: 'primevue', order: 'base, primevue' }
+      }
+    }
+  })
   .use(ToastService)
   .use(ConfirmationService)
   .mount('#app')

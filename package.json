@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@primeuix/themes": "^3.0.1",
     "dayjs": "^1.11.23",
     "pinia": "^4.0.3",
     "primevue": "^5.0.1",
