@@ -39,12 +39,15 @@ Toda nueva carpeta, archivo o dependencia debe seguirlo. Si algo nuevo no encaja
 | Capa | Puede importar | No puede importar |
 |---|---|---|
 | `views/` | components, composables, stores, utils | services, storage |
+| `layouts/` | components, composables, stores, utils | services, storage |
 | `components/` | components, composables, stores, utils | services, storage |
 | `composables/` | stores, services, utils | views, components |
 | `stores/` | su propio servicio, utils | `localStorage` directo, views, components |
 | `services/` | `storage.js`, otros services, utils, data | Vue, Pinia, `localStorage` directo (salvo `storage.js`) |
 | `utils/`, `data/` | nada del proyecto (funciones puras) | todo lo demás |
 | `pdf/` | utils, data | stores, services |
+| `router/` | views, layouts, stores, utils, `acceso.js` | services |
+| `main.js` | todo (raíz de composición) | — |
 
 > ¿Por qué? Si en el futuro hay un backend HTTP, solo se reemplaza `services/`. Lo demás no cambia.
 
@@ -73,10 +76,12 @@ consult-ia/
 │   ├── App.vue               # Raíz: <RouterView>, Toast y ConfirmDialog globales
 │   │
 │   ├── router/
-│   │   └── index.js          # Rutas con meta.rol + guard global de sesión y rol
+│   │   ├── index.js          # Rutas con meta.rol + guard global de sesión y rol
+│   │   └── acceso.js         # resolverAcceso(): decisión pura del guard
 │   │
 │   ├── services/             # Única capa con persistencia
-│   │   ├── storage.js        # leer(clave), guardar(clave, datos): único acceso a localStorage
+│   │   ├── storage.js        # leer(clave, porDefecto = []), guardar(clave, datos), CLAVES: único acceso a localStorage
+│   │   ├── semillaService.js # cargarSemilla, inicializarDatos (persiste los datos de seed.js)
 │   │   ├── pacientesService.js
 │   │   ├── medicosService.js
 │   │   ├── consultoriosService.js
@@ -108,11 +113,12 @@ consult-ia/
 │   │
 │   ├── views/                # Una vista por ruta
 │   │   ├── LoginView.vue
+│   │   ├── EnConstruccionView.vue # Provisional para rutas de fases futuras
 │   │   ├── recepcion/        # DashboardView, PacientesView, AgendaView, ...
 │   │   └── medico/           # MiAgendaView, AtencionView, HistoriaView, ...
 │   │
 │   ├── components/           # Componentes reutilizables, agrupados por dominio
-│   │   ├── comunes/          # Piezas genéricas (AlertaAlergias, CampoError, ...)
+│   │   ├── comunes/          # Piezas genéricas (MarcoAplicacion, AlertaAlergias, CampoError, ...)
 │   │   ├── pacientes/        # PacienteForm.vue, ...
 │   │   ├── citas/
 │   │   ├── consultas/
@@ -131,14 +137,17 @@ consult-ia/
 │   ├── utils/                # Funciones puras, sin Vue ni persistencia
 │   │   ├── validaciones.js
 │   │   ├── formato.js
+│   │   ├── roles.js          # Ruta de inicio por rol
 │   │   ├── alergias.js       # Cruce receta vs alergias (local, sin IA)
 │   │   └── anonimizar.js     # Quita datos identificables antes de llamar a la IA
 │   │
-│   └── assets/               # CSS global e imágenes importadas desde el código
-│       └── main.css
+│   └── assets/               # Imágenes importadas desde el código (el diseño lo aporta el usuario)
 │
 └── tests/                    # Vitest, replica la estructura de src/
     ├── services/             # citasService.test.js, pacientesService.test.js, ...
+    ├── router/               # acceso.test.js
+    ├── views/                # LoginView.test.js
+    ├── data/                 # seed.test.js
     ├── utils/                # alergias.test.js, anonimizar.test.js, validaciones.test.js
     └── composables/          # Solo cuando la lógica no dependa del navegador real
 ```
@@ -159,23 +168,29 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **solo documentación**. El proyecto Vue se genera en la **fase 1** mediante un spec.
+> Estado actual: **fase 1 implementada**. El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue sin tema, login simulado, layouts por rol y datos semilla). Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
-### Generar el proyecto (fase 1)
+### Instalación por fase
+
+No se usa `npm create vite`: los archivos base se escriben a mano y cada fase instala solo lo que usa.
 
 ```bash
-npm create vite@latest . -- --template vue
+# Fase 1
+npm install vue vue-router pinia primevue dayjs
+npm install -D vite @vitejs/plugin-vue eslint @eslint/js eslint-plugin-vue globals vitest jsdom
 
-npm install vue-router pinia primevue @primeuix/themes primeicons \
-  @fullcalendar/vue3 @fullcalendar/core @fullcalendar/daygrid \
-  @fullcalendar/timegrid @fullcalendar/interaction \
-  dayjs pdfmake
+# Fase 3 (agenda)
+npm install @fullcalendar/vue3 @fullcalendar/core @fullcalendar/daygrid \
+  @fullcalendar/timegrid @fullcalendar/interaction
+
+# Fase 5 (PDFs)
+npm install pdfmake
 
 # Opcionales (solo si el spec de la fase lo requiere)
 npm install qrcode chart.js vue-chartjs
-
-npm install -D eslint @eslint/js eslint-plugin-vue globals vitest jsdom
 ```
+
+Si se incorpora un tema o íconos de PrimeVue, se documentan aquí en el spec correspondiente.
 
 ### Scripts de `package.json`
 
@@ -231,8 +246,7 @@ Los imports internos usan el alias `@/` (ej. `import { leer } from '@/services/s
 | `vue` | Framework (Composition API, `<script setup>`) |
 | `vue-router` | Rutas y guard de roles |
 | `pinia` | Estado global, un store por dominio |
-| `primevue`, `@primeuix/themes` | Componentes UI (DataTable, Dialog, Toast, ConfirmDialog, …) y tema |
-| `primeicons` | Íconos de PrimeVue |
+| `primevue` | Componentes UI (Toast, ConfirmDialog, DataTable, Dialog, …), sin tema: el diseño lo aporta el usuario |
 | `@fullcalendar/vue3`, `@fullcalendar/core` | Calendario de citas |
 | `@fullcalendar/daygrid`, `@fullcalendar/timegrid` | Vistas de mes, semana y día |
 | `@fullcalendar/interaction` | Arrastrar para reprogramar y hacer clic para crear |
@@ -251,7 +265,7 @@ Los imports internos usan el alias `@/` (ej. `import { leer } from '@/services/s
 
 | Paquete | Propósito |
 |---|---|
-| `vite`, `@vitejs/plugin-vue` | Build y servidor de desarrollo (los instala `create vite`) |
+| `vite`, `@vitejs/plugin-vue` | Build y servidor de desarrollo |
 | `eslint`, `@eslint/js`, `globals` | Lint de JavaScript |
 | `eslint-plugin-vue` | Reglas de lint para archivos `.vue` |
 | `vitest` | Tests unitarios (usa la config de Vite) |
