@@ -48,6 +48,7 @@ Toda nueva carpeta, archivo o dependencia debe seguirlo. Si algo nuevo no encaja
 | `utils/`, `data/` | nada del proyecto (funciones puras) | todo lo demás |
 | `pdf/` | utils, data | stores, services |
 | `router/` | views, layouts, stores, utils, `acceso.js` | services |
+| `assets/` | nada del proyecto | todo lo demás (solo lo importa `main.js`) |
 | `main.js` | todo (raíz de composición) | — |
 
 > ¿Por qué? Si en el futuro hay un backend HTTP, solo se reemplaza `services/`. Lo demás no cambia.
@@ -95,8 +96,8 @@ consult-ia/
 │   │   ├── consultasService.js
 │   │   ├── recetasService.js
 │   │   ├── authService.js    # login, logout, sesionActual
-│   │   ├── respaldoService.js # Exportar e importar JSON (sin iaApiKey)
-│   │   └── iaService.js      # Config IA (clinica_config), fetch a Claude y validación
+│   │   ├── respaldoService.js # Exportar e importar JSON
+│   │   └── iaService.js      # Config IA (clinica_config), POST al servidor de IA y validación
 │   │
 │   ├── stores/               # Pinia, uno por dominio + auth
 │   │   ├── auth.js
@@ -124,7 +125,7 @@ consult-ia/
 │   │   └── medico/           # MiAgendaView, AtencionView, HistoriaView, ...
 │   │
 │   ├── components/           # Componentes reutilizables, agrupados por dominio
-│   │   ├── comunes/          # Piezas genéricas (MarcoAplicacion, AlertaAlergias, CampoError, ...)
+│   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion, AlertaAlergias, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, ...
 │   │   ├── pacientes/        # PacienteForm.vue, ...
 │   │   ├── citas/
 │   │   ├── consultas/
@@ -142,12 +143,12 @@ consult-ia/
 │   │
 │   ├── utils/                # Funciones puras, sin Vue ni persistencia
 │   │   ├── validaciones.js
-│   │   ├── formato.js
+│   │   ├── formato.js        # formatearFecha
 │   │   ├── roles.js          # Ruta de inicio por rol
 │   │   ├── alergias.js       # Cruce receta vs alergias (local, sin IA)
 │   │   └── anonimizar.js     # Quita datos identificables antes de llamar a la IA
 │   │
-│   └── assets/               # Imágenes importadas desde el código (el diseño lo aporta el usuario)
+│   └── assets/               # Estilos globales y tema: main.css (tokens de DESIGN.md, base) y presetClinica.js (preset de PrimeVue)
 │
 └── tests/                    # Vitest, replica la estructura de src/
     ├── services/             # citasService.test.js, pacientesService.test.js, ...
@@ -174,7 +175,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 1 implementada**. El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue sin tema, login simulado, layouts por rol y datos semilla). Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 1 implementada, con el login diseñado (spec 002)**. El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts y las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 
@@ -184,6 +185,9 @@ No se usa `npm create vite`: los archivos base se escriben a mano y cada fase in
 # Fase 1
 npm install vue vue-router pinia primevue dayjs
 npm install -D vite @vitejs/plugin-vue eslint @eslint/js eslint-plugin-vue globals vitest jsdom
+
+# Fase 1 — diseño del login (spec 002)
+npm install @primeuix/themes
 
 # Fase 3 (agenda)
 npm install @fullcalendar/vue3 @fullcalendar/core @fullcalendar/daygrid \
@@ -196,7 +200,7 @@ npm install pdfmake
 npm install qrcode chart.js vue-chartjs
 ```
 
-Si se incorpora un tema o íconos de PrimeVue, se documentan aquí en el spec correspondiente.
+Íconos: SVG inline de trazo 1.75; no se usa `primeicons`.
 
 ### Scripts de `package.json`
 
@@ -252,7 +256,8 @@ Los imports internos usan el alias `@/` (ej. `import { leer } from '@/services/s
 | `vue` | Framework (Composition API, `<script setup>`) |
 | `vue-router` | Rutas y guard de roles |
 | `pinia` | Estado global, un store por dominio |
-| `primevue` | Componentes UI (Toast, ConfirmDialog, DataTable, Dialog, …), sin tema: el diseño lo aporta el usuario |
+| `primevue` | Componentes UI (Toast, ConfirmDialog, DataTable, Dialog, …), tematizado con `src/assets/presetClinica.js` |
+| `@primeuix/themes` | Preset del tema de PrimeVue (base Aura) con los tokens de `DESIGN.md` |
 | `@fullcalendar/vue3`, `@fullcalendar/core` | Calendario de citas |
 | `@fullcalendar/daygrid`, `@fullcalendar/timegrid` | Vistas de mes, semana y día |
 | `@fullcalendar/interaction` | Arrastrar para reprogramar y hacer clic para crear |
@@ -263,9 +268,10 @@ Los imports internos usan el alias `@/` (ej. `import { leer } from '@/services/s
 
 **Sin dependencia**, se usan APIs nativas:
 - Web Speech API para el dictado.
-- `fetch` para la API de Claude.
+- `fetch` para el servidor de IA.
 - `crypto.randomUUID()` para los ids.
 - `localStorage` para la persistencia.
+- Fuentes Public Sans y Courier Prime desde Google Fonts (`<link>` en `index.html`).
 
 ### Desarrollo
 
@@ -298,6 +304,8 @@ Para agregar una dependencia nueva hace falta:
 | Spec | `NNN-nombre-en-kebab.md` | `003-agenda-citas.md` |
 | Agente | `kebab-case.md` | `spec-writer.md` |
 | Clave de localStorage | `clinica_` + entidad en plural, `snake_case` | `clinica_citas` |
+| Variable CSS de diseño | `--` + grupo en español + nombre del token de `DESIGN.md` | `--color-tinta`, `--radio-md`, `--espacio-lg`, `--sombra-hoja`, `--fuente-dato` |
+| Clase CSS global | kebab-case en español | `.campo`, `.campo-con-error`, `.tipo-label`, `.icono` |
 | Ruta | minúsculas, segmentos en español | `/medico/atencion/:citaId` |
 | Variables y funciones | `camelCase` **en español** | `citasDelDia`, `validarSolapamiento()` |
 | Constantes | `UPPER_SNAKE_CASE` | `DURACION_CITA_MIN` |
@@ -325,7 +333,8 @@ El diseño que se implementa es el que creamos para este proyecto. No se inventa
 
 ### Cómo se implementa
 
-- Los tokens de `DESIGN.md` viven en un solo lugar: el preset de `@primeuix/themes` y `src/assets/main.css`. Los componentes no escriben colores hex sueltos.
+- Los hex de `DESIGN.md` viven en un solo lugar: las variables `--color-*` de `src/assets/main.css`. El preset de `@primeuix/themes` (`src/assets/presetClinica.js`) las referencia con `var(--color-...)` y no repite hex; los componentes tampoco escriben colores hex sueltos.
+- `main.css` declara `@layer base, primevue;`. PrimeVue se registra en `main.js` con `cssLayer: { name: 'primevue', order: 'base, primevue' }`, así el reset de la capa `base` no pisa a PrimeVue, y los ajustes de componentes sin capa (`.p-inputtext`, `.p-button:disabled`) sí ganan sobre los estilos que PrimeVue inyecta.
 - Se usan los componentes de PrimeVue tematizados para que se vean como en `DESIGN.md`; no se reemplazan por componentes propios.
 - Cambiar el diseño implica actualizar primero `DESIGN.md` (y la pantalla en `docs/diseno/pantallas/` si cambia la composición), dentro del mismo spec.
 

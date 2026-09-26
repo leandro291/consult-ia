@@ -1,0 +1,193 @@
+/* Tokens, base y ajustes visuales de la app. Ver DESIGN.md para el detalle de cada valor. */
+@layer base, primevue;
+
+:root {
+  /* Colores (front matter de DESIGN.md) */
+  --color-tinta: #1D3FAF;
+  --color-tinta-oscura: #152E80;
+  --color-tinta-suave: #E9EEFB;
+  --color-tinta-clara: #DCE3FA;
+  --color-sello: #6A2BB0;
+  --color-sello-suave: #F4EEFB;
+  --color-sello-oscuro: #4B1F80;
+  --color-alerta: #B3122E;
+  --color-alerta-oscura: #7A0C1F;
+  --color-alerta-suave: #FCE8EC;
+  --color-alerta-clara: #FFE3E8;
+  --color-copia-amarilla: #FFE14D;
+  --color-texto-copia-amarilla: #3D3400;
+  --color-copia-rosa: #FF9EC4;
+  --color-texto-copia-rosa: #4A0F2A;
+  --color-papel: #FFFFFF;
+  --color-mesa: #E6E9EF;
+  --color-campo: #F4F6FA;
+  --color-texto: #16192B;
+  --color-texto-secundario: #4A5068;
+  --color-lapiz: #5A5F70;
+  --color-lapiz-suave: #F7F7F9;
+  --color-apagado: #EEF0F4;
+  --color-pasado: #F7F8FB;
+  --color-linea: #C5CCDC;
+  --color-renglon: #DDE2EC;
+  --color-perforacion: #AEB6C9;
+
+  /* Radios */
+  --radio-sm: 4px;
+  --radio-md: 6px;
+  --radio-pill: 22px;
+
+  /* Espacios */
+  --espacio-xs: 4px;
+  --espacio-sm: 8px;
+  --espacio-md: 12px;
+  --espacio-lg: 16px;
+  --espacio-xl: 24px;
+  --espacio-2xl: 32px;
+  --espacio-3xl: 48px;
+
+  /* Fuentes */
+  --fuente-texto: 'Public Sans', system-ui, sans-serif;
+  --fuente-dato: 'Courier Prime', ui-monospace, monospace;
+
+  /* Sombras (Shadow Vocabulary) */
+  --sombra-hoja: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08);
+  --sombra-toast: 0 6px 20px rgba(22, 25, 43, 0.12);
+  --sombra-dialogo: 0 20px 48px rgba(22, 25, 43, 0.35);
+  --velo-dialogo: rgba(22, 25, 43, 0.55);
+  --sombra-boton: 0 1px 2px rgba(21, 46, 128, 0.25);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-mesa);
+    color: var(--color-texto);
+    font: 400 15px/1.55 var(--fuente-texto);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background: var(--color-copia-amarilla);
+    color: var(--color-texto-copia-amarilla);
+  }
+
+  input,
+  textarea {
+    caret-color: var(--color-tinta);
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-tinta);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: var(--color-tinta);
+    text-underline-offset: 3px;
+  }
+
+  a:hover {
+    color: var(--color-tinta-oscura);
+  }
+}
+
+/* Tipografía (sin capa: gana sobre PrimeVue) */
+.tipo-display {
+  font: 800 60px/1.02 var(--fuente-texto);
+  letter-spacing: -0.035em;
+}
+
+.tipo-headline {
+  font: 800 30px/1.1 var(--fuente-texto);
+  letter-spacing: -0.025em;
+}
+
+.tipo-title {
+  font: 700 20px/1.3 var(--fuente-texto);
+  letter-spacing: -0.01em;
+}
+
+.tipo-label {
+  font: 600 12px/1.3 var(--fuente-texto);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tipo-dato {
+  font-family: var(--fuente-dato);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Íconos de trazo, en una sola familia */
+.icono {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Campo de formulario: etiqueta + control */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+}
+
+.campo > label {
+  font: 600 12px/1.3 var(--fuente-texto);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-texto-secundario);
+}
+
+.campo:focus-within > label {
+  color: var(--color-tinta);
+}
+
+.campo.campo-con-error > label {
+  color: var(--color-alerta);
+}
+
+/* Ajustes de PrimeVue que el preset no expresa */
+.p-inputtext {
+  height: 44px;
+  padding: 0 12px;
+  font-size: 15px;
+  background: var(--color-campo);
+  color: var(--color-texto);
+  border: none;
+  border-bottom: 1.5px solid var(--color-texto);
+  border-radius: var(--radio-sm) var(--radio-sm) 0 0;
+}
+
+.p-inputtext:focus {
+  border-bottom: 2px solid var(--color-tinta);
+}
+
+.p-inputtext.p-invalid {
+  background: var(--color-alerta-suave);
+  border-bottom: 2px solid var(--color-alerta);
+}
+
+.p-button:disabled {
+  background: var(--color-apagado);
+  color: var(--color-lapiz);
+  border: 1.5px dotted var(--color-perforacion);
+  cursor: not-allowed;
+}
