@@ -109,7 +109,7 @@ consult-ia/
 │   │   └── recetas.js
 │   │
 │   ├── composables/          # Lógica reactiva reutilizable
-│   │   ├── useCatalogo.js    # Estado y ejecución comunes de los stores de catálogo
+│   │   ├── useCatalogo.js    # Estado y ejecución comunes de los stores de catálogo y de citas
 │   │   ├── useEliminarPaciente.js # Eliminación de paciente en dos pasos (confirmar o avisar)
 │   │   ├── useFecha.js
 │   │   ├── useConfirmacion.js
@@ -178,7 +178,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 2 implementada (specs 003 y 004)**; fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 3 empezada con el spec 006 (capa de datos de citas: `citasService` y store, sin interfaz)**; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 

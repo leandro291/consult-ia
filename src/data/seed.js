@@ -5,7 +5,7 @@ export const VERSION_SEMILLA = 1
 export const TRANSCRIPCION_DEMO =
   'Paciente refiere fiebre desde hace tres días y dolor de garganta al tragar. Temperatura 38.5, presión 120 sobre 80, frecuencia cardiaca 92. Amígdalas inflamadas con placas blanquecinas, sin tos. Impresión diagnóstica faringitis bacteriana. Indico amoxicilina 500 miligramos cada 8 horas por 7 días y paracetamol 500 miligramos cada 8 horas si hay fiebre. Control en una semana.'
 
-const DURACION_CITA_MIN = 30
+export const DURACION_CITA_MIN = 30
 
 const CONSULTORIOS = [
   { nombre: 'Consultorio 101', piso: '1', descripcion: 'Medicina general' },
