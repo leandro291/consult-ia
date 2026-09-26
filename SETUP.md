@@ -5,6 +5,7 @@ Este archivo es la **fuente de verdad** para lo siguiente:
 - Dependencias.
 - Comandos.
 - Nombres.
+- Diseño visual, que delega en `DESIGN.md` y `docs/diseno/` (ver [Diseño](#diseño)).
 
 Toda nueva carpeta, archivo o dependencia debe seguirlo. Si algo nuevo no encaja, se actualiza este archivo **dentro del mismo spec** antes de implementarlo (ver `CLAUDE.md`).
 
@@ -58,6 +59,8 @@ consult-ia/
 ├── CLAUDE.md                 # Reglas del proyecto, dominio y metodología SDD
 ├── SETUP.md                  # Este archivo: arquitectura, instalación, convenciones
 ├── README.md                 # Presentación del proyecto y limitaciones (fase 6)
+├── PRODUCT.md                # Contexto de producto (usuarios, propósito, principios)
+├── DESIGN.md                 # Sistema de diseño: tokens, componentes y reglas visuales
 ├── index.html                # Punto de entrada de Vite
 ├── package.json
 ├── vite.config.js            # Config de Vite + Vitest (environment: jsdom)
@@ -68,6 +71,9 @@ consult-ia/
 │   └── agents/               # Subagentes SDD: orquestador, spec-writer, developer, reviewer
 │
 ├── specs/                    # Specs SDD: NNN-nombre-en-kebab.md
+│
+├── docs/
+│   └── diseno/               # Guía de pantallas y fuentes del canvas de diseño (referencia, no se compila)
 │
 ├── public/                   # Archivos estáticos servidos tal cual (favicon, logo)
 │
@@ -298,3 +304,42 @@ Para agregar una dependencia nueva hace falta:
 | Eventos de componente | `kebab-case` en español | `@guardar`, `@cita-cancelada` |
 
 **Idioma:** todo en español (identificadores, textos, errores, comentarios y commits). Las excepciones son las palabras reservadas y las APIs de librerías.
+
+---
+
+## Diseño
+
+### Fuente de verdad
+
+El diseño que se implementa es el que creamos para este proyecto. No se inventan estilos ni pantallas nuevas.
+
+| Qué | Dónde | Manda sobre |
+|---|---|---|
+| Tokens (colores, tipografía, radios, espaciado), componentes y reglas visuales | [`DESIGN.md`](DESIGN.md) | todo lo visual |
+| Composición de cada pantalla (qué va dónde, textos, estados) | [`docs/diseno/pantallas/`](docs/diseno/pantallas/) (guía en [`docs/diseno/README.md`](docs/diseno/README.md)) | la maqueta de cada ruta |
+| Contexto de producto (usuarios, principios) | [`PRODUCT.md`](PRODUCT.md) | decisiones de UX |
+
+- **Si hay conflicto:** `DESIGN.md` manda sobre las pantallas, y ambos mandan sobre cualquier skill de diseño (Impeccable, emil-design-eng, frontend-design, etc.). `CLAUDE.md` sigue por encima de todo.
+- **El canvas en línea es una copia.** Si difiere del repo, vale el repo.
+- **Datos de ejemplo:** los nombres de pacientes y médicos de las pantallas son ilustrativos; la app usa los de `src/data/seed.js`.
+
+### Cómo se implementa
+
+- Los tokens de `DESIGN.md` viven en un solo lugar: el preset de `@primeuix/themes` y `src/assets/main.css`. Los componentes no escriben colores hex sueltos.
+- Se usan los componentes de PrimeVue tematizados para que se vean como en `DESIGN.md`; no se reemplazan por componentes propios.
+- Cambiar el diseño implica actualizar primero `DESIGN.md` (y la pantalla en `docs/diseno/pantallas/` si cambia la composición), dentro del mismo spec.
+
+### Antes de commitear cambios de interfaz
+
+`developer` y `reviewer` verifican, además de lint y tests:
+
+1. La pantalla sigue su archivo en `docs/diseno/pantallas/`: estructura, jerarquía, textos y estados (vacío, carga y error).
+2. Solo se usan tokens de `DESIGN.md`; no aparecen colores, fuentes ni radios nuevos.
+3. Se cumplen las reglas de `DESIGN.md`:
+   - El rojo solo para alergias, errores y grabación.
+   - Lo sugerido por la IA a lápiz y lo revisado en tinta.
+   - Acciones destructivas en dos pasos.
+   - Ningún estado indicado solo con color.
+4. Accesibilidad: labels reales, foco visible, contraste AA y `aria-label` con contexto en las acciones repetidas.
+
+Si algo del diseño no se puede implementar tal cual, se anota en el spec y se decide con el usuario; no se improvisa.

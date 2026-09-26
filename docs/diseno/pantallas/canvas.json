@@ -1,0 +1,204 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Componentes.dc.html": {
+      "h": 2040,
+      "title": "Componentes base",
+      "w": 1366,
+      "x": 0,
+      "y": 1320
+    },
+    "Main.dc.html": {
+      "h": 768,
+      "title": "Login · /login",
+      "w": 1366,
+      "x": 0,
+      "y": 0
+    },
+    "MedicoLayout.dc.html": {
+      "h": 900,
+      "title": "Layout médico · lista del día",
+      "w": 1366,
+      "x": 1446,
+      "y": 0
+    },
+    "RecepcionLayout.dc.html": {
+      "h": 900,
+      "title": "Panel del día · /recepcion/dashboard",
+      "w": 1366,
+      "x": 2892,
+      "y": 0
+    },
+    "AtenderCita.dc.html": {
+      "h": 1800,
+      "title": "Atender cita · /medico/atencion/:citaId",
+      "w": 1366,
+      "x": 1446,
+      "y": 1320
+    },
+    "EstadosDictado.dc.html": {
+      "h": 880,
+      "title": "Dictado por voz · estados",
+      "w": 1366,
+      "x": 2892,
+      "y": 1320
+    },
+    "AgendaRecepcion.dc.html": {
+      "h": 980,
+      "title": "Agenda · /recepcion/agenda",
+      "w": 1366,
+      "x": 0,
+      "y": 3800
+    },
+    "MiAgendaMedico.dc.html": {
+      "h": 1000,
+      "title": "Mi agenda · /medico/agenda (día)",
+      "w": 1366,
+      "x": 1446,
+      "y": 3800
+    },
+    "HistoriaClinica.dc.html": {
+      "h": 1240,
+      "title": "Historia clínica · /medico/historia/:pacienteId",
+      "w": 1366,
+      "x": 0,
+      "y": 5400
+    },
+    "EmitirReceta.dc.html": {
+      "h": 1120,
+      "title": "Emitir receta · /medico/receta/:consultaId",
+      "w": 1366,
+      "x": 1446,
+      "y": 5400
+    },
+    "Pacientes.dc.html": {
+      "h": 900,
+      "title": "Pacientes · /recepcion/pacientes",
+      "w": 1366,
+      "x": 0,
+      "y": 7060
+    },
+    "PacienteNuevo.dc.html": {
+      "h": 900,
+      "title": "Nuevo paciente · diálogo",
+      "w": 1366,
+      "x": 1446,
+      "y": 7060
+    },
+    "Medicos.dc.html": {
+      "h": 760,
+      "title": "Médicos · /recepcion/medicos",
+      "w": 1366,
+      "x": 2892,
+      "y": 7060
+    },
+    "Consultorios.dc.html": {
+      "h": 760,
+      "title": "Consultorios · /recepcion/consultorios",
+      "w": 1366,
+      "x": 4338,
+      "y": 7060
+    },
+    "Respaldo.dc.html": {
+      "h": 960,
+      "title": "Respaldo · /recepcion/respaldo",
+      "w": 1366,
+      "x": 0,
+      "y": 8080
+    },
+    "ConfiguracionIA.dc.html": {
+      "h": 900,
+      "title": "Configuración IA · /medico/configuracion",
+      "w": 1366,
+      "x": 1446,
+      "y": 8080
+    },
+    "EstadosVaciosCarga.dc.html": {
+      "h": 2160,
+      "title": "Estados vacíos, de carga y de error",
+      "w": 1366,
+      "x": 2892,
+      "y": 8080
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-26T15:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "t1": {
+      "kind": "title1",
+      "maxW": 4258,
+      "text": "Formulario en triplicado · Login y layouts por rol",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "t2": {
+      "kind": "title1",
+      "maxW": 1366,
+      "text": "Componentes base",
+      "w": 240,
+      "x": 0,
+      "y": 1020
+    },
+    "t3": {
+      "kind": "title1",
+      "maxW": 2812,
+      "text": "Atender cita",
+      "w": 240,
+      "x": 1446,
+      "y": 1020
+    },
+    "t4": {
+      "kind": "title1",
+      "maxW": 2812,
+      "text": "Agendas · calendario tipo FullCalendar",
+      "w": 240,
+      "x": 0,
+      "y": 3500
+    },
+    "t5": {
+      "kind": "title1",
+      "maxW": 2812,
+      "text": "Historia clínica y receta",
+      "w": 240,
+      "x": 0,
+      "y": 5100
+    },
+    "t6": {
+      "kind": "title1",
+      "maxW": 5704,
+      "text": "Catálogos, respaldo, configuración y estados",
+      "w": 240,
+      "x": 0,
+      "y": 6760
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "MedicoLayout.dc.html",
+    "RecepcionLayout.dc.html",
+    "Componentes.dc.html",
+    "AtenderCita.dc.html",
+    "EstadosDictado.dc.html",
+    "AgendaRecepcion.dc.html",
+    "MiAgendaMedico.dc.html",
+    "HistoriaClinica.dc.html",
+    "EmitirReceta.dc.html",
+    "Pacientes.dc.html",
+    "PacienteNuevo.dc.html",
+    "Medicos.dc.html",
+    "Consultorios.dc.html",
+    "Respaldo.dc.html",
+    "ConfiguracionIA.dc.html",
+    "EstadosVaciosCarga.dc.html"
+  ],
+  "pages": [],
+  "title": "Clínica: Login y layouts"
+}

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Configuración del asistente IA</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+input,select{caret-color:#1D3FAF;font-family:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mk{stroke-width:1.5}
+</style>
+</helmet>
+<div style="width: 1366px; height: 900px; display: grid; grid-template-columns: 256px minmax(0, 1fr); background: #E6E9EF;">
+  <aside style="background: #FFFFFF; border-right: 1px solid #C5CCDC; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect class="mk" x="9" y="9" width="19" height="19" rx="2" fill="#FF9EC4" stroke="#16192B"></rect><rect class="mk" x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFE14D" stroke="#16192B"></rect><rect class="mk" x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B"></rect><path class="mk" d="M8 10h11M8 14h11M8 18h7" stroke="#1D3FAF" fill="none"></path></svg>
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 16px; font-weight: 700; letter-spacing: -0.01em;">Clínica Demo</span>
+        <span style="font-size: 13px; color: #4A5068;">Médico</span>
+      </div>
+    </div>
+    <nav aria-label="Menú del médico">
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Mi agenda</a></li>
+        <li><a href="#" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; background: #E9EEFB; color: #1D3FAF; font-size: 15px; font-weight: 700; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Configuración IA</a></li>
+      </ul>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <p style="margin: 0; padding: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Siguiente paciente</p>
+      <a href="#" style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid #C5CCDC; border-radius: 6px; text-decoration: none; color: #16192B;">
+        <span style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 15px; font-weight: 700;">Luis Quispe Mamani</span><span style="font-family: 'Courier Prime', monospace; font-size: 14px; font-weight: 700;">10:30</span></span>
+        <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 4px; color: #B3122E; font-size: 12px; font-weight: 700;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Alergia: penicilina</span>
+      </a>
+    </div>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 2px dotted #AEB6C9;">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+        <span aria-hidden="true" style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #16192B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">AT</span>
+        <div style="display: flex; flex-direction: column; min-width: 0;">
+          <span style="font-size: 14px; font-weight: 700;">Dra. Ana Torres</span>
+          <span style="font-size: 12px; color: #4A5068;">Medicina General · <span style="font-family: 'Courier Prime', monospace;">CMP 045123</span></span>
+        </div>
+      </div>
+      <button type="button" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; background: none; border: none; border-radius: 6px; color: #16192B; font-size: 14px; font-weight: 600; text-align: left;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4"></path></svg>Cerrar sesión</button>
+    </div>
+  </aside>
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 28px 48px 22px; border-bottom: 2px dotted #AEB6C9;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Configuración IA</h1>
+        <p style="margin: 0; font-size: 15px; color: #4A5068;">Asistente de consulta por voz</p>
+      </div>
+    </header>
+    <main style="padding: 28px 48px 40px; display: grid; grid-template-columns: minmax(0, 640px) minmax(0, 1fr); gap: 32px; align-items: start;">
+      <section aria-label="Ajustes del asistente" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 8px 28px 24px;">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid #DDE2EC;">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <label for="ia-on" style="font-size: 16px; font-weight: 700;">Activar asistente</label>
+            <span id="ia-on-ayuda" style="font-size: 14px; line-height: 1.5; color: #4A5068;">Si lo apaga, la atención médica funciona igual, de forma manual.</span>
+          </div>
+          <span style="position: relative; display: inline-flex; flex-shrink: 0;">
+            <input id="ia-on" type="checkbox" role="switch" checked="{{yes}}" aria-describedby="ia-on-ayuda" style="position: absolute; top: 0; left: 0; width: 52px; height: 30px; margin: 0; opacity: 0; cursor: pointer;">
+            <span aria-hidden="true" style="width: 52px; height: 30px; box-sizing: border-box; padding: 3px; display: flex; justify-content: flex-end; background: #1D3FAF; border-radius: 15px;"><span style="width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(22, 25, 43, 0.3);"></span></span>
+          </span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; padding: 20px 0 0;">
+          <label for="ia-key" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">API key de Claude</label>
+          <div style="position: relative;">
+            <input id="ia-key" type="password" value="clave-de-ejemplo" autocomplete="off" aria-describedby="ia-key-ayuda" style="width: 100%; height: 44px; box-sizing: border-box; padding: 0 108px 0 12px; font-family: 'Courier Prime', monospace; font-size: 16px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+            <button type="button" aria-pressed="false" style="position: absolute; right: 4px; top: 2px; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 10px; background: none; border: none; border-radius: 6px; color: #1D3FAF; font-size: 14px; font-weight: 700;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>Mostrar</button>
+          </div>
+          <span id="ia-key-ayuda" style="font-size: 13px; color: #4A5068;">Se guarda solo en este navegador y no se incluye en los respaldos.</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; padding: 20px 0;">
+          <label for="ia-modelo" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Modelo</label>
+          <select id="ia-modelo" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-family: 'Courier Prime', monospace; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;"><option>claude-sonnet-5</option><option>claude-haiku-4-5</option></select>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid #DDE2EC; border-bottom: 1px solid #DDE2EC;">
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 15px; font-weight: 700;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h4l2-6 3 12 2-6h3"></path></svg>Probar conexión</button>
+          <span role="status" style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Conexión correcta. Respondió en <span style="font-family: 'Courier Prime', monospace;">1,2 s</span>.</span>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; padding-top: 20px;">
+          <button type="button" style="height: 44px; padding: 0 22px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 1px 2px rgba(21, 46, 128, 0.25);">Guardar configuración</button>
+        </div>
+      </section>
+
+      <aside aria-label="Aviso" style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: #F7F7F9; border: 1px dashed #5A5F70; border-radius: 6px;">
+        <h2 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="color: #4A5068;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8v.01"></path></svg>Proyecto académico</h2>
+        <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.55; color: #3F4458;">
+          <li>La key queda visible para quien use este navegador. En producción, las llamadas deberían pasar por un servidor que la proteja.</li>
+          <li>A la IA solo se envían la transcripción, la edad, el sexo, las alergias y los antecedentes. Nunca el nombre, el DNI ni los datos de contacto.</li>
+          <li>Las sugerencias pueden contener errores. El médico siempre las revisa antes de guardar.</li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

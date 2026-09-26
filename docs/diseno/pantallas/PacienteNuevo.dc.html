@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Nuevo paciente</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+input,textarea,select{caret-color:#1D3FAF;font-family:inherit}
+input::placeholder,textarea::placeholder{color:#5A5F70}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</helmet>
+<div style="position: relative; width: 1366px; height: 900px; display: grid; grid-template-columns: 256px minmax(0, 1fr); background: #E6E9EF; overflow: hidden;">
+  <div aria-hidden="true" style="background: #FFFFFF; border-right: 1px solid #C5CCDC;"></div>
+  <div aria-hidden="true" style="padding: 28px 48px; display: flex; flex-direction: column; gap: 28px;">
+    <span style="font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Pacientes</span>
+    <div style="height: 640px; background: #FFFFFF; border-radius: 4px;"></div>
+  </div>
+
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(22, 25, 43, 0.55); display: flex; align-items: center; justify-content: center;">
+    <div role="dialog" aria-modal="true" aria-labelledby="dlg-p" style="width: 680px; background: #FFFFFF; border-radius: 6px; box-shadow: 0 20px 48px rgba(22, 25, 43, 0.35); display: flex; flex-direction: column;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 16px; border-bottom: 2px dotted #AEB6C9;">
+        <h2 id="dlg-p" style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.015em;">Nuevo paciente</h2>
+        <button type="button" aria-label="Cerrar" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+      </div>
+
+      <form style="padding: 20px 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px;">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-dni" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #B3122E;">DNI</label>
+          <input id="p-dni" type="text" inputmode="numeric" value="46123578" aria-invalid="true" aria-describedby="p-dni-err" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-family: 'Courier Prime', monospace; font-size: 16px; background: #FCE8EC; border: none; border-bottom: 2px solid #B3122E; border-radius: 4px 4px 0 0;">
+          <span id="p-dni-err" style="display: flex; align-items: flex-start; gap: 6px; font-size: 13px; font-weight: 600; line-height: 1.4; color: #B3122E;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.01"></path></svg>Ya existe un paciente con este DNI (Luis Quispe Mamani).</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-nac" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Fecha de nacimiento</label>
+          <input id="p-nac" type="date" value="1990-05-12" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-nom" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Nombres</label>
+          <input id="p-nom" type="text" value="Sofía" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-ape" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Apellidos</label>
+          <input id="p-ape" type="text" value="Gutiérrez León" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+        </div>
+        <fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 6px;">
+          <legend style="padding: 0; margin-bottom: 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Sexo</legend>
+          <div style="display: flex; gap: 8px;">
+            <label style="flex-grow: 1; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px; background: #E9EEFB; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 15px; font-weight: 600; color: #1D3FAF; cursor: pointer;"><input type="radio" name="sexo" checked="{{yes}}" style="margin: 0; accent-color: #1D3FAF;">Femenino</label>
+            <label style="flex-grow: 1; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px; border: 1px solid #C5CCDC; border-radius: 6px; font-size: 15px; cursor: pointer;"><input type="radio" name="sexo" style="margin: 0; accent-color: #1D3FAF;">Masculino</label>
+          </div>
+        </fieldset>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-gs" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Grupo sanguíneo</label>
+          <select id="p-gs" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;"><option>A+</option></select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-tel" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Teléfono</label>
+          <input id="p-tel" type="tel" value="964 250 318" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-family: 'Courier Prime', monospace; font-size: 16px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-mail" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Correo <span style="text-transform: none; letter-spacing: 0; font-weight: 400;">(opcional)</span></label>
+          <input id="p-mail" type="email" placeholder="nombre@correo.com" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-dir" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Dirección</label>
+          <input id="p-dir" type="text" value="Jr. Las Magnolias 245, Lima" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-alg" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Alergias</label>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 44px; box-sizing: border-box; padding: 6px 8px; background: #F4F6FA; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+            <span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 8px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 4px; color: #B3122E; font-size: 13px; font-weight: 700;">Ibuprofeno<button type="button" aria-label="Quitar ibuprofeno" style="width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 3px; color: #B3122E;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></span>
+            <input id="p-alg" type="text" placeholder="Escriba y presione Enter" style="flex-grow: 1; min-width: 180px; height: 30px; padding: 0 4px; font-size: 15px; background: none; border: none;">
+          </div>
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px;">
+          <label for="p-ant" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Antecedentes</label>
+          <textarea id="p-ant" rows="2" placeholder="Enfermedades previas, cirugías, medicación habitual" style="box-sizing: border-box; padding: 10px 12px; font-size: 15px; line-height: 1.5; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0; resize: vertical;"></textarea>
+        </div>
+      </form>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 28px 20px; border-top: 1px solid #DDE2EC;">
+        <button type="button" style="height: 44px; padding: 0 16px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700;">Cancelar</button>
+        <button type="submit" style="height: 44px; padding: 0 20px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 1px 2px rgba(21, 46, 128, 0.25);">Guardar paciente</button>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

@@ -5,11 +5,14 @@ colors:
   tinta: "#1D3FAF"
   tinta-oscura: "#152E80"
   tinta-suave: "#E9EEFB"
+  tinta-clara: "#DCE3FA"
   sello: "#6A2BB0"
   sello-suave: "#F4EEFB"
+  sello-oscuro: "#4B1F80"
   alerta: "#B3122E"
   alerta-oscura: "#7A0C1F"
   alerta-suave: "#FCE8EC"
+  alerta-clara: "#FFE3E8"
   copia-amarilla: "#FFE14D"
   texto-copia-amarilla: "#3D3400"
   copia-rosa: "#FF9EC4"
@@ -22,6 +25,7 @@ colors:
   lapiz: "#5A5F70"
   lapiz-suave: "#F7F7F9"
   apagado: "#EEF0F4"
+  pasado: "#F7F8FB"
   linea: "#C5CCDC"
   renglon: "#DDE2EC"
   perforacion: "#AEB6C9"
@@ -99,6 +103,16 @@ components:
     rounded: "{rounded.md}"
     padding: "0 20px"
     height: "44px"
+  button-danger-outline:
+    backgroundColor: "{colors.papel}"
+    textColor: "{colors.alerta}"
+    rounded: "{rounded.md}"
+    padding: "0 20px"
+    height: "44px"
+  button-icon-tabla:
+    textColor: "{colors.tinta}"
+    rounded: "{rounded.md}"
+    size: "40px"
   button-disabled:
     backgroundColor: "{colors.apagado}"
     textColor: "{colors.lapiz}"
@@ -150,6 +164,14 @@ components:
   nav-item-activo:
     backgroundColor: "{colors.tinta-suave}"
     textColor: "{colors.tinta}"
+  evento-confirmado:
+    backgroundColor: "{colors.tinta}"
+    textColor: "{colors.papel}"
+    rounded: "{rounded.sm}"
+  evento-atendido:
+    backgroundColor: "{colors.sello-suave}"
+    textColor: "{colors.sello-oscuro}"
+    rounded: "{rounded.sm}"
   hoja:
     backgroundColor: "{colors.papel}"
     rounded: "{rounded.sm}"
@@ -158,7 +180,7 @@ components:
 
 # Design System: Clínica Demo
 
-<!-- Fuente: canvas de diseño "Clínica: Login y layouts" (https://claude.ai/artifact/LZeFPnEjFHgUwnUvs9HvR2). Aún no hay código; volver a correr /impeccable document cuando exista el tema de PrimeVue para confirmar los valores reales. -->
+<!-- Fuente: canvas de diseño "Clínica: Login y layouts" (https://claude.ai/artifact/LZeFPnEjFHgUwnUvs9HvR2), 17 pantallas. Los nombres de pacientes y médicos del canvas son ilustrativos; la app usa los de src/data/seed.js. Aún no hay tema de PrimeVue; volver a correr /impeccable document cuando exista para confirmar los valores reales. -->
 
 ## Overview
 
@@ -184,15 +206,15 @@ Es una interfaz de trabajo (Operate): densidad media, lectura rápida de tablas 
 Restringida: neutros fríos de papel y mesa, un acento de tinta, y tres colores con significado fijo (sello, alerta, copias).
 
 ### Primary
-- **Tinta de bolígrafo** (`tinta`): acción principal, foco, enlaces, ítem de menú activo, datos confirmados por el médico. `tinta-oscura` para hover; `tinta-suave` para fondos de selección.
+- **Tinta de bolígrafo** (`tinta`): acción principal, foco, enlaces, ítem de menú activo, datos confirmados por el médico. `tinta-oscura` para hover; `tinta-suave` para fondos de selección; `tinta-clara` para texto secundario sobre fondo de tinta (6,9:1).
 
 ### Secondary
-- **Sello violeta** (`sello`, `sello-suave`): solo para lo registrado: cita atendida, "Consulta guardada", toast de éxito.
+- **Sello violeta** (`sello`, `sello-suave`, `sello-oscuro`): solo para lo registrado: cita atendida, "Consulta guardada", toast de éxito. `sello-oscuro` es el texto de los eventos atendidos del calendario.
 
 ### Tertiary
 - **Copia amarilla** (`copia-amarilla`): historia clínica y selección de texto. Texto encima siempre `texto-copia-amarilla`.
 - **Copia rosa** (`copia-rosa`): receta. Texto encima siempre `texto-copia-rosa`.
-- **Alerta** (`alerta`, `alerta-oscura`, `alerta-suave`): alergias, errores de validación, errores de IA y el punto de grabación.
+- **Alerta** (`alerta`, `alerta-oscura`, `alerta-suave`, `alerta-clara`): alergias, errores de validación, errores de IA y el punto de grabación. `alerta-clara` es el texto secundario dentro de la franja roja.
 
 ### Neutral
 - **Papel** (`papel`): hojas, menú lateral, diálogos.
@@ -201,6 +223,7 @@ Restringida: neutros fríos de papel y mesa, un acento de tinta, y tres colores 
 - **Texto** (`texto`) y **Texto secundario** (`texto-secundario`): contenido y etiquetas. Ambos pasan AA sobre papel, campo y mesa.
 - **Lápiz** (`lapiz`, `lapiz-suave`): todo lo sugerido por IA sin confirmar, y el estado deshabilitado.
 - **Apagado** (`apagado`): chips cancelados, botones deshabilitados, aviso fijo de IA.
+- **Pasado** (`pasado`): días y horas ya transcurridos en el calendario.
 - **Línea**, **Renglón**, **Perforación** (`linea`, `renglon`, `perforacion`): bordes, renglones de tabla y bordes punteados de perforación.
 
 ### Named Rules
@@ -208,7 +231,9 @@ Restringida: neutros fríos de papel y mesa, un acento de tinta, y tres colores 
 
 **The Copy Colors Mean Documents Rule.** Amarillo = historia clínica, rosa = receta. No se usan como acento decorativo ni como estado de cita.
 
-**The Never Color Alone Rule.** Todo estado lleva texto o ícono además del color: la cita cancelada va tachada, la no asistida con borde punteado y la alergia con triángulo.
+**The Never Color Alone Rule.** Todo estado lleva texto o ícono además del color: la cita cancelada va tachada, la no asistida con borde punteado y la alergia con triángulo. En el calendario, cada evento anuncia su estado en su nombre accesible ("10:30 Luis Quispe, confirmada, alérgico a penicilina").
+
+**Contraste verificado.** Todos los pares de texto de la paleta pasan AA (mínimo 5,57:1). `linea` y `perforacion` no llegan a 3:1 y solo pueden ser decorativos: todo campo lleva además su renglón inferior en `texto` o `lapiz`.
 
 ## Typography
 
@@ -237,6 +262,10 @@ Restringida: neutros fríos de papel y mesa, un acento de tinta, y tres colores 
 - **Cabecera:** título y fecha a la izquierda, acciones de pantalla a la derecha, separada del contenido por la perforación (2px punteado `perforacion`). Padding 28px 48px 22px.
 - **Contenido:** padding 32px 48px 48px sobre la mesa; una hoja principal por pantalla.
 - **Ritmo:** escala de 4/8 (`spacing`). Grupos internos a 8–12px; entre bloques 20–32px; más aire sobre un título que debajo.
+- **Menú de íconos (72px):** en las pantallas donde el médico redacta un documento (Atender cita, Emitir receta) el menú lateral se reduce a íconos con `aria-label` para ganar ancho. En el resto va el menú completo.
+- **Bloque "Siguiente paciente":** fijo en el menú completo del médico, en todas sus pantallas.
+- **Franja de alergia:** en Atender cita y Emitir receta, franja roja de todo el ancho bajo la cabecera, con `role="note"` y `aria-label="Alergias del paciente"`.
+- **Búsqueda:** la búsqueda global de pacientes vive en la cabecera del panel del día; el filtro de un listado vive en la barra superior de su hoja.
 - **Referencia:** 1366×768 (laptop). En tablet, el menú lateral se colapsa a íconos o a un cajón; las tablas pasan a filas apiladas antes que a scroll horizontal. [A resolver en implementación.]
 
 ## Elevation & Depth
@@ -264,9 +293,11 @@ Esquinas de papel, apenas redondeadas: 4px en hojas, chips y campos (solo esquin
 - **Hover / Focus:** hover pasa a `tinta-oscura`. El foco es un anillo de 2px en tinta con 2px de separación, en todos los controles.
 - **Secondary:** papel con contorno de 1.5px en tinta y texto en tinta (ej. "Atender" en citas que no son la siguiente).
 - **Ghost:** solo texto en tinta, para cancelar o acciones terciarias.
-- **Danger:** alerta lleno, solo acciones destructivas y siempre detrás de `ConfirmDialog`.
+- **Danger:** dos pasos. El disparador va con borde rojo y texto terminado en "…" ("Cancelar cita…", "Restablecer…"); abre el `ConfirmDialog`, y solo su botón de confirmación va en rojo lleno ("Sí, cancelar").
 - **Disabled:** apagado, texto lápiz y borde punteado; si depende de una configuración, al lado va un enlace que explica cómo habilitarlo ("Sin API key. Configurar IA").
-- **Icon-only:** 40–44px, siempre con `aria-label`.
+- **Icon-only:** 44px; 40px dentro de filas de tabla. Siempre con `aria-label` que nombra el objeto ("Editar a Jorge Huamán Salas"), nunca solo "Editar".
+- **Enlaces repetidos en filas** ("Ver", "Ver historia", "Atender") llevan `aria-label` con el nombre de la fila.
+- **Orden:** en grupos de botones la acción principal va a la derecha.
 
 ### Chips (estados de cita)
 - **Programada:** contorno en tinta.
@@ -298,13 +329,48 @@ Esquinas de papel, apenas redondeadas: 4px en hojas, chips y campos (solo esquin
 - En recepción, los conteos por estado son pestañas-filtro de la tabla (número grande y etiqueta), no tarjetas de métricas.
 
 ### Aviso de alergia (signature)
-Recuadro con `alerta-suave`, borde de 2px en alerta por los cuatro lados, triángulo y título en peso 800. Se muestra al agendar y al recetar. La versión bloqueante es un diálogo con franja superior de alerta. Exige marcar "Revisé la alergia…" para habilitar "Mantener", y la acción principal es la segura ("Quitar medicamento").
+Recuadro con `alerta-suave`, borde de 2px en alerta por los cuatro lados, triángulo y título en peso 800. Se muestra al agendar y al recetar.
+- **Franja:** en atención y receta, además, franja roja de todo el ancho (ver Layout).
+- **Bloqueo en línea:** cuando un medicamento cruza con una alergia, la fila se enmarca en rojo y debajo aparece el bloqueo: "Posible reacción alérgica", la explicación, la casilla "Revisé la alergia y mantengo la indicación", "Mantener" deshabilitado hasta marcarla y "Quitar medicamento" como acción principal a la derecha. No es un diálogo: el médico sigue viendo el formulario. La barra inferior muestra "1 alerta de alergia sin resolver" y "Guardar consulta" queda deshabilitado.
+- **Calendario:** el evento del paciente lleva el triángulo y el panel de detalle abre con el recuadro de alergia arriba.
 
 ### Dictado (signature)
 Cápsula "Grabando 00:42" con un punto rojo pulsante. El pulso se desactiva con `prefers-reduced-motion`. Pausar y Detener son secundarios; Limpiar es ghost. La carga ("Analizando consulta…") va en un recuadro a lápiz con spinner de tinta.
 
 ### Sello "Consulta guardada"
 Doble borde violeta, MAYÚSCULAS espaciadas, fecha y hora en Courier Prime, rotado −4°. Aparece en la hoja al guardar y habilita "Generar receta PDF".
+
+### Calendario (tema de FullCalendar)
+- **Vistas:** recepción usa Semana (filtrable por médico); el médico usa Día y Semana. Solo días y horas del horario de atención.
+- **Rejilla:** franjas de 30 min; 48px en semana, 56px en día. Línea de hora en `renglon`, media hora en `apagado`. Horas en Courier Prime 12px.
+- **Pasado:** días y horas transcurridos con fondo `pasado`. Hora actual: línea de 2px en tinta con punto (no rojo).
+- **Hoy:** cabecera de columna en `tinta-suave` con el número en círculo de tinta.
+- **Eventos:** mismos estilos que los chips de estado (programada con borde, confirmada llena, atendida en sello, cancelada tachada, no asistió punteada). En semana, hora y apellido; en día, fila completa con motivo, estado y acción.
+- **Selección:** anillo oscuro doble (`0 0 0 2px papel, 0 0 0 4px texto`), distinto del foco en tinta.
+- **Hueco libre:** al pasar, "+ Nueva cita HH:mm" con borde punteado en tinta.
+- **Detalle:** panel flotante con alergia, horario, médico, consultorio, motivo, estado, "Reprogramar" y "Cancelar cita…".
+
+### Tira de horario
+Seis casillas (Lu a Sá) de 26×24px: día de atención en tinta llena con texto blanco, día libre con borde punteado. Debajo, el rango en Courier Prime. El contenedor lleva `aria-label` en palabras ("Lunes a viernes").
+
+### Línea de tiempo (historia clínica)
+Riel vertical de 2px en `linea` con un punto por consulta; el más reciente en copia amarilla. Cada consulta es una hoja con franja superior amarilla de 8px: diagnóstico como título, fecha y médico, signos vitales en una línea de datos, y motivo, examen, diagnóstico y plan como lista de definiciones en lectura (16px, ~72ch). Las antiguas se pliegan con "Ver detalle".
+
+### Receta y vista previa
+El formulario de receta es una hoja con franja superior rosa de 8px. Cada medicamento confirma "Sin cruce con las alergias registradas". La vista previa del PDF (A5) muestra membrete, médico, paciente, "Rp/" con la tabla, indicaciones, firma, id y QR; nada por debajo de 10px en pantalla y 10–11pt en el PDF. Descargar e Imprimir se deshabilitan con el motivo escrito debajo.
+
+### Diálogos
+- **Formulario:** `Dialog` de 680px sobre velo, título en 22px, perforación bajo el título, acciones abajo a la derecha.
+- **Confirmación destructiva:** `alertdialog` con franja superior roja de 6px, consecuencia concreta con números ("Se borrarán 10 pacientes…"), "Cancelar" con borde y "Sí, …" en rojo lleno.
+- **Aviso sin salida:** `alertdialog` sin franja, explica el motivo ("Tiene 4 consultas registradas") y solo "Entendido".
+
+### Interruptor
+Pista de 52×30px en tinta con perilla blanca; `input type="checkbox" role="switch"` real encima, con descripción asociada.
+
+### Estados vacíos, de carga y de error
+- **Vacío:** ícono de trazo o la hoja vacía punteada, título que dice qué falta, una línea con el siguiente paso y una sola acción principal. Distinguir "sin resultados" (ofrece limpiar la búsqueda) de "primer uso" (ofrece crear o cargar la demo).
+- **Carga:** esqueleto con las mismas columnas que la tabla real, brillo suave desactivado con `prefers-reduced-motion`, visible solo si tarda más de 300 ms. Operaciones cortas: spinner de tinta con el texto de lo que ocurre.
+- **Error:** qué pasó, qué hacer y qué se conservó ("No se cambió ningún dato", "Su transcripción sigue intacta").
 
 ## Do's and Don'ts
 
@@ -322,3 +388,6 @@ Doble borde violeta, MAYÚSCULAS espaciadas, fecha y hora en Courier Prime, rota
 - **Don't** armar el dashboard con tarjetas de métrica (número gigante con etiqueta y acento).
 - **Don't** usar fondos crema, degradados, glassmorphism ni modo oscuro por defecto.
 - **Don't** usar emoji como íconos.
+- **Don't** abrir un diálogo cuando el aviso puede ir en línea; los diálogos son para formularios y confirmaciones.
+- **Don't** usar `role="tab"` para filtros; los filtros son botones con `aria-pressed`.
+- **Don't** usar el mismo anillo para selección y foco.

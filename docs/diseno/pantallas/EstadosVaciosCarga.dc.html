@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Estados vacíos, de carga y de error</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+input{caret-color:#1D3FAF;font-family:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.sk{background:linear-gradient(90deg,#EEF0F4 0%,#F7F8FB 50%,#EEF0F4 100%);background-size:200% 100%;animation:sk 1.4s ease-in-out infinite;border-radius:3px}
+@keyframes sk{0%{background-position:100% 0}100%{background-position:-100% 0}}
+@keyframes giro{to{transform:rotate(360deg)}}
+.giro{animation:giro .9s linear infinite}
+@media (prefers-reduced-motion: reduce){.sk,.giro{animation:none}}
+</style>
+</helmet>
+<div style="width: 1366px; height: 2160px; box-sizing: border-box; padding: 64px 72px; display: flex; flex-direction: column; gap: 36px; background: #E6E9EF;">
+  <div style="display: flex; flex-direction: column; gap: 8px; max-width: 760px;">
+    <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Estados vacíos, de carga y de error</h1>
+    <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #4A5068;">Un estado vacío dice qué falta y cuál es el siguiente paso. La carga reserva la forma de lo que viene. Un error explica qué pasó y que no se perdió nada.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 32px; align-items: start;">
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Tabla cargando</h2>
+      <section aria-busy="true" aria-label="Cargando pacientes" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); padding: 18px 24px 22px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;">Cargando pacientes…</span>
+        <div class="sk" style="width: 280px; height: 40px;"></div>
+        <div style="display: grid; grid-template-columns: 90px minmax(0, 1fr) 60px 110px; gap: 16px; padding-bottom: 10px; border-bottom: 1.5px solid #16192B; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;"><span>DNI</span><span>Paciente</span><span>Edad</span><span>Teléfono</span></div>
+        <div style="display: grid; grid-template-columns: 90px minmax(0, 1fr) 60px 110px; gap: 16px; align-items: center;"><div class="sk" style="height: 14px;"></div><div class="sk" style="height: 14px; width: 70%;"></div><div class="sk" style="height: 14px; width: 60%;"></div><div class="sk" style="height: 14px;"></div></div>
+        <div style="display: grid; grid-template-columns: 90px minmax(0, 1fr) 60px 110px; gap: 16px; align-items: center;"><div class="sk" style="height: 14px;"></div><div class="sk" style="height: 14px; width: 55%;"></div><div class="sk" style="height: 14px; width: 60%;"></div><div class="sk" style="height: 14px;"></div></div>
+        <div style="display: grid; grid-template-columns: 90px minmax(0, 1fr) 60px 110px; gap: 16px; align-items: center;"><div class="sk" style="height: 14px;"></div><div class="sk" style="height: 14px; width: 80%;"></div><div class="sk" style="height: 14px; width: 60%;"></div><div class="sk" style="height: 14px;"></div></div>
+        <div style="display: grid; grid-template-columns: 90px minmax(0, 1fr) 60px 110px; gap: 16px; align-items: center;"><div class="sk" style="height: 14px;"></div><div class="sk" style="height: 14px; width: 62%;"></div><div class="sk" style="height: 14px; width: 60%;"></div><div class="sk" style="height: 14px;"></div></div>
+      </section>
+      <p style="margin: 0; font-size: 13px; color: #4A5068;">Mismas columnas que la tabla real. Se muestra solo si la carga pasa de 300 ms.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Búsqueda sin resultados</h2>
+      <section style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); padding: 18px 24px 28px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="position: relative; width: 280px;">
+          <label for="b-vacia" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;">Buscar paciente</label>
+          <svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 12px; top: 11px; color: #4A5068;"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <input id="b-vacia" type="search" value="Zeballos" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 12px 0 40px; font-size: 15px; background: #F4F6FA; border: none; border-bottom: 2px solid #1D3FAF; border-radius: 4px 4px 0 0;">
+        </div>
+        <div role="status" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px 0 4px; text-align: center;">
+          <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><rect x="10" y="8" width="30" height="38" rx="2" fill="#FFFFFF" stroke="#AEB6C9" stroke-width="1.5" stroke-dasharray="4 3"></rect><circle cx="34" cy="34" r="9" fill="#FFFFFF" stroke="#1D3FAF" stroke-width="2"></circle><path d="m41 41 7 7" stroke="#1D3FAF" stroke-width="2.5" stroke-linecap="round"></path></svg>
+          <p style="margin: 0; font-size: 17px; font-weight: 700;">Ningún paciente coincide con “Zeballos”</p>
+          <p style="margin: 0; font-size: 14px; color: #4A5068;">Revise el apellido o busque por DNI.</p>
+          <div style="display: flex; gap: 10px; margin-top: 6px;">
+            <button type="button" style="height: 40px; padding: 0 14px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Limpiar búsqueda</button>
+            <button type="button" style="height: 40px; padding: 0 16px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Registrar paciente</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Primer uso: sin consultorios</h2>
+      <section style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); padding: 36px 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+        <svg width="64" height="64" viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="9" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#AEB6C9" stroke-width="0.9" stroke-dasharray="2 1.5"></rect><rect x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#AEB6C9" stroke-width="0.9" stroke-dasharray="2 1.5"></rect><rect x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B" stroke-width="0.9"></rect><path d="M8 10h11M8 14h7" stroke="#C5CCDC" stroke-width="0.9"></path></svg>
+        <p style="margin: 0; font-size: 17px; font-weight: 700;">Todavía no hay consultorios</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A5068; max-width: 38ch;">Cree el primero para poder asignarlo a un médico y agendar citas.</p>
+        <button type="button" style="margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nuevo consultorio</button>
+        <a href="#" style="font-size: 14px; font-weight: 600;">o cargue los datos de demo en Respaldo</a>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Panel del día sin citas</h2>
+      <section style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06);">
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1.5px solid #16192B;">
+          <span style="display: flex; flex-direction: column; padding: 12px 14px 10px; background: #E9EEFB; border-bottom: 3px solid #1D3FAF; color: #1D3FAF;"><span style="font-size: 22px; font-weight: 800;">0</span><span style="font-size: 12px; font-weight: 700;">Todas</span></span>
+          <span style="display: flex; flex-direction: column; padding: 12px 14px 10px; border-left: 1px solid #DDE2EC; color: #4A5068;"><span style="font-size: 22px; font-weight: 800;">0</span><span style="font-size: 12px; font-weight: 600;">Programadas</span></span>
+          <span style="display: flex; flex-direction: column; padding: 12px 14px 10px; border-left: 1px solid #DDE2EC; color: #4A5068;"><span style="font-size: 22px; font-weight: 800;">0</span><span style="font-size: 12px; font-weight: 600;">Atendidas</span></span>
+          <span style="display: flex; flex-direction: column; padding: 12px 14px 10px; border-left: 1px solid #DDE2EC; color: #4A5068;"><span style="font-size: 22px; font-weight: 800;">0</span><span style="font-size: 12px; font-weight: 600;">Canceladas</span></span>
+          <span style="display: flex; flex-direction: column; padding: 12px 14px 10px; border-left: 1px solid #DDE2EC; color: #4A5068;"><span style="font-size: 22px; font-weight: 800;">0</span><span style="font-size: 12px; font-weight: 600;">No asistió</span></span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 32px 24px 34px; text-align: center;">
+          <svg class="ic" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="color: #AEB6C9;"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+          <p style="margin: 0; font-size: 17px; font-weight: 700;">No hay citas para hoy</p>
+          <p style="margin: 0; font-size: 14px; color: #4A5068;">La próxima es el lunes <span style="font-family: 'Courier Prime', monospace;">28/09</span> a las <span style="font-family: 'Courier Prime', monospace;">08:30</span>.</p>
+          <button type="button" style="margin-top: 6px; height: 40px; padding: 0 16px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Nueva cita</button>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Historia clínica sin consultas</h2>
+      <section style="background: #FFFFFF; border-top: 8px solid #FFE14D; border-radius: 0 0 4px 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); padding: 30px 28px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;">
+        <p style="margin: 0; font-size: 17px; font-weight: 700;">Pedro Salazar Núñez aún no tiene consultas</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A5068; max-width: 44ch;">La primera aparecerá aquí cuando un médico atienda una de sus citas.</p>
+        <button type="button" disabled="{{yes}}" style="margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; background: #EEF0F4; color: #5A5F70; border: 1.5px dashed #AEB6C9; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: not-allowed;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Exportar PDF</button>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Mi agenda: día sin citas</h2>
+      <section style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); display: grid; grid-template-columns: 56px minmax(0, 1fr); grid-template-rows: repeat(4, 40px); background-image: repeating-linear-gradient(to bottom, #DDE2EC 0px, #DDE2EC 1px, transparent 1px, transparent 40px);">
+        <span style="grid-column: 1; grid-row: 1; padding: 4px 8px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">08:00</span>
+        <span style="grid-column: 1; grid-row: 3; padding: 4px 8px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">09:00</span>
+        <div style="grid-column: 2; grid-row: 1 / span 4; border-left: 1px solid #DDE2EC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.85);">
+          <p style="margin: 0; font-size: 16px; font-weight: 700;">No tiene citas el martes 29/09</p>
+          <a href="#" style="font-size: 14px; font-weight: 600;">Ir al próximo día con citas</a>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Probar conexión con la IA</h2>
+      <section style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; font-size: 14px;">
+        <div role="status" style="display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid #DDE2EC;">
+          <button type="button" disabled="{{yes}}" style="height: 40px; padding: 0 14px; background: #EEF0F4; color: #5A5F70; border: 1.5px dashed #AEB6C9; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: not-allowed;">Probando…</button>
+          <svg class="giro" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="#C5CCDC" stroke-width="2.5"></circle><path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="#1D3FAF" stroke-width="2.5" stroke-linecap="round"></path></svg>
+          <span style="font-weight: 600; color: #3F4458;">Esperando respuesta (máximo 30 s)</span>
+        </div>
+        <p role="alert" style="margin: 0; display: flex; gap: 8px; color: #B3122E; font-weight: 600;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.01"></path></svg><span>La API key no es válida. Revísela y vuelva a probar.</span></p>
+        <p style="margin: 0; display: flex; gap: 8px; color: #B3122E; font-weight: 600;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.01"></path></svg><span>Se alcanzó el límite de uso. Espere unos minutos e intente de nuevo.</span></p>
+        <p style="margin: 0; display: flex; gap: 8px; color: #B3122E; font-weight: 600;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.01"></path></svg><span>No hay conexión a internet. La atención sigue funcionando a mano.</span></p>
+        <p style="margin: 0; display: flex; gap: 8px; color: #B3122E; font-weight: 600;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.01"></path></svg><span>La IA tardó más de 30 s en responder. Intente de nuevo.</span></p>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Importar respaldo</h2>
+      <section style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 8px 24px rgba(22, 25, 43, 0.06); padding: 20px 24px; display: flex; flex-direction: column; gap: 18px;">
+        <div role="status" style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 14px; font-weight: 600;">Importando <span style="font-family: 'Courier Prime', monospace;">clinica_respaldo_2026-09-26.json</span>…</span>
+          <div role="progressbar" aria-label="Progreso de importación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" style="height: 8px; background: #EEF0F4; border-radius: 4px; overflow: hidden;"><div style="width: 60%; height: 100%; background: #1D3FAF;"></div></div>
+          <span style="font-size: 13px; color: #4A5068;">Validando citas <span style="font-family: 'Courier Prime', monospace;">25 de 42</span></span>
+        </div>
+        <div role="alert" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: #FCE8EC; border: 2px solid #B3122E; border-radius: 6px; color: #7A0C1F;">
+          <svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; color: #B3122E;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.01"></path></svg>
+          <div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5;"><strong style="color: #B3122E;">El archivo no es un respaldo válido.</strong><span>Falta la lista de pacientes. No se cambió ningún dato.</span></div>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">No se puede eliminar</h2>
+      <div style="padding: 28px; background: rgba(22, 25, 43, 0.55); border-radius: 6px;">
+        <div role="alertdialog" aria-labelledby="no-elim" style="background: #FFFFFF; border-radius: 6px; box-shadow: 0 20px 48px rgba(22, 25, 43, 0.35); padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 id="no-elim" style="margin: 0; font-size: 18px; font-weight: 800;">No se puede eliminar a Luis Quispe Mamani</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #3F4458;">Tiene <strong>4 consultas registradas</strong>. Las historias clínicas se conservan, así que el paciente no se puede borrar.</p>
+          <div style="display: flex; justify-content: flex-end;"><button type="button" style="height: 44px; padding: 0 20px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700;">Entendido</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Confirmar restablecer demo</h2>
+      <div style="padding: 28px; background: rgba(22, 25, 43, 0.55); border-radius: 6px;">
+        <div role="alertdialog" aria-labelledby="conf-demo" style="background: #FFFFFF; border-top: 6px solid #B3122E; border-radius: 0 0 6px 6px; box-shadow: 0 20px 48px rgba(22, 25, 43, 0.35); padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+          <h3 id="conf-demo" style="margin: 0; font-size: 18px; font-weight: 800;">¿Restablecer los datos de demo?</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #3F4458;">Se borrarán <span style="font-family: 'Courier Prime', monospace;">10</span> pacientes, <span style="font-family: 'Courier Prime', monospace;">42</span> citas, <span style="font-family: 'Courier Prime', monospace;">18</span> consultas y <span style="font-family: 'Courier Prime', monospace;">12</span> recetas. No se puede deshacer.</p>
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" style="height: 44px; padding: 0 16px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 15px; font-weight: 700;">Cancelar</button>
+            <button type="button" style="height: 44px; padding: 0 18px; background: #B3122E; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700;">Sí, restablecer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":2160}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

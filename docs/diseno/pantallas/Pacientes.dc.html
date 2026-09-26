@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pacientes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+input{caret-color:#1D3FAF;font-family:inherit}
+input::placeholder{color:#5A5F70}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mk{stroke-width:1.5}
+</style>
+</helmet>
+<div style="width: 1366px; height: 900px; display: grid; grid-template-columns: 256px minmax(0, 1fr); background: #E6E9EF;">
+
+  <aside style="background: #FFFFFF; border-right: 1px solid #C5CCDC; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect class="mk" x="9" y="9" width="19" height="19" rx="2" fill="#FF9EC4" stroke="#16192B"></rect><rect class="mk" x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFE14D" stroke="#16192B"></rect><rect class="mk" x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B"></rect><path class="mk" d="M8 10h11M8 14h11M8 18h7" stroke="#1D3FAF" fill="none"></path></svg>
+      <div style="display: flex; flex-direction: column;"><span style="font-size: 16px; font-weight: 700; letter-spacing: -0.01em;">Clínica Demo</span><span style="font-size: 13px; color: #4A5068;">Recepción</span></div>
+    </div>
+    <nav aria-label="Menú de recepción">
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9Z"></path></svg>Panel del día</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Agenda</a></li>
+        <li><a href="#" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; background: #E9EEFB; color: #1D3FAF; font-size: 15px; font-weight: 700; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a5 5 0 0 1 3.5 6"></path></svg>Pacientes</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v2a5 5 0 0 0 10 0v-2"></path><circle cx="20" cy="11" r="2"></circle></svg>Médicos</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17M3 21h18"></path><circle cx="15" cy="12" r="1"></circle></svg>Consultorios</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1"></rect><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4"></path></svg>Respaldo</a></li>
+      </ul>
+    </nav>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 2px dotted #AEB6C9;">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+        <span aria-hidden="true" style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #16192B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">RE</span>
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 14px; font-weight: 700;">Recepción</span><span style="font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">recepcion@clinica.com</span></div>
+      </div>
+      <button type="button" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; background: none; border: none; border-radius: 6px; color: #16192B; font-size: 14px; font-weight: 600; text-align: left;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4"></path></svg>Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 28px 48px 22px; border-bottom: 2px dotted #AEB6C9;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Pacientes</h1>
+        <p style="margin: 0; font-size: 15px; color: #4A5068;">10 pacientes registrados</p>
+      </div>
+      <button type="button" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 1px 2px rgba(21, 46, 128, 0.25);"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nuevo paciente</button>
+    </header>
+
+    <main style="padding: 28px 48px 40px;">
+      <section aria-label="Listado de pacientes" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08);">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 24px; border-bottom: 1px solid #C5CCDC;">
+          <div style="position: relative;">
+            <label for="buscar-p" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;">Buscar paciente</label>
+            <svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 12px; top: 13px; color: #4A5068;"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input id="buscar-p" type="search" placeholder="Buscar por DNI o nombre" style="width: 360px; height: 44px; box-sizing: border-box; padding: 0 12px 0 40px; font-size: 15px; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+          </div>
+          <span style="font-size: 14px; color: #4A5068;">Ordenado por apellido</span>
+        </div>
+        <div style="padding: 0 24px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
+            <thead>
+              <tr style="text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">
+                <th style="padding: 14px 12px 10px 0; border-bottom: 1.5px solid #16192B; width: 110px;">DNI</th>
+                <th style="padding: 14px 12px 10px; border-bottom: 1.5px solid #16192B;">Paciente</th>
+                <th style="padding: 14px 12px 10px; border-bottom: 1.5px solid #16192B; width: 70px;">Edad</th>
+                <th style="padding: 14px 12px 10px; border-bottom: 1.5px solid #16192B; width: 130px;">Teléfono</th>
+                <th style="padding: 14px 12px 10px; border-bottom: 1.5px solid #16192B; width: 140px;">Última consulta</th>
+                <th style="padding: 14px 0 10px 12px; border-bottom: 1.5px solid #16192B; width: 150px; text-align: right;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 11px 12px 11px 0; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">70214589</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-weight: 600;">Huamán Salas, Jorge</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">41</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">976 112 450</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace;">26/09/2026</td><td style="padding: 6px 0 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Jorge Huamán Salas" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Jorge Huamán Salas" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Jorge Huamán Salas" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr><td style="padding: 11px 12px 11px 0; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">45872136</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-weight: 600;">Fernández Rojas, María</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">52</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">954 321 876</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace;">26/09/2026</td><td style="padding: 6px 0 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a María Fernández Rojas" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a María Fernández Rojas" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a María Fernández Rojas" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr><td style="padding: 11px 12px 11px 0; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">61234590</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-weight: 600;">Cárdenas Soto, Mateo</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">6</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">912 008 334</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace;">26/09/2026</td><td style="padding: 6px 0 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Mateo Cárdenas Soto" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Mateo Cárdenas Soto" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Mateo Cárdenas Soto" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr><td style="padding: 11px 12px 11px 0; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">41236987</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-weight: 600;">Chávez Díaz, Rosa</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">63</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">987 110 245</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace;">14/08/2026</td><td style="padding: 6px 0 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Rosa Chávez Díaz" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Rosa Chávez Díaz" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Rosa Chávez Díaz" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr style="background: #F4F6FA;"><td style="padding: 11px 12px 11px 8px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">46123578</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;"><span style="font-weight: 600;">Quispe Mamani, Luis</span> <span style="display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; padding: 2px 7px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 4px; color: #B3122E; font-size: 12px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Penicilina</span></td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">34</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">987 654 321</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace;">26/09/2026</td><td style="padding: 6px 8px 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Luis Quispe Mamani" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Luis Quispe Mamani" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Luis Quispe Mamani" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr><td style="padding: 11px 12px 11px 0; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">08765432</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-weight: 600;">Ríos Paredes, Carmen</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">29</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">945 778 102</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace;">26/09/2026</td><td style="padding: 6px 0 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Carmen Ríos Paredes" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Carmen Ríos Paredes" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Carmen Ríos Paredes" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr><td style="padding: 11px 12px 11px 0; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; font-weight: 700;">40987612</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-weight: 600;">Salazar Núñez, Pedro</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC;">47</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; font-family: 'Courier Prime', monospace; color: #4A5068;">999 401 227</td><td style="padding: 11px 12px; border-bottom: 1px solid #DDE2EC; color: #4A5068;">Sin consultas</td><td style="padding: 6px 0 6px 12px; border-bottom: 1px solid #DDE2EC; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Pedro Salazar Núñez" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Pedro Salazar Núñez" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Pedro Salazar Núñez" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+              <tr><td style="padding: 11px 12px 11px 0; font-family: 'Courier Prime', monospace; font-weight: 700;">72456813</td><td style="padding: 11px 12px; font-weight: 600;">Vargas Ponce, Ana Lucía</td><td style="padding: 11px 12px;">38</td><td style="padding: 11px 12px; font-family: 'Courier Prime', monospace; color: #4A5068;">933 560 781</td><td style="padding: 11px 12px; font-family: 'Courier Prime', monospace;">02/09/2026</td><td style="padding: 6px 0 6px 12px; text-align: right; white-space: nowrap;"><a href="#" aria-label="Ver a Ana Lucía Vargas Ponce" style="font-size: 14px; font-weight: 600; margin-right: 6px;">Ver</a><button type="button" aria-label="Editar a Ana Lucía Vargas Ponce" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button><button type="button" aria-label="Eliminar a Ana Lucía Vargas Ponce" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"></path></svg></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-top: 2px dotted #AEB6C9; font-size: 14px;">
+          <span style="color: #4A5068;"><span style="font-family: 'Courier Prime', monospace;">1–8</span> de <span style="font-family: 'Courier Prime', monospace;">10</span></span>
+          <div style="display: flex; gap: 4px;">
+            <button type="button" aria-label="Página anterior" disabled="{{yes}}" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: 1px solid #DDE2EC; border-radius: 6px; color: #AEB6C9; cursor: not-allowed;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+            <button type="button" aria-label="Página siguiente" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: 1px solid #C5CCDC; border-radius: 6px; color: #1D3FAF;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>
