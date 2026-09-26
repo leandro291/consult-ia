@@ -103,7 +103,7 @@ Es una sola aplicación con login. Según el rol del usuario se muestra un layou
 - **Mi agenda**: solo las citas del médico logueado (vista del día y de la semana).
 - **Atender cita**: muestra datos del paciente, alergias e historial, junto con el formulario de consulta. Al guardar, la cita pasa a estado `atendida`.
   - Incluye el **Asistente de consulta por voz**: dictado → IA → formulario y borrador de receta prellenados.
-- **Configuración IA**: pantalla para ingresar la API key y probar la conexión.
+- **Configuración IA**: pantalla para configurar la URL del servidor de IA y probar la conexión.
 - **Historia clínica**: línea de tiempo de todas las consultas de un paciente, con opción de exportarla a PDF.
 - **Emitir receta**: formulario de medicamentos ligado a una consulta. Genera el PDF.
 
@@ -147,8 +147,7 @@ Las relaciones se hacen por id.
 - **`clinica_consultas`**: `{ id, citaId, pacienteId, medicoId, fecha, motivo, signosVitales: { presion, frecuenciaCardiaca, temperatura, peso, talla }, examenFisico, diagnosticos: [{ codigo, descripcion }], plan, observaciones }`
 - **`clinica_recetas`**: `{ id, consultaId, pacienteId, medicoId, fecha, items: [{ medicamento, dosis, frecuencia, duracion, via, indicaciones }], indicacionesGenerales }`
 - **`clinica_sesion`**: `{ usuarioId, rol, nombre }`, el usuario logueado actualmente.
-- **`clinica_config`**: `{ iaApiKey, iaModelo, iaActivada }`, configuración del asistente IA.
-  - **Nunca** incluir `iaApiKey` en la exportación de respaldo JSON.
+- **`clinica_config`**: `{ iaServidorUrl, iaActivada }`, configuración del asistente IA.
 - Las consultas creadas con ayuda del asistente llevan además:
   - `generadaConIA: true`
   - `transcripcion`: el texto dictado original
@@ -256,11 +255,11 @@ Es la función destacada del proyecto. Imita a un "escriba clínico con IA": el 
 
 ### Formato de respuesta esperado de la IA
 
-El prompt de sistema pide responder **solo con JSON válido** con esta forma exacta. Los campos sin información van como `null` o como array vacío. La IA **nunca inventa** datos que no estén en la transcripción.
+El servidor de IA responde **solo con JSON válido** con esta forma exacta (es el contrato entre el front y el servidor). Los campos sin información van como `null` o como array vacío. La IA **nunca inventa** datos que no estén en la transcripción.
 
 ```json
 {
-  "motivo": "string",
+  "motivo": "string|null",
   "signosVitales": {
     "presion": "string|null",
     "frecuenciaCardiaca": "number|null",
@@ -268,22 +267,22 @@ El prompt de sistema pide responder **solo con JSON válido** con esta forma exa
     "peso": "number|null",
     "talla": "number|null"
   },
-  "examenFisico": "string",
+  "examenFisico": "string|null",
   "diagnosticos": [
-    { "codigo": "J02.9", "descripcion": "Faringitis aguda, no especificada" }
+    { "codigo": "string|null", "descripcion": "string" }
   ],
-  "plan": "string",
+  "plan": "string|null",
   "receta": [
     {
-      "medicamento": "Amoxicilina 500 mg",
-      "dosis": "1 cápsula",
-      "frecuencia": "cada 8 horas",
-      "duracion": "7 días",
-      "via": "oral",
-      "indicaciones": "después de las comidas"
+      "medicamento": "string",
+      "dosis": "string|null",
+      "frecuencia": "string|null",
+      "duracion": "string|null",
+      "via": "string|null",
+      "indicaciones": "string|null"
     }
   ],
-  "indicacionesPaciente": "texto en lenguaje sencillo para el paciente",
+  "indicacionesPaciente": "string|null",
   "advertencias": ["datos faltantes o dudas que el médico debería revisar"]
 }
 ```
@@ -294,27 +293,19 @@ El prompt de sistema pide responder **solo con JSON válido** con esta forma exa
 
 ### iaService.js
 
-- Usa `fetch` directo a la API de Claude, sin SDK.
-- Consultar la documentación oficial (https://docs.claude.com) para:
-  - El endpoint.
-  - Los headers requeridos, incluido el necesario para llamadas desde el navegador.
-  - El nombre de modelo vigente.
-- Leer `iaApiKey` e `iaModelo` desde `clinica_config`.
-- Si no hay key configurada, el botón "Generar con IA" queda deshabilitado, con un enlace a `/medico/configuracion`.
+- Hace `fetch` POST a la URL configurada en `iaServidorUrl` (`clinica_config`), enviando `{ transcripcion, contexto }` (el `contexto` es la salida de `anonimizar.js`; nunca nombre, DNI, teléfono, email ni dirección).
+- Recibe como respuesta el JSON con el formato del contrato (ver arriba).
+- Si no hay servidor configurado o el asistente está desactivado, el botón "Generar con IA" queda deshabilitado, con un enlace a `/medico/configuracion`.
 - Parámetros de la llamada:
   - Timeout de 30 s con `AbortController`.
-  - Temperatura baja (≈0.2).
-  - Límite razonable de tokens de salida.
 - Extraer el JSON de la respuesta de forma robusta: quitar bloques ```json si vienen incluidos.
-- Manejar los errores con mensajes en español: sin conexión, key inválida (401), límite de uso (429), timeout y respuesta mal formada.
+- Manejar los errores con mensajes en español: sin conexión o servidor no disponible, error del servidor (5xx), límite de uso (429), timeout y respuesta mal formada.
 
 ### Configuración (`/medico/configuracion`)
 
-- Campo para la API key, tipo password con opción de mostrar.
-- Selector o campo del modelo.
+- Campo para la URL del servidor de IA.
 - Interruptor para activar o desactivar el asistente.
 - Botón "Probar conexión".
-- Texto de aviso: la key se guarda solo en este navegador; es un proyecto académico.
 
 ### Interfaz
 
@@ -405,7 +396,7 @@ Completar y verificar cada fase antes de pasar a la siguiente. Cada fase se ejec
 - La autenticación es simulada, con contraseñas sin cifrar. No es apta para datos médicos reales.
 - No hay sincronización entre dispositivos ni usuarios simultáneos.
 - Límites del asistente IA:
-  - La API key se guarda en localStorage y es visible desde el navegador. En producción, las llamadas deberían pasar por un servidor intermedio que la proteja.
+  - El asistente depende de un servidor de IA externo a este proyecto; si no está disponible o no está configurado, la atención médica funciona igual de forma manual.
   - El dictado por voz depende del navegador (funciona mejor en Chrome o Edge) y requiere permiso de micrófono.
   - Las sugerencias de la IA pueden contener errores; el médico es siempre responsable de verificarlas.
   - La detección de alergias usa una tabla simplificada de familias de medicamentos y no reemplaza una base farmacológica real.

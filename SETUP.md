@@ -95,8 +95,8 @@ consult-ia/
 │   │   ├── consultasService.js
 │   │   ├── recetasService.js
 │   │   ├── authService.js    # login, logout, sesionActual
-│   │   ├── respaldoService.js # Exportar e importar JSON (sin iaApiKey)
-│   │   └── iaService.js      # Config IA (clinica_config), fetch a Claude y validación
+│   │   ├── respaldoService.js # Exportar e importar JSON
+│   │   └── iaService.js      # Config IA (clinica_config), POST al servidor de IA y validación
 │   │
 │   ├── stores/               # Pinia, uno por dominio + auth
 │   │   ├── auth.js
@@ -263,7 +263,7 @@ Los imports internos usan el alias `@/` (ej. `import { leer } from '@/services/s
 
 **Sin dependencia**, se usan APIs nativas:
 - Web Speech API para el dictado.
-- `fetch` para la API de Claude.
+- `fetch` para el servidor de IA.
 - `crypto.randomUUID()` para los ids.
 - `localStorage` para la persistencia.
 
