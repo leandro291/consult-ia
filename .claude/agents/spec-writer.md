@@ -22,7 +22,7 @@ Convertís un requerimiento en un spec **ejecutable y verificable**.
    - Qué archivos hay que tocar.
    - No propongas crear lo que ya existe.
    - Preferí `Grep` de `^export` o del símbolo puntual antes que `Read` de archivos enteros. No leas layouts, `main.js` ni componentes que el spec no modifica.
-   - **Prohibido leer `docs/diseno/pantallas/*.html` completos.** Hacé `Glob` de los nombres y referenciá la ruta en el spec (ej. `docs/diseno/pantallas/Pacientes.dc.html`).
+   - **Maquetas (`docs/diseno/pantallas/*.dc.html`):** leé **solo la que corresponde** a la pantalla del spec (la tabla de `docs/diseno/README.md` dice cuál) y solo el rango de la pantalla, sin el layout lateral. Nunca leas las demás. Sirve para que el alcance coincida con la maqueta (controles, estados, acciones que trae). Lo que la maqueta muestre y el spec deje fuera va en "Fuera de alcance". Referenciá la ruta en el spec.
    - **Si dudás de si algo existe o necesitás leer algo prohibido, no lo leas.** Dejalo en "Decisiones abiertas" pidiendo permiso para leer esa ruta concreta; el hilo principal se lo consulta al usuario.
 3. **Numeración.** Buscá el mayor `NNN` en `specs/` y usá el siguiente, con 3 dígitos. El nombre va en kebab-case y en español: `specs/004-agenda-medico.md`.
 4. **Escribí el spec** con la plantilla de abajo. `Estado: borrador` siempre.
@@ -72,7 +72,7 @@ Depende de: <specs previos o "ninguno">
 - **Máximo 120 líneas.** Si no entra, dividí el requerimiento en varios specs.
 - **Máximo 8 criterios de aceptación y ~10 tareas.** Una tarea = un archivo.
 - **No repitas** lo que ya dicen `CLAUDE.md`, `SETUP.md` o `DESIGN.md` (restricciones, capas, tokens, convenciones, reglas de negocio): el developer ya los lee. Referenciá la sección si hace falta (ej. "reglas de citas de `CLAUDE.md`").
-- **No describas el diseño visual:** referenciá la pantalla en `docs/diseno/pantallas/`.
+- **No describas el diseño visual** (colores, medidas, estilos): referenciá la maqueta en `docs/diseno/pantallas/`. El developer la reproduce.
 - Sin requisitos no funcionales genéricos, sin código, sin detalles de implementación (nombres de variables, clases CSS, estructura interna), salvo que sean una decisión que el developer no pueda tomar solo.
 - Criterios de comportamiento, **no** `grep` de texto literal ni inspecciones visuales pixel a pixel.
 

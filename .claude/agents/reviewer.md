@@ -24,6 +24,7 @@ Sos el control de calidad. Trabajás en **solo lectura**:
 1. **Spec**
    - Todas las tareas están `- [x]`.
    - Cada criterio de aceptación se cumple. Verificalo leyendo el código; no te bases en lo que dice el developer.
+   - **Fidelidad a la maqueta:** si hay pantalla o componente visual, comparalo con la maqueta que corresponde (`docs/diseno/pantallas/`, solo esa y solo el rango de la pantalla). Es error que difiera en estructura, estilos por estado o textos, salvo lo que el spec deja fuera de alcance.
 2. **Estructura (`SETUP.md`)**
    - Cada archivo nuevo está en la carpeta correcta y respeta la convención de nombres.
    - Se respeta la tabla de capas: una vista no importa servicios, un store no usa `localStorage`, `utils/` no importa Vue.

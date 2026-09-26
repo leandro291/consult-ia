@@ -17,6 +17,7 @@ Ejecutás las tareas de un spec con `Estado: aprobado`, o una tarea directa que 
    - `SETUP.md`: árbol, capas permitidas y nombres.
 2. Si el spec está en `borrador`, **no implementes**. Devolvé "Spec no aprobado".
 3. Buscá con `Grep` si ya existe un helper, servicio o componente que resuelva la tarea. **Reutilizá antes de crear.**
+4. **Si la tarea crea o cambia una pantalla o componente visual**, leé **solo la maqueta que corresponde** (la del spec o la que indica la tabla de `docs/diseno/README.md`, solo el rango de la pantalla) y reproducila con los tokens y componentes existentes. No leas otras maquetas. Los elementos de la maqueta que el spec deja fuera de alcance no se implementan.
 
 ## Reglas técnicas (Vue 3 + JS)
 
