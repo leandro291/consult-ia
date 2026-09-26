@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Agenda de recepción</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+select{font-family:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mk{stroke-width:1.5}
+</style>
+</helmet>
+<div style="width: 1366px; height: 980px; display: grid; grid-template-columns: 256px minmax(0, 1fr); background: #E6E9EF;">
+
+  <aside style="background: #FFFFFF; border-right: 1px solid #C5CCDC; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect class="mk" x="9" y="9" width="19" height="19" rx="2" fill="#FF9EC4" stroke="#16192B"></rect><rect class="mk" x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFE14D" stroke="#16192B"></rect><rect class="mk" x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B"></rect><path class="mk" d="M8 10h11M8 14h11M8 18h7" stroke="#1D3FAF" fill="none"></path></svg>
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 16px; font-weight: 700; letter-spacing: -0.01em;">Clínica Demo</span>
+        <span style="font-size: 13px; color: #4A5068;">Recepción</span>
+      </div>
+    </div>
+    <nav aria-label="Menú de recepción">
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9Z"></path></svg>Panel del día</a></li>
+        <li><a href="#" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; background: #E9EEFB; color: #1D3FAF; font-size: 15px; font-weight: 700; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Agenda</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a5 5 0 0 1 3.5 6"></path></svg>Pacientes</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v2a5 5 0 0 0 10 0v-2"></path><circle cx="20" cy="11" r="2"></circle></svg>Médicos</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17M3 21h18"></path><circle cx="15" cy="12" r="1"></circle></svg>Consultorios</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1"></rect><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4"></path></svg>Respaldo</a></li>
+      </ul>
+    </nav>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 2px dotted #AEB6C9;">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+        <span aria-hidden="true" style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #16192B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">RE</span>
+        <div style="display: flex; flex-direction: column; min-width: 0;">
+          <span style="font-size: 14px; font-weight: 700;">Recepción</span>
+          <span style="font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">recepcion@clinica.com</span>
+        </div>
+      </div>
+      <button type="button" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; background: none; border: none; border-radius: 6px; color: #16192B; font-size: 14px; font-weight: 600; text-align: left;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4"></path></svg>Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 28px 48px 22px; border-bottom: 2px dotted #AEB6C9;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Agenda</h1>
+        <p style="margin: 0; font-size: 15px; color: #4A5068;">Sábado, <span style="font-family: 'Courier Prime', monospace;">26/09/2026</span></p>
+      </div>
+      <button type="button" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 1px 2px rgba(21, 46, 128, 0.25);"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nueva cita</button>
+    </header>
+
+    <main style="padding: 28px 48px 40px;">
+      <section aria-label="Calendario de citas" style="position: relative; background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08);">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid #C5CCDC;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" style="height: 40px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;">Hoy</button>
+            <button type="button" aria-label="Semana anterior" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #16192B;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+            <button type="button" aria-label="Semana siguiente" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #16192B;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+            <h2 style="margin: 0 0 0 6px; font-size: 18px; font-weight: 700;">21 – 26 de septiembre de 2026</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <label for="filtro-medico" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Médico</label>
+            <select id="filtro-medico" style="height: 40px; padding: 0 10px; font-size: 14px; font-weight: 600; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;"><option>Dra. Ana Torres · Medicina General</option><option>Todos los médicos</option></select>
+            <div role="group" aria-label="Vista" style="display: flex; background: #FFFFFF; border: 1px solid #C5CCDC; border-radius: 6px; padding: 3px;">
+              <button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; background: none; color: #16192B; border: none; border-radius: 4px; font-size: 14px; font-weight: 600;">Mes</button>
+              <button type="button" aria-pressed="true" style="height: 34px; padding: 0 14px; background: #16192B; color: #FFFFFF; border: none; border-radius: 4px; font-size: 14px; font-weight: 700;">Semana</button>
+              <button type="button" aria-pressed="false" style="height: 34px; padding: 0 14px; background: none; color: #16192B; border: none; border-radius: 4px; font-size: 14px; font-weight: 600;">Día</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 64px repeat(6, minmax(0, 1fr)); border-bottom: 1.5px solid #16192B;">
+          <span></span>
+          <span style="padding: 10px 10px 8px; border-left: 1px solid #DDE2EC; font-size: 13px; font-weight: 600; color: #4A5068;">Lun <span style="font-family: 'Courier Prime', monospace; font-size: 15px;">21</span></span>
+          <span style="padding: 10px 10px 8px; border-left: 1px solid #DDE2EC; font-size: 13px; font-weight: 600; color: #4A5068;">Mar <span style="font-family: 'Courier Prime', monospace; font-size: 15px;">22</span></span>
+          <span style="padding: 10px 10px 8px; border-left: 1px solid #DDE2EC; font-size: 13px; font-weight: 600; color: #4A5068;">Mié <span style="font-family: 'Courier Prime', monospace; font-size: 15px;">23</span></span>
+          <span style="padding: 10px 10px 8px; border-left: 1px solid #DDE2EC; font-size: 13px; font-weight: 600; color: #4A5068;">Jue <span style="font-family: 'Courier Prime', monospace; font-size: 15px;">24</span></span>
+          <span style="padding: 10px 10px 8px; border-left: 1px solid #DDE2EC; font-size: 13px; font-weight: 600; color: #4A5068;">Vie <span style="font-family: 'Courier Prime', monospace; font-size: 15px;">25</span></span>
+          <span style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-left: 1px solid #DDE2EC; background: #E9EEFB; font-size: 13px; font-weight: 700; color: #1D3FAF;">Sáb <span style="width: 28px; height: 28px; border-radius: 50%; background: #1D3FAF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 15px;">26</span>Hoy</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 64px repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(12, 48px); background-image: repeating-linear-gradient(to bottom, #DDE2EC 0px, #DDE2EC 1px, transparent 1px, transparent 96px), repeating-linear-gradient(to bottom, #EEF0F4 0px, #EEF0F4 1px, transparent 1px, transparent 48px);">
+          <span style="grid-column: 2; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC; background: #F7F8FB;"></span>
+          <span style="grid-column: 3; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC; background: #F7F8FB;"></span>
+          <span style="grid-column: 4; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC; background: #F7F8FB;"></span>
+          <span style="grid-column: 5; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC; background: #F7F8FB;"></span>
+          <span style="grid-column: 6; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC; background: #F7F8FB;"></span>
+          <span style="grid-column: 7; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC;"></span>
+          <span style="grid-column: 7; grid-row: 1 / span 5; background: #F7F8FB;"></span>
+
+          <span style="grid-column: 1; grid-row: 1; padding: 4px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">08:00</span>
+          <span style="grid-column: 1; grid-row: 3; padding: 4px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">09:00</span>
+          <span style="grid-column: 1; grid-row: 5; padding: 4px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">10:00</span>
+          <span style="grid-column: 1; grid-row: 7; padding: 4px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">11:00</span>
+          <span style="grid-column: 1; grid-row: 9; padding: 4px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">12:00</span>
+          <span style="grid-column: 1; grid-row: 11; padding: 4px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">13:00</span>
+
+          <a href="#" aria-label="08:00 Elena Soto, atendida" style="grid-column: 2; grid-row: 1; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">08:00</span> Elena Soto</a>
+          <a href="#" aria-label="09:30 Raúl Díaz, atendida" style="grid-column: 2; grid-row: 4; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:30</span> Raúl Díaz</a>
+          <a href="#" aria-label="11:00 Gloria Nina, atendida" style="grid-column: 2; grid-row: 7; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">11:00</span> Gloria Nina</a>
+          <a href="#" aria-label="12:30 Hugo Paz, no asistió" style="grid-column: 2; grid-row: 10; margin: 3px 5px; padding: 3px 7px; background: #FFFFFF; border: 1.5px dashed #4A5068; border-radius: 4px; color: #3F4458; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">12:30</span> Hugo Paz</a>
+
+          <a href="#" aria-label="08:30 Julia Mendoza, atendida" style="grid-column: 3; grid-row: 2; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">08:30</span> Julia Mendoza</a>
+          <a href="#" aria-label="10:00 Óscar Ramos, atendida" style="grid-column: 3; grid-row: 5; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:00</span> Óscar Ramos</a>
+          <a href="#" aria-label="13:00 Diana Flores, cancelada" style="grid-column: 3; grid-row: 11; margin: 3px 5px; padding: 4px 8px; background: #EEF0F4; border-radius: 4px; color: #4A5068; font-size: 12px; line-height: 1.35; text-decoration: line-through; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">13:00</span> Diana Flores</a>
+
+          <a href="#" aria-label="09:00 Carlos Vega, atendida" style="grid-column: 4; grid-row: 3; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:00</span> Carlos Vega</a>
+          <a href="#" aria-label="09:30 Lucía Ortiz, atendida" style="grid-column: 4; grid-row: 4; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:30</span> Lucía Ortiz</a>
+          <a href="#" aria-label="12:00 Marco Silva, atendida" style="grid-column: 4; grid-row: 9; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">12:00</span> Marco Silva</a>
+
+          <a href="#" aria-label="08:00 Teresa Campos, atendida" style="grid-column: 5; grid-row: 1; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">08:00</span> Teresa Campos</a>
+          <a href="#" aria-label="10:30 Iván Castro, no asistió" style="grid-column: 5; grid-row: 6; margin: 3px 5px; padding: 3px 7px; background: #FFFFFF; border: 1.5px dashed #4A5068; border-radius: 4px; color: #3F4458; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:30</span> Iván Castro</a>
+          <a href="#" aria-label="11:30 Nora Pinto, atendida" style="grid-column: 5; grid-row: 8; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">11:30</span> Nora Pinto</a>
+
+          <a href="#" aria-label="09:00 Andrés Luna, atendida" style="grid-column: 6; grid-row: 3; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:00</span> Andrés Luna</a>
+          <a href="#" aria-label="10:00 Patricia Ruiz, atendida" style="grid-column: 6; grid-row: 5; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:00</span> Patricia Ruiz</a>
+          <a href="#" aria-label="13:30 Fernando Gil, cancelada" style="grid-column: 6; grid-row: 12; margin: 3px 5px; padding: 4px 8px; background: #EEF0F4; border-radius: 4px; color: #4A5068; font-size: 12px; line-height: 1.35; text-decoration: line-through; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">13:30</span> Fernando Gil</a>
+
+          <a href="#" aria-label="08:30 María Fernández, atendida" style="grid-column: 7; grid-row: 2; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">08:30</span> María Fernández</a>
+          <a href="#" aria-label="09:00 Jorge Huamán, atendida" style="grid-column: 7; grid-row: 3; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:00</span> Jorge Huamán</a>
+          <a href="#" aria-label="09:30 Rosa Chávez, no asistió" style="grid-column: 7; grid-row: 4; margin: 3px 5px; padding: 3px 7px; background: #FFFFFF; border: 1.5px dashed #4A5068; border-radius: 4px; color: #3F4458; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:30</span> Rosa Chávez</a>
+          <a href="#" aria-label="10:00 Carmen Ríos, atendida" style="grid-column: 7; grid-row: 5; margin: 3px 5px; padding: 4px 8px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:00</span> Carmen Ríos</a>
+          <a href="#" aria-label="10:30 Luis Quispe, confirmada, alérgico a penicilina" style="grid-column: 7; grid-row: 6; margin: 3px 5px; padding: 4px 8px; background: #1D3FAF; border-radius: 4px; color: #FFFFFF; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #16192B; display: flex; align-items: flex-start; gap: 4px;"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" aria-label="Alergia" style="flex-shrink: 0; margin-top: 1px; color: #FFD9E0;"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg><span><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:30</span> Luis Quispe</span></a>
+          <a href="#" aria-label="11:00 Ana Lucía Vargas, programada" style="grid-column: 7; grid-row: 7; margin: 3px 5px; padding: 3px 7px; background: #FFFFFF; border: 1.5px solid #1D3FAF; border-radius: 4px; color: #1D3FAF; font-size: 12px; line-height: 1.35; text-decoration: none; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">11:00</span> Ana Lucía Vargas</a>
+          <a href="#" aria-label="11:30 Pedro Salazar, cancelada" style="grid-column: 7; grid-row: 8; margin: 3px 5px; padding: 4px 8px; background: #EEF0F4; border-radius: 4px; color: #4A5068; font-size: 12px; line-height: 1.35; text-decoration: line-through; overflow: hidden;"><span style="font-family: 'Courier Prime', monospace; font-weight: 700;">11:30</span> Pedro Salazar</a>
+          <button type="button" style="grid-column: 7; grid-row: 10; margin: 3px 5px; display: flex; align-items: center; justify-content: center; gap: 6px; background: #E9EEFB; border: 1.5px dashed #1D3FAF; border-radius: 4px; color: #1D3FAF; font-size: 12px; font-weight: 700;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nueva cita <span style="font-family: 'Courier Prime', monospace;">12:30</span></button>
+
+          <div aria-hidden="true" style="grid-column: 7; grid-row: 5; position: relative; pointer-events: none;">
+            <div style="position: absolute; left: 0; right: 0; top: 32px; height: 2px; background: #1D3FAF;"></div>
+            <div style="position: absolute; left: -5px; top: 28px; width: 10px; height: 10px; border-radius: 50%; background: #1D3FAF;"></div>
+          </div>
+        </div>
+
+        <div role="dialog" aria-labelledby="pop-titulo" style="position: absolute; right: 180px; top: 262px; width: 312px; background: #FFFFFF; border: 1px solid #C5CCDC; border-radius: 6px; box-shadow: 0 16px 40px rgba(22, 25, 43, 0.22); padding: 18px; display: flex; flex-direction: column; gap: 12px; z-index: 3;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+            <h3 id="pop-titulo" style="margin: 0; font-size: 17px; font-weight: 800;">Luis Quispe Mamani</h3>
+            <button type="button" aria-label="Cerrar" style="width: 32px; height: 32px; margin: -6px -6px 0 0; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #FCE8EC; border: 2px solid #B3122E; border-radius: 6px; color: #B3122E; font-size: 14px; font-weight: 800;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Alérgico a penicilina</div>
+          <dl style="margin: 0; display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 6px 10px; font-size: 14px;">
+            <dt style="color: #4A5068;">Horario</dt><dd style="margin: 0; font-family: 'Courier Prime', monospace; font-weight: 700;">Sáb 26/09 · 10:30–11:00</dd>
+            <dt style="color: #4A5068;">Médico</dt><dd style="margin: 0;">Dra. Ana Torres</dd>
+            <dt style="color: #4A5068;">Consultorio</dt><dd style="margin: 0;">Consultorio 1 · Piso 1</dd>
+            <dt style="color: #4A5068;">Motivo</dt><dd style="margin: 0;">Fiebre y dolor de garganta</dd>
+            <dt style="color: #4A5068;">Estado</dt><dd style="margin: 0;"><span style="display: inline-block; padding: 3px 8px; background: #1D3FAF; border-radius: 4px; color: #FFFFFF; font-size: 12px; font-weight: 700;">Confirmada</span></dd>
+          </dl>
+          <div style="display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid #DDE2EC;">
+            <button type="button" style="flex-grow: 1; height: 40px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;">Reprogramar</button>
+            <button type="button" style="flex-grow: 1; height: 40px; background: #FFFFFF; color: #B3122E; border: 1.5px solid #B3122E; border-radius: 6px; font-size: 14px; font-weight: 700;">Cancelar cita…</button>
+          </div>
+          <p style="margin: 0; font-size: 13px; color: #4A5068;">También puede arrastrarla a otro horario libre.</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid #C5CCDC; font-size: 13px; color: #4A5068;">
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span aria-hidden="true" style="width: 16px; height: 12px; border: 1.5px solid #1D3FAF; border-radius: 2px;"></span>Programada</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span aria-hidden="true" style="width: 16px; height: 12px; background: #1D3FAF; border-radius: 2px;"></span>Confirmada</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span aria-hidden="true" style="width: 16px; height: 12px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 2px;"></span>Atendida</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span aria-hidden="true" style="width: 16px; height: 12px; background: #EEF0F4; border-radius: 2px;"></span><span style="text-decoration: line-through;">Cancelada</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span aria-hidden="true" style="width: 16px; height: 12px; border: 1.5px dashed #4A5068; border-radius: 2px;"></span>No asistió</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="color: #B3122E;"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Paciente con alergias</span>
+          <span style="flex-grow: 1;"></span>
+          <span>Horario de atención: <span style="font-family: 'Courier Prime', monospace; color: #16192B;">Lun–Sáb 08:00–14:00</span></span>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":980}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

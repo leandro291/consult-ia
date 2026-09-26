@@ -58,6 +58,8 @@ consult-ia/
 ├── CLAUDE.md                 # Reglas del proyecto, dominio y metodología SDD
 ├── SETUP.md                  # Este archivo: arquitectura, instalación, convenciones
 ├── README.md                 # Presentación del proyecto y limitaciones (fase 6)
+├── PRODUCT.md                # Contexto de producto (usuarios, propósito, principios)
+├── DESIGN.md                 # Sistema de diseño: tokens, componentes y reglas visuales
 ├── index.html                # Punto de entrada de Vite
 ├── package.json
 ├── vite.config.js            # Config de Vite + Vitest (environment: jsdom)
@@ -68,6 +70,9 @@ consult-ia/
 │   └── agents/               # Subagentes SDD: orquestador, spec-writer, developer, reviewer
 │
 ├── specs/                    # Specs SDD: NNN-nombre-en-kebab.md
+│
+├── docs/
+│   └── diseno/               # Guía de pantallas y fuentes del canvas de diseño (referencia, no se compila)
 │
 ├── public/                   # Archivos estáticos servidos tal cual (favicon, logo)
 │

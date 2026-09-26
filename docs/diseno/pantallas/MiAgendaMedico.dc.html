@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mi agenda del médico, vista día</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mk{stroke-width:1.5}
+</style>
+</helmet>
+<div style="width: 1366px; height: 1000px; display: grid; grid-template-columns: 256px minmax(0, 1fr); background: #E6E9EF;">
+
+  <aside style="background: #FFFFFF; border-right: 1px solid #C5CCDC; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect class="mk" x="9" y="9" width="19" height="19" rx="2" fill="#FF9EC4" stroke="#16192B"></rect><rect class="mk" x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFE14D" stroke="#16192B"></rect><rect class="mk" x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B"></rect><path class="mk" d="M8 10h11M8 14h11M8 18h7" stroke="#1D3FAF" fill="none"></path></svg>
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 16px; font-weight: 700; letter-spacing: -0.01em;">Clínica Demo</span>
+        <span style="font-size: 13px; color: #4A5068;">Médico</span>
+      </div>
+    </div>
+    <nav aria-label="Menú del médico">
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+        <li><a href="#" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; background: #E9EEFB; color: #1D3FAF; font-size: 15px; font-weight: 700; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Mi agenda</a></li>
+        <li><a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; color: #16192B; font-size: 15px; font-weight: 500; text-decoration: none;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Configuración IA</a></li>
+      </ul>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <p style="margin: 0; padding: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Siguiente paciente</p>
+      <a href="#" style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid #C5CCDC; border-radius: 6px; text-decoration: none; color: #16192B;">
+        <span style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 15px; font-weight: 700;">Luis Quispe Mamani</span><span style="font-family: 'Courier Prime', monospace; font-size: 14px; font-weight: 700;">10:30</span></span>
+        <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 4px; color: #B3122E; font-size: 12px; font-weight: 700;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Alergia: penicilina</span>
+      </a>
+    </div>
+    <div style="flex-grow: 1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 2px dotted #AEB6C9;">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+        <span aria-hidden="true" style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #16192B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">AT</span>
+        <div style="display: flex; flex-direction: column; min-width: 0;">
+          <span style="font-size: 14px; font-weight: 700;">Dra. Ana Torres</span>
+          <span style="font-size: 12px; color: #4A5068;">Medicina General · <span style="font-family: 'Courier Prime', monospace;">CMP 045123</span></span>
+        </div>
+      </div>
+      <button type="button" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; background: none; border: none; border-radius: 6px; color: #16192B; font-size: 14px; font-weight: 600; text-align: left;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4"></path></svg>Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 28px 48px 22px; border-bottom: 2px dotted #AEB6C9;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Mi agenda</h1>
+        <p style="margin: 0; font-size: 15px; color: #4A5068;">Sábado, <span style="font-family: 'Courier Prime', monospace;">26/09/2026</span></p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600;"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #1D3FAF;"></span>Asistente IA activo</span>
+        <div role="group" aria-label="Vista" style="display: flex; background: #FFFFFF; border: 1px solid #C5CCDC; border-radius: 6px; padding: 3px;">
+          <button type="button" aria-pressed="true" style="height: 38px; padding: 0 18px; background: #16192B; color: #FFFFFF; border: none; border-radius: 4px; font-size: 14px; font-weight: 700;">Día</button>
+          <button type="button" aria-pressed="false" style="height: 38px; padding: 0 18px; background: none; color: #16192B; border: none; border-radius: 4px; font-size: 14px; font-weight: 600;">Semana</button>
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 28px 48px 40px;">
+      <div style="position: relative;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(10px, 10px); background: #FF9EC4; border-radius: 4px;"></div>
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(5px, 5px); background: #FFE14D; border-radius: 4px;"></div>
+        <section aria-label="Calendario del día" style="position: relative; background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08);">
+
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid #C5CCDC;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" style="height: 40px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;">Hoy</button>
+              <button type="button" aria-label="Día anterior" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #16192B;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+              <button type="button" aria-label="Día siguiente" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #16192B;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+              <h2 style="margin: 0 0 0 6px; font-size: 18px; font-weight: 700;">Sábado 26 de septiembre de 2026</h2>
+            </div>
+            <p style="margin: 0; font-size: 14px; color: #4A5068;">7 citas · 3 atendidas · siguiente a las <span style="font-family: 'Courier Prime', monospace; font-weight: 700; color: #16192B;">10:30</span></p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: repeat(12, 56px); background-image: repeating-linear-gradient(to bottom, #DDE2EC 0px, #DDE2EC 1px, transparent 1px, transparent 112px), repeating-linear-gradient(to bottom, #EEF0F4 0px, #EEF0F4 1px, transparent 1px, transparent 56px);">
+            <span style="grid-column: 2; grid-row: 1 / span 12; border-left: 1px solid #DDE2EC;"></span>
+            <span style="grid-column: 2; grid-row: 1 / span 5; background: #F7F8FB;"></span>
+
+            <span style="grid-column: 1; grid-row: 1; padding: 6px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">08:00</span>
+            <span style="grid-column: 1; grid-row: 3; padding: 6px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">09:00</span>
+            <span style="grid-column: 1; grid-row: 5; padding: 6px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">10:00</span>
+            <span style="grid-column: 1; grid-row: 7; padding: 6px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">11:00</span>
+            <span style="grid-column: 1; grid-row: 9; padding: 6px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">12:00</span>
+            <span style="grid-column: 1; grid-row: 11; padding: 6px 10px 0 0; text-align: right; font-family: 'Courier Prime', monospace; font-size: 12px; color: #4A5068;">13:00</span>
+
+            <div style="grid-column: 2; grid-row: 2; margin: 3px 8px; padding: 0 6px 0 12px; display: flex; align-items: center; gap: 14px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700;">08:30</span>
+              <span style="font-weight: 700;">María Fernández Rojas</span><span>Control de presión</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">Atendida</span>
+              <a href="#" aria-label="Ver historia de María Fernández Rojas" style="display: inline-flex; align-items: center; height: 36px; padding: 0 12px; font-size: 13px; font-weight: 700; color: #4B1F80;">Ver historia</a>
+            </div>
+            <div style="grid-column: 2; grid-row: 3; margin: 3px 8px; padding: 0 6px 0 12px; display: flex; align-items: center; gap: 14px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:00</span>
+              <span style="font-weight: 700;">Jorge Huamán Salas</span><span>Dolor lumbar</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">Atendida</span>
+              <a href="#" aria-label="Ver historia de Jorge Huamán Salas" style="display: inline-flex; align-items: center; height: 36px; padding: 0 12px; font-size: 13px; font-weight: 700; color: #4B1F80;">Ver historia</a>
+            </div>
+            <div style="grid-column: 2; grid-row: 4; margin: 3px 8px; padding: 0 18px 0 11px; display: flex; align-items: center; gap: 14px; background: #FFFFFF; border: 1.5px dashed #4A5068; border-radius: 4px; color: #3F4458; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700;">09:30</span>
+              <span style="font-weight: 700;">Rosa Chávez Díaz</span><span>Tos persistente</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 12px; font-weight: 700;">No asistió</span>
+            </div>
+            <div style="grid-column: 2; grid-row: 5; margin: 3px 8px; padding: 0 6px 0 12px; display: flex; align-items: center; gap: 14px; background: #F4EEFB; border: 1px solid #6A2BB0; border-radius: 4px; color: #4B1F80; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:00</span>
+              <span style="font-weight: 700;">Carmen Ríos Paredes</span><span>Cefalea</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">Atendida</span>
+              <a href="#" aria-label="Ver historia de Carmen Ríos Paredes" style="display: inline-flex; align-items: center; height: 36px; padding: 0 12px; font-size: 13px; font-weight: 700; color: #4B1F80;">Ver historia</a>
+            </div>
+            <div style="grid-column: 2; grid-row: 6; margin: 3px 8px; padding: 0 6px 0 12px; display: flex; align-items: center; gap: 14px; background: #1D3FAF; border-radius: 4px; color: #FFFFFF; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700;">10:30</span>
+              <span style="font-weight: 700;">Luis Quispe Mamani</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 4px; color: #B3122E; font-size: 12px; font-weight: 800;"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Penicilina</span>
+              <span style="color: #DCE3FA;">Fiebre y dolor de garganta</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 12px; font-weight: 700; color: #DCE3FA;">Confirmada</span>
+              <a href="#" aria-label="Atender a Luis Quispe Mamani" style="display: inline-flex; align-items: center; height: 38px; padding: 0 16px; background: #FFFFFF; border-radius: 6px; color: #1D3FAF; font-size: 14px; font-weight: 800; text-decoration: none;">Atender</a>
+            </div>
+            <div style="grid-column: 2; grid-row: 7; margin: 3px 8px; padding: 0 6px 0 11px; display: flex; align-items: center; gap: 14px; background: #FFFFFF; border: 1.5px solid #1D3FAF; border-radius: 4px; color: #1D3FAF; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700;">11:00</span>
+              <span style="font-weight: 700; color: #16192B;">Ana Lucía Vargas Ponce</span><span style="color: #4A5068;">Control postoperatorio</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 12px; font-weight: 700;">Programada</span>
+              <a href="#" aria-label="Atender a Ana Lucía Vargas Ponce" style="display: inline-flex; align-items: center; height: 38px; padding: 0 16px; background: #FFFFFF; border: 1.5px solid #1D3FAF; box-sizing: border-box; border-radius: 6px; color: #1D3FAF; font-size: 14px; font-weight: 700; text-decoration: none;">Atender</a>
+            </div>
+            <div style="grid-column: 2; grid-row: 8; margin: 3px 8px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 14px; background: #EEF0F4; border-radius: 4px; color: #4A5068; font-size: 14px;">
+              <span style="font-family: 'Courier Prime', monospace; font-weight: 700; text-decoration: line-through;">11:30</span>
+              <span style="font-weight: 700; text-decoration: line-through;">Pedro Salazar Núñez</span><span style="text-decoration: line-through;">Chequeo general</span>
+              <span style="flex-grow: 1;"></span>
+              <span style="font-size: 12px; font-weight: 700;">Cancelada</span>
+            </div>
+            <div style="grid-column: 2; grid-row: 9 / span 4; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #4A5068;">Sin citas de <span style="font-family: 'Courier Prime', monospace; margin: 0 5px;">12:00</span> a <span style="font-family: 'Courier Prime', monospace; margin-left: 5px;">14:00</span></div>
+
+            <div aria-hidden="true" style="grid-column: 2; grid-row: 5; position: relative; pointer-events: none;">
+              <div style="position: absolute; left: 0; right: 0; top: 37px; height: 2px; background: #1D3FAF;"></div>
+              <div style="position: absolute; left: -5px; top: 33px; width: 10px; height: 10px; border-radius: 50%; background: #1D3FAF;"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

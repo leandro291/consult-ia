@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Estados del dictado por voz</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+textarea{caret-color:#1D3FAF;font-family:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(179,18,46,.45)}100%{box-shadow:0 0 0 10px rgba(179,18,46,0)}}
+@keyframes giro{to{transform:rotate(360deg)}}
+.pulso{animation:pulso 1.4s cubic-bezier(.16,1,.3,1) infinite}
+.giro{animation:giro .9s linear infinite}
+@media (prefers-reduced-motion: reduce){.pulso,.giro{animation:none}}
+</style>
+</helmet>
+<div style="width: 1366px; height: 880px; box-sizing: border-box; padding: 64px 72px; display: flex; flex-direction: column; gap: 32px; background: #E6E9EF;">
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Dictado por voz</h1>
+    <p style="margin: 0; font-size: 16px; color: #4A5068;">El panel del asistente en sus tres momentos. Después de “Transcribiendo”, el formulario se llena a lápiz.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; align-items: start;">
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Grabando</h2>
+      <section aria-label="Asistente de consulta, grabando" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; background: #EEF0F4; border-radius: 6px; font-size: 13px; line-height: 1.45;">
+          <svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px; color: #4A5068;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8v.01"></path></svg>
+          Sugerencias generadas por IA. Verifique toda la información antes de guardar.
+        </div>
+        <span role="status" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 22px; color: #7A0C1F; font-size: 14px; font-weight: 700;"><span class="pulso" aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #B3122E;"></span>Grabando <span style="font-family: 'Courier Prime', monospace;">00:42</span></span>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"></path></svg>Pausar</button>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1.5"></rect></svg>Detener</button>
+          <button type="button" style="height: 44px; padding: 0 10px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Limpiar</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="t1" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Transcripción</label>
+          <textarea id="t1" rows="5" style="box-sizing: border-box; padding: 12px; font-size: 14px; line-height: 1.6; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0; resize: vertical;">Paciente refiere fiebre desde hace tres días y dolor de garganta al tragar. Temperatura 38.5, presión 120 sobre 80, frecuencia cardiaca 92.</textarea>
+        </div>
+        <p aria-live="polite" style="margin: 0; padding: 10px 12px; background: #F7F7F9; border: 1px dashed #5A5F70; border-radius: 6px; font-size: 14px; line-height: 1.5; color: #5A5F70;"><span style="font-weight: 700; font-style: normal; color: #3F4458;">Escuchando:</span> <span style="font-style: italic;">amígdalas inflamadas con placas blanquecinas</span></p>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <button type="button" disabled="{{yes}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; background: #EEF0F4; color: #5A5F70; border: 1.5px dashed #AEB6C9; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: not-allowed;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path><path d="M13.5 6.5l4 4"></path></svg>Generar con IA</button>
+          <span style="font-size: 13px; color: #4A5068;">Pause o detenga el dictado para generar.</span>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Pausado</h2>
+      <section aria-label="Asistente de consulta, en pausa" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; background: #EEF0F4; border-radius: 6px; font-size: 13px; line-height: 1.45;">
+          <svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px; color: #4A5068;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8v.01"></path></svg>
+          Sugerencias generadas por IA. Verifique toda la información antes de guardar.
+        </div>
+        <span role="status" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px; background: #FFFFFF; border: 1.5px dashed #5A5F70; border-radius: 22px; color: #3F4458; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"></path></svg>En pausa <span style="font-family: 'Courier Prime', monospace;">00:58</span></span>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>Reanudar</button>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1.5"></rect></svg>Detener</button>
+          <button type="button" style="height: 44px; padding: 0 10px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Limpiar</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="t2" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #1D3FAF;">Transcripción</label>
+          <textarea id="t2" rows="7" aria-describedby="t2-ayuda" style="box-sizing: border-box; padding: 12px; font-size: 14px; line-height: 1.6; color: #16192B; background: #F4F6FA; border: none; border-bottom: 2px solid #1D3FAF; border-radius: 4px 4px 0 0; resize: vertical;">Paciente refiere fiebre desde hace tres días y dolor de garganta al tragar. Temperatura 38.5, presión 120 sobre 80, frecuencia cardiaca 92. Amígdalas inflamadas con placas blanquecinas, sin tos. Impresión diagnóstica faringitis bacteriana.</textarea>
+          <span id="t2-ayuda" style="font-size: 13px; color: #4A5068;">Puede corregir el texto mientras está en pausa.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 1px 2px rgba(21, 46, 128, 0.25);"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path><path d="M13.5 6.5l4 4"></path></svg>Generar con IA</button>
+          <button type="button" style="height: 44px; padding: 0 10px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Usar ejemplo</button>
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Transcribiendo</h2>
+      <section aria-label="Asistente de consulta, analizando" aria-busy="true" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; background: #EEF0F4; border-radius: 6px; font-size: 13px; line-height: 1.45;">
+          <svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px; color: #4A5068;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8v.01"></path></svg>
+          Sugerencias generadas por IA. Verifique toda la información antes de guardar.
+        </div>
+        <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px; background: #EEF0F4; border-radius: 22px; color: #3F4458; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Dictado detenido · <span style="font-family: 'Courier Prime', monospace;">01:15</span></span>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="t3" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Transcripción</label>
+          <textarea id="t3" rows="7" readonly="{{yes}}" style="box-sizing: border-box; padding: 12px; font-size: 14px; line-height: 1.6; color: #3F4458; background: #EEF0F4; border: none; border-bottom: 1.5px solid #AEB6C9; border-radius: 4px 4px 0 0; resize: none;">Paciente refiere fiebre desde hace tres días y dolor de garganta al tragar. Temperatura 38.5, presión 120 sobre 80, frecuencia cardiaca 92. Amígdalas inflamadas con placas blanquecinas, sin tos. Impresión diagnóstica faringitis bacteriana. Indico amoxicilina 500 miligramos cada 8 horas por 7 días…</textarea>
+        </div>
+        <div role="status" style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; background: #F7F7F9; border: 1px dashed #5A5F70; border-radius: 6px;">
+          <span style="display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; color: #3F4458;"><svg class="giro" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="#C5CCDC" stroke-width="2.5"></circle><path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="#1D3FAF" stroke-width="2.5" stroke-linecap="round"></path></svg>Analizando consulta…</span>
+          <span style="font-size: 13px; line-height: 1.5; color: #4A5068;">Se envían edad, sexo, alergias y antecedentes. Nunca el nombre, el DNI ni los datos de contacto.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <button type="button" style="align-self: flex-start; height: 44px; padding: 0 12px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700;">Cancelar</button>
+          <span style="font-size: 13px; color: #4A5068;">Si la IA falla, la transcripción queda intacta para reintentar.</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":880}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

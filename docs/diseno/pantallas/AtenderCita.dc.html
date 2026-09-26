@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Atender cita</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+input,textarea{caret-color:#1D3FAF;font-family:inherit}
+input::placeholder,textarea::placeholder{color:#5A5F70}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mk{stroke-width:1.5}
+</style>
+</helmet>
+<div style="width: 1366px; height: 1800px; display: grid; grid-template-columns: 72px minmax(0, 1fr); background: #E6E9EF;">
+
+  <nav aria-label="Menú del médico" style="background: #FFFFFF; border-right: 1px solid #C5CCDC; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 0;">
+    <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" style="margin-bottom: 16px;"><rect class="mk" x="9" y="9" width="19" height="19" rx="2" fill="#FF9EC4" stroke="#16192B"></rect><rect class="mk" x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFE14D" stroke="#16192B"></rect><rect class="mk" x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B"></rect><path class="mk" d="M8 10h11M8 14h11M8 18h7" stroke="#1D3FAF" fill="none"></path></svg>
+    <a href="#" aria-label="Mi agenda" aria-current="page" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #E9EEFB; color: #1D3FAF;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></a>
+    <a href="#" aria-label="Configuración IA" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 6px; color: #16192B;"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg></a>
+    <div style="flex-grow: 1;"></div>
+    <span aria-label="Dra. Ana Torres" style="width: 36px; height: 36px; border-radius: 50%; background: #16192B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">AT</span>
+    <button type="button" aria-label="Cerrar sesión" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; color: #16192B;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4"></path></svg></button>
+  </nav>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 20px 40px 18px; background: #E6E9EF;">
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <a href="#" style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; text-decoration: none;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Mi agenda</a>
+        <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.025em;">Luis Quispe Mamani</h1>
+        <p style="margin: 0; font-size: 15px; color: #4A5068;">34 años · Masculino · <span style="font-family: 'Courier Prime', monospace;">DNI 46123578</span> · Grupo O+</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="font-size: 14px; color: #4A5068;">Cita <span style="font-family: 'Courier Prime', monospace; font-weight: 700; color: #16192B;">10:30</span> · Consultorio 1 · Piso 1</span>
+        <span style="display: inline-block; padding: 4px 9px; background: #1D3FAF; border-radius: 4px; color: #FFFFFF; font-size: 12px; font-weight: 700;">Confirmada</span>
+        <a href="#" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border: 1px solid #C5CCDC; background: #FFFFFF; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none;">Historia clínica</a>
+      </div>
+    </header>
+
+    <div role="note" aria-label="Alergias del paciente" style="display: flex; align-items: center; gap: 16px; padding: 14px 40px; background: #B3122E; color: #FFFFFF;">
+      <svg class="ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>
+      <p style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase;">Alérgico a penicilina</p>
+      <p style="margin: 0; font-size: 15px; font-weight: 600;">No recetar amoxicilina ni ampicilina.</p>
+      <div style="flex-grow: 1;"></div>
+      <p style="margin: 0; font-size: 14px; color: #FFE3E8;">Antecedentes: asma leve</p>
+    </div>
+
+    <div style="flex-grow: 1; padding: 28px 40px 32px; display: grid; grid-template-columns: 392px minmax(0, 1fr); gap: 32px; align-items: start; border-top: 2px dotted #AEB6C9;">
+
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <section aria-labelledby="h-asistente" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 id="h-asistente" style="margin: 0; font-size: 18px; font-weight: 700;">Asistente de consulta</h2>
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #1D3FAF;"></span>IA activa</span>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; background: #EEF0F4; border-radius: 6px; font-size: 13px; line-height: 1.45;">
+            <svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px; color: #4A5068;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8v.01"></path></svg>
+            Sugerencias generadas por IA. Verifique toda la información antes de guardar.
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; background: #EEF0F4; border-radius: 20px; font-size: 13px; font-weight: 700; color: #3F4458;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Dictado detenido · <span style="font-family: 'Courier Prime', monospace;">01:15</span></span>
+            <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>Seguir dictando</button>
+            <button type="button" style="height: 40px; padding: 0 10px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Limpiar</button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="transcripcion" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Transcripción</label>
+            <textarea id="transcripcion" rows="9" style="box-sizing: border-box; padding: 12px; font-size: 14px; line-height: 1.6; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0; resize: vertical;">Paciente refiere fiebre desde hace tres días y dolor de garganta al tragar. Temperatura 38.5, presión 120 sobre 80, frecuencia cardiaca 92. Amígdalas inflamadas con placas blanquecinas, sin tos. Impresión diagnóstica faringitis bacteriana. Indico amoxicilina 500 miligramos cada 8 horas por 7 días y paracetamol 500 miligramos cada 8 horas si hay fiebre. Control en una semana.</textarea>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; background: #FFFFFF; color: #1D3FAF; border: 1.5px solid #1D3FAF; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path><path d="M13.5 6.5l4 4"></path></svg>Volver a generar</button>
+            <button type="button" style="height: 44px; padding: 0 12px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Usar ejemplo</button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: #F7F7F9; border: 1px dashed #5A5F70; border-radius: 6px;">
+            <span style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="color: #5A5F70;"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>Revise antes de guardar · 3</span>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.45; color: #3F4458;">
+              <li style="display: flex; gap: 8px; color: #B3122E; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Amoxicilina choca con la alergia a penicilina.</li>
+              <li style="display: flex; gap: 8px;"><span aria-hidden="true" style="width: 16px; flex-shrink: 0; text-align: center;">·</span>No se dictó el peso ni la talla.</li>
+              <li style="display: flex; gap: 8px;"><span aria-hidden="true" style="width: 16px; flex-shrink: 0; text-align: center;">·</span><span>El código <span style="font-family: 'Courier Prime', monospace;">J02.0</span> no está en la lista CIE-10 local.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section aria-labelledby="h-ultima" style="background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08); padding: 20px 24px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 id="h-ultima" style="margin: 0; font-size: 15px; font-weight: 700;">Última consulta</h2>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A5068;"><span style="font-family: 'Courier Prime', monospace; color: #16192B;">12/06/2026</span> · Dra. Ana Torres<br><span style="font-family: 'Courier Prime', monospace;">J00</span> Rinofaringitis aguda · <span style="font-family: 'Courier Prime', monospace;">T 37.8 °C · PA 118/76</span></p>
+          <a href="#" style="font-size: 14px; font-weight: 600;">Ver historia clínica completa</a>
+        </section>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 40px; min-width: 0;">
+        <div style="position: relative;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(10px, 10px); background: #FF9EC4; border-radius: 4px;"></div>
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(5px, 5px); background: #FFE14D; border-radius: 4px;"></div>
+          <section aria-labelledby="h-consulta" style="position: relative; background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 26px 32px 30px; display: flex; flex-direction: column; gap: 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 2px dotted #AEB6C9;">
+              <h2 id="h-consulta" style="margin: 0; font-size: 20px; font-weight: 700;">Consulta</h2>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border: 1px dashed #5A5F70; border-radius: 4px; color: #3F4458; font-size: 12px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>7 campos sugeridos por IA</span>
+                <span style="font-family: 'Courier Prime', monospace; font-size: 14px; color: #4A5068;">26/09/2026</span>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;"><label for="f-motivo" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Motivo</label><span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px dashed #5A5F70; border-radius: 4px; color: #5A5F70; font-size: 11px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>Sugerido por IA</span></div>
+              <input id="f-motivo" type="text" value="Fiebre de tres días y dolor de garganta al tragar" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 15px; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0;">
+            </div>
+
+            <fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 10px;">
+              <legend style="padding: 0; margin-bottom: 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Signos vitales</legend>
+              <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px;">
+                <div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-pa" style="font-size: 13px; font-weight: 600;">Presión <span style="font-weight: 400; color: #4A5068;">mmHg</span></label><input id="f-pa" type="text" value="120/80" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-family: 'Courier Prime', monospace; font-size: 16px; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0;"></div>
+                <div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-fc" style="font-size: 13px; font-weight: 600;">Frec. cardiaca <span style="font-weight: 400; color: #4A5068;">lpm</span></label><input id="f-fc" type="text" value="92" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-family: 'Courier Prime', monospace; font-size: 16px; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0;"></div>
+                <div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-t" style="font-size: 13px; font-weight: 600;">Temperatura <span style="font-weight: 400; color: #4A5068;">°C</span></label><input id="f-t" type="text" value="38.5" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-family: 'Courier Prime', monospace; font-size: 16px; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0;"></div>
+                <div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-peso" style="font-size: 13px; font-weight: 600;">Peso <span style="font-weight: 400; color: #4A5068;">kg</span></label><input id="f-peso" type="text" placeholder="No dictado" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-size: 14px; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;"></div>
+                <div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-talla" style="font-size: 13px; font-weight: 600;">Talla <span style="font-weight: 400; color: #4A5068;">cm</span></label><input id="f-talla" type="text" placeholder="No dictado" style="height: 44px; box-sizing: border-box; padding: 0 10px; font-size: 14px; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;"></div>
+              </div>
+            </fieldset>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;"><label for="f-examen" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Examen físico</label><span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px dashed #5A5F70; border-radius: 4px; color: #5A5F70; font-size: 11px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>Sugerido por IA</span></div>
+              <textarea id="f-examen" rows="2" style="box-sizing: border-box; padding: 10px 12px; font-size: 15px; line-height: 1.55; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0; resize: vertical;">Amígdalas inflamadas con placas blanquecinas. Sin tos.</textarea>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span id="l-dx" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Diagnósticos (CIE-10)</span><span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px dashed #5A5F70; border-radius: 4px; color: #5A5F70; font-size: 11px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>Sugerido por IA</span></div>
+              <ul aria-labelledby="l-dx" style="margin: 0; padding: 0; list-style: none;">
+                <li style="display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 4px 4px 4px 12px; background: #F7F7F9; border: 1px dashed #AEB6C9; border-radius: 4px;">
+                  <span style="font-family: 'Courier Prime', monospace; font-size: 16px; font-weight: 700; color: #3F4458;">J02.0</span>
+                  <span style="font-size: 15px; font-style: italic; color: #5A5F70;">Faringitis estreptocócica</span>
+                  <span style="display: inline-flex; padding: 2px 7px; border: 1px dashed #5A5F70; border-radius: 4px; color: #3F4458; font-size: 12px; font-weight: 700;">código a verificar</span>
+                  <div style="flex-grow: 1;"></div>
+                  <button type="button" aria-label="Quitar diagnóstico J02.0" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+                </li>
+              </ul>
+              <button type="button" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 8px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Agregar diagnóstico</button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;"><label for="f-plan" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Plan</label><span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px dashed #5A5F70; border-radius: 4px; color: #5A5F70; font-size: 11px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>Sugerido por IA</span></div>
+              <textarea id="f-plan" rows="2" style="box-sizing: border-box; padding: 10px 12px; font-size: 15px; line-height: 1.55; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0; resize: vertical;">Antibiótico y antipirético por vía oral. Control en una semana.</textarea>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="f-obs" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Observaciones</label>
+              <textarea id="f-obs" rows="2" placeholder="Opcional" style="box-sizing: border-box; padding: 10px 12px; font-size: 15px; line-height: 1.55; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0; resize: vertical;"></textarea>
+            </div>
+          </section>
+        </div>
+
+        <section aria-labelledby="h-receta" style="background: #FFFFFF; border-top: 8px solid #FF9EC4; border-radius: 0 0 4px 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 10px 28px rgba(22, 25, 43, 0.08); padding: 22px 32px 28px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 2px dotted #AEB6C9;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <h2 id="h-receta" style="margin: 0; font-size: 20px; font-weight: 700;">Borrador de receta</h2>
+              <span style="display: inline-flex; padding: 3px 8px; background: #FF9EC4; border-radius: 4px; color: #4A0F2A; font-size: 12px; font-weight: 700;">Copia rosa</span>
+            </div>
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; background: #FCE8EC; border: 1px solid #B3122E; border-radius: 4px; color: #B3122E; font-size: 12px; font-weight: 700;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Alergia: penicilina</span>
+          </div>
+
+          <div role="table" aria-label="Medicamentos" style="display: flex; flex-direction: column; gap: 10px;">
+            <div role="row" style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.6fr 1.3fr 40px; gap: 12px; padding: 0 14px 8px; border-bottom: 1.5px solid #16192B; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">
+              <span role="columnheader">Medicamento</span><span role="columnheader">Dosis</span><span role="columnheader">Frecuencia</span><span role="columnheader">Duración</span><span role="columnheader">Vía</span><span role="columnheader">Indicaciones</span><span role="columnheader"></span>
+            </div>
+
+            <div style="border: 2px solid #B3122E; border-radius: 6px; overflow: hidden;">
+              <div role="row" style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.6fr 1.3fr 40px; gap: 12px; align-items: center; padding: 10px 12px; background: #FCE8EC; font-size: 14px; color: #7A0C1F;">
+                <span role="cell" style="display: flex; align-items: center; gap: 6px; font-weight: 800; color: #B3122E;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>Amoxicilina 500 mg</span>
+                <span role="cell">1 cápsula</span><span role="cell">cada 8 horas</span><span role="cell">7 días</span><span role="cell">oral</span><span role="cell">después de las comidas</span>
+                <span role="cell"><button type="button" aria-label="Editar amoxicilina" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #7A0C1F;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button></span>
+              </div>
+              <div style="padding: 16px 16px 16px; background: #FFFFFF; border-top: 1px solid #B3122E; display: flex; flex-direction: column; gap: 12px;">
+                <p style="margin: 0; font-size: 16px; font-weight: 800; color: #B3122E;">Posible reacción alérgica</p>
+                <p style="margin: 0; font-size: 14px; line-height: 1.5;"><strong>Amoxicilina</strong> pertenece a la familia de la penicilina, y el paciente es alérgico a la penicilina. No se puede guardar la consulta hasta resolverlo.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                  <label style="display: flex; gap: 10px; align-items: center; font-size: 14px; cursor: pointer;"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; accent-color: #B3122E;">Revisé la alergia y mantengo la indicación</label>
+                  <div style="display: flex; gap: 10px;">
+                    <button type="button" disabled="{{yes}}" style="height: 40px; padding: 0 16px; background: #EEF0F4; color: #5A5F70; border: 1.5px solid #C5CCDC; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: not-allowed;">Mantener</button>
+                    <button type="button" style="height: 40px; padding: 0 16px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;">Quitar medicamento</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div role="row" style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.6fr 1.3fr 40px; gap: 12px; align-items: center; padding: 8px 12px; background: #F7F7F9; border: 1px dashed #AEB6C9; border-radius: 4px; font-size: 14px; font-style: italic; color: #5A5F70;">
+              <span role="cell" style="font-weight: 600;">Paracetamol 500 mg</span>
+              <span role="cell">1 tableta</span><span role="cell">cada 8 horas</span><span role="cell" style="font-style: normal;">—</span><span role="cell">oral</span><span role="cell">solo si hay fiebre</span>
+              <span role="cell"><button type="button" aria-label="Editar paracetamol" style="width: 40px; height: 40px; background: none; border: none; border-radius: 6px; color: #4A5068;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg></button></span>
+            </div>
+
+            <button type="button" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 8px; background: none; color: #1D3FAF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Agregar medicamento</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;"><label for="f-ind" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Indicaciones para el paciente</label><span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border: 1px dashed #5A5F70; border-radius: 4px; color: #5A5F70; font-size: 11px; font-weight: 700;"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>Sugerido por IA</span></div>
+            <textarea id="f-ind" rows="3" aria-describedby="f-ind-ayuda" style="box-sizing: border-box; padding: 10px 12px; font-size: 15px; line-height: 1.55; font-style: italic; color: #5A5F70; background: #F7F7F9; border: 1px dashed #AEB6C9; border-bottom: 1.5px dashed #5A5F70; border-radius: 4px 4px 0 0; resize: vertical;">Tome los medicamentos después de comer y beba bastante líquido. Si la fiebre pasa de 39 °C o le cuesta respirar, acuda a emergencia. Vuelva a control en una semana.</textarea>
+            <span id="f-ind-ayuda" style="font-size: 13px; color: #4A5068;">Se imprime en la receta, en lenguaje sencillo.</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 16px 40px; background: #FFFFFF; border-top: 1px solid #C5CCDC; box-shadow: 0 -6px 20px rgba(22, 25, 43, 0.08);">
+      <div style="display: flex; align-items: center; gap: 20px; font-size: 14px;">
+        <span id="bloqueo" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #B3122E;"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17.5v.01"></path></svg>1 alerta de alergia sin resolver</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; color: #3F4458;"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"></path></svg>10 sugerencias por revisar</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button type="button" disabled="{{yes}}" style="height: 44px; padding: 0 18px; background: #EEF0F4; color: #5A5F70; border: 1.5px dashed #AEB6C9; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: not-allowed;">Generar receta PDF</button>
+        <button type="button" disabled="{{yes}}" aria-describedby="bloqueo" style="height: 44px; padding: 0 22px; background: #EEF0F4; color: #5A5F70; border: 1.5px dashed #AEB6C9; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: not-allowed;">Guardar consulta</button>
+      </div>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":1800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true };
+  }
+}
+</script>
+</body>
+</html>

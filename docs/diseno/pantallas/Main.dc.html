@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ingreso a Clínica Demo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Public Sans',system-ui,sans-serif;color:#16192B;background:#E6E9EF;font-variant-numeric:tabular-nums}
+::selection{background:#FFE14D;color:#16192B}
+input{caret-color:#1D3FAF;font-family:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid #1D3FAF;outline-offset:2px}
+a{color:#1D3FAF;text-underline-offset:3px}a:hover{color:#152E80}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mk{stroke-width:1.5}
+</style>
+</helmet>
+<div style="width: 1366px; height: 768px; box-sizing: border-box; padding: 72px 120px; display: grid; grid-template-columns: minmax(0, 1fr) 452px; gap: 104px; align-items: center; background: #E6E9EF;">
+
+  <div style="display: flex; flex-direction: column; gap: 32px; max-width: 560px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <svg width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect class="mk" x="9" y="9" width="19" height="19" rx="2" fill="#FF9EC4" stroke="#16192B"></rect><rect class="mk" x="6.5" y="6.5" width="19" height="19" rx="2" fill="#FFE14D" stroke="#16192B"></rect><rect class="mk" x="4" y="4" width="19" height="19" rx="2" fill="#FFFFFF" stroke="#16192B"></rect><path class="mk" d="M8 10h11M8 14h11M8 18h7" stroke="#1D3FAF" fill="none"></path></svg>
+      <span style="font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">Clínica Demo</span>
+    </div>
+    <h1 style="margin: 0; font-size: 60px; line-height: 1.02; font-weight: 800; letter-spacing: -0.035em;">Una consulta,<br>tres copias.</h1>
+    <p style="margin: 0; font-size: 18px; line-height: 1.55; color: #4A5068; max-width: 44ch;">El médico dicta y la hoja se llena. Al confirmar, la historia clínica y la receta salen de la misma atención.</p>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <div style="width: 26px; height: 32px; flex-shrink: 0; background: #FFFFFF; border: 1.5px solid #16192B; border-radius: 2px;"></div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4;"><strong>Original</strong> <span style="color: #4A5068;">· la consulta: motivo, signos vitales, diagnóstico y plan</span></p>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <div style="width: 26px; height: 32px; flex-shrink: 0; background: #FFE14D; border: 1.5px solid #16192B; border-radius: 2px;"></div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4;"><strong>Copia amarilla</strong> <span style="color: #4A5068;">· la historia clínica, en orden cronológico</span></p>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <div style="width: 26px; height: 32px; flex-shrink: 0; background: #FF9EC4; border: 1.5px solid #16192B; border-radius: 2px;"></div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4;"><strong>Copia rosa</strong> <span style="color: #4A5068;">· la receta en PDF, para descargar o imprimir</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: relative;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(12px, 12px); background: #FF9EC4; border-radius: 4px;"></div>
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(6px, 6px); background: #FFE14D; border-radius: 4px;"></div>
+    <form style="position: relative; background: #FFFFFF; border-radius: 4px; box-shadow: 0 1px 2px rgba(22, 25, 43, 0.08), 0 12px 32px rgba(22, 25, 43, 0.10); padding: 36px 40px 32px; display: flex; flex-direction: column; gap: 22px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 2px dotted #AEB6C9;">
+        <h2 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em;">Ingresar</h2>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 14px; color: #4A5068;">26/09/2026</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label for="correo" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Correo electrónico</label>
+        <input id="correo" type="email" autocomplete="username" value="medico1@clinica.com" style="height: 44px; box-sizing: border-box; padding: 0 12px; font-size: 16px; color: #16192B; background: #F4F6FA; border: none; border-bottom: 2px solid #1D3FAF; border-radius: 4px 4px 0 0;">
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label for="clave" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5068;">Contraseña</label>
+        <div style="position: relative;">
+          <input id="clave" type="password" autocomplete="current-password" value="123456" style="width: 100%; height: 44px; box-sizing: border-box; padding: 0 48px 0 12px; font-size: 16px; color: #16192B; background: #F4F6FA; border: none; border-bottom: 1.5px solid #16192B; border-radius: 4px 4px 0 0;">
+          <button type="button" aria-label="Mostrar contraseña" style="position: absolute; right: 0; top: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: #4A5068;">
+            <svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" style="height: 48px; margin-top: 4px; background: #1D3FAF; color: #FFFFFF; border: none; border-radius: 6px; font-size: 16px; font-weight: 700; letter-spacing: 0.01em; box-shadow: 0 1px 2px rgba(21, 46, 128, 0.25);">Ingresar</button>
+
+      <div style="background: #F4F6FA; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+        <p style="margin: 0; font-size: 13px; font-weight: 700;">Cuentas de demostración</p>
+        <p style="margin: 0; font-family: 'Courier Prime', monospace; font-size: 14px; line-height: 1.5; color: #16192B;">recepcion@clinica.com<br>medico1@clinica.com · medico2 · medico3</p>
+        <p style="margin: 0; font-size: 13px; color: #4A5068;">Contraseña de todas: <span style="font-family: 'Courier Prime', monospace; color: #16192B; font-weight: 700;">123456</span></p>
+      </div>
+
+      <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #4A5068;">Proyecto académico. Los datos se guardan solo en este navegador.</p>
+    </form>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":768}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
