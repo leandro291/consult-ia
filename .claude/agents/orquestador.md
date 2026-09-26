@@ -78,7 +78,6 @@ Ciclos developer→reviewer: N
 Archivos creados/modificados:
   - ruta — qué cambió
 Lint: OK | FALLA | no aplica (proyecto sin package.json)
-Tests: OK | FALLA | no aplica
 Errores pendientes (si DETENIDO): lista literal del último reviewer
 Siguiente paso sugerido: p. ej. "commit con OK del usuario" o "marcar spec como implementado"
 ```

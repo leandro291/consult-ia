@@ -158,7 +158,7 @@ consult-ia/
     └── composables/          # Solo cuando la lógica no dependa del navegador real
 ```
 
-**Qué se testea (mínimo):**
+**Qué se testea (mínimo, en la fase 8 de `CLAUDE.md`; hasta entonces no se escriben ni corren tests):**
 - Reglas de negocio de `services/`:
   - Solapamiento de citas.
   - Horario.
@@ -331,7 +331,7 @@ El diseño que se implementa es el que creamos para este proyecto. No se inventa
 
 ### Antes de commitear cambios de interfaz
 
-`developer` y `reviewer` verifican, además de lint y tests:
+`developer` y `reviewer` verifican, además de lint:
 
 1. La pantalla sigue su archivo en `docs/diseno/pantallas/`: estructura, jerarquía, textos y estados (vacío, carga y error).
 2. Solo se usan tokens de `DESIGN.md`; no aparecen colores, fuentes ni radios nuevos.
