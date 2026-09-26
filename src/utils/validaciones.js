@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 const FORMATO_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const LARGO_MIN_PASSWORD = 6
 
@@ -54,5 +56,21 @@ export function validarMedico(datos, { alta = false } = {}) {
       errores.password = `La contraseña debe tener al menos ${LARGO_MIN_PASSWORD} caracteres.`
     }
   }
+  return errores
+}
+
+// La unicidad del DNI la valida el servicio, no esta función.
+export function validarPaciente(datos) {
+  const errores = {}
+  if (!/^\d{8}$/.test((datos.dni ?? '').trim())) errores.dni = 'El DNI debe tener 8 dígitos.'
+  if (vacio(datos.nombres)) errores.nombres = 'Los nombres son obligatorios.'
+  if (vacio(datos.apellidos)) errores.apellidos = 'Los apellidos son obligatorios.'
+  if (vacio(datos.fechaNacimiento)) errores.fechaNacimiento = 'La fecha de nacimiento es obligatoria.'
+  // Las fechas ISO "YYYY-MM-DD" se comparan bien como texto.
+  else if (datos.fechaNacimiento > dayjs().format('YYYY-MM-DD')) {
+    errores.fechaNacimiento = 'La fecha de nacimiento no puede ser futura.'
+  }
+  if (vacio(datos.sexo)) errores.sexo = 'Seleccione el sexo.'
+  if (!vacio(datos.email) && !FORMATO_EMAIL.test(datos.email.trim())) errores.email = 'Ingrese un correo válido.'
   return errores
 }

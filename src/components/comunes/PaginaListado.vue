@@ -12,7 +12,9 @@ defineProps({
   // Ej. "Nuevo médico": texto del botón primario.
   etiquetaNuevo: { type: String, required: true },
   tituloVacio: { type: String, required: true },
-  textoVacio: { type: String, required: true }
+  textoVacio: { type: String, required: true },
+  // Filas por página; 0 = sin paginación.
+  filas: { type: Number, default: 0 }
 })
 
 defineEmits(['nuevo'])
@@ -51,10 +53,18 @@ defineEmits(['nuevo'])
       :aria-label="etiqueta"
       class="hoja"
     >
+      <!-- Herramientas de la hoja (ej. búsqueda): siempre visibles, también con el estado vacío. -->
+      <slot name="herramientas" />
+
       <DataTable
         v-if="valores.length"
         :value="valores"
         data-key="id"
+        :paginator="filas > 0"
+        :rows="filas || null"
+        :always-show-paginator="false"
+        paginator-template="CurrentPageReport PrevPageLink NextPageLink"
+        current-page-report-template="{first}–{last} de {totalRecords}"
       >
         <slot />
       </DataTable>
@@ -62,6 +72,7 @@ defineEmits(['nuevo'])
       <div
         v-else
         class="vacio"
+        role="status"
       >
         <svg
           width="64"
@@ -114,22 +125,25 @@ defineEmits(['nuevo'])
         <p class="vacio-texto">
           {{ textoVacio }}
         </p>
-        <Button
-          type="button"
-          class="boton-nuevo"
-          @click="$emit('nuevo')"
-        >
-          <svg
-            class="icono"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+        <div class="acciones-vacio">
+          <slot name="acciones-vacio" />
+          <Button
+            type="button"
+            class="boton-nuevo"
+            @click="$emit('nuevo')"
           >
-            <path d="M12 5v14M5 12h14" />
-          </svg>
-          {{ etiquetaNuevo }}
-        </Button>
+            <svg
+              class="icono"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            {{ etiquetaNuevo }}
+          </Button>
+        </div>
       </div>
     </section>
   </div>
@@ -155,7 +169,10 @@ defineEmits(['nuevo'])
 .vacio { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 36px 24px; text-align: center; }
 .vacio-titulo { margin: 0; font-size: 17px; font-weight: 700; }
 .vacio-texto { margin: 0; max-width: 38ch; font-size: 14px; line-height: 1.5; color: var(--color-texto-secundario); }
-.vacio .boton-nuevo { margin-top: 6px; }
+.acciones-vacio { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+
+.hoja :deep(.p-paginator) { justify-content: flex-end; gap: 4px; padding: 14px 0 0; background: transparent; border-top: 2px dotted var(--color-perforacion); font-size: 14px; color: var(--color-texto-secundario); }
+.hoja :deep(.p-paginator-current) { margin-right: auto; }
 
 @media (max-width: 1023px) {
   .cabecera { padding-inline: 24px; }
