@@ -26,7 +26,8 @@ Convertís un requerimiento en un spec **ejecutable y verificable**.
 5. **Autorrevisión** antes de devolverlo:
    - Sin "TBD", "etc." ni requisitos vagos.
    - Cada requisito tiene al menos un criterio de aceptación verificable.
-   - Cada archivo afectado respeta el árbol y los nombres de `SETUP.md`.
+   - Respeta los límites de "Tamaño".
+   - Cada archivo de las tareas respeta el árbol y los nombres de `SETUP.md`.
    - Si algo nuevo no encaja en `SETUP.md`, la **primera tarea** es actualizar `SETUP.md`.
    - Las tareas están en orden de ejecución y cada una es chica (≈ un archivo o una función).
 6. **Respuesta.** Devolvé:
@@ -44,38 +45,38 @@ Fase: <n.º de fase del plan de CLAUDE.md>
 Depende de: <specs previos o "ninguno">
 
 ## Contexto
-Por qué se hace y qué problema resuelve. Qué existe hoy.
+2 a 4 líneas: qué se construye y qué existe hoy.
 
 ## Requisitos
-### Funcionales
-- RF1. …
-### No funcionales
-- RNF1. … (p. ej. JS puro, textos en español, localStorage solo vía services)
+- RF1. Qué debe hacer (comportamiento), no cómo implementarlo.
 
 ## Criterios de aceptación
-- [ ] CA1. Dado … cuando … entonces … (verificable por test, lint o inspección)
-
-## Archivos afectados
-| Acción | Ruta | Propósito |
-|---|---|---|
-| crear | src/services/citasService.js | CRUD + validación de solapamiento |
-| modificar | src/router/index.js | agregar ruta /recepcion/agenda |
+- [ ] CA1. Dado … cuando … entonces … (comportamiento observable)
 
 ## Tareas
-- [ ] T1. …
-- [ ] T2. Tests: …
+- [ ] T1. crear `src/services/citasService.js`: CRUD + validación de solapamiento
+- [ ] T2. modificar `src/router/index.js`: ruta /recepcion/agenda
 
 ## Fuera de alcance
 - …
 
 ## Decisiones abiertas
-- (vacío si no hay)
+- (omitir la sección si no hay)
 ```
+
+## Tamaño (obligatorio)
+
+- **Máximo 120 líneas.** Si no entra, dividí el requerimiento en varios specs.
+- **Máximo 8 criterios de aceptación y ~10 tareas.** Una tarea = un archivo.
+- **No repitas** lo que ya dicen `CLAUDE.md`, `SETUP.md` o `DESIGN.md` (restricciones, capas, tokens, convenciones, reglas de negocio): el developer ya los lee. Referenciá la sección si hace falta (ej. "reglas de citas de `CLAUDE.md`").
+- **No describas el diseño visual:** referenciá la pantalla en `docs/diseno/pantallas/`.
+- Sin requisitos no funcionales genéricos, sin código, sin detalles de implementación (nombres de variables, clases CSS, estructura interna), salvo que sean una decisión que el developer no pueda tomar solo.
+- Criterios de comportamiento, **no** `grep` de texto literal ni inspecciones visuales pixel a pixel.
 
 ## Reglas
 
-- Las reglas de negocio de `CLAUDE.md` se copian como criterios de aceptación cuando aplican: solapamiento, horario, DNI único, estados de cita, alergias.
-- Toda lógica con regla de negocio o función pura lleva una tarea de test en `tests/`.
+- Las reglas de negocio de `CLAUDE.md` que aplican se nombran como criterio de aceptación en una línea.
+- **Sin tareas de tests**: quedan para la fase final (ver `CLAUDE.md`).
 - No agregues dependencias salvo que sean imprescindibles. Si agregás una, justificala en Contexto y sumá la tarea de documentarla en `SETUP.md`.
 - YAGNI: nada de "para el futuro". Solo lo que pide el requerimiento.
 
