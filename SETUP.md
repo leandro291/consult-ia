@@ -121,12 +121,13 @@ consult-ia/
 │   ├── views/                # Una vista por ruta
 │   │   ├── LoginView.vue
 │   │   ├── EnConstruccionView.vue # Provisional para rutas de fases futuras
-│   │   ├── recepcion/        # DashboardView, PacientesView, AgendaView, ...
+│   │   ├── recepcion/        # ConsultoriosView, MedicosView, DashboardView, PacientesView, AgendaView, ...
 │   │   └── medico/           # MiAgendaView, AtencionView, HistoriaView, ...
 │   │
 │   ├── components/           # Componentes reutilizables, agrupados por dominio
-│   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion, AlertaAlergias, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, ...
+│   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion, AlertaAlergias, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, CampoTexto (etiqueta + InputText + error), PaginaListado (cabecera, hoja con tabla y estado vacío), DialogoFormulario, BotonEditar, ...
 │   │   ├── pacientes/        # PacienteForm.vue, ...
+│   │   ├── medicos/          # MedicoForm.vue, HorarioFields.vue
 │   │   ├── citas/
 │   │   ├── consultas/
 │   │   ├── recetas/
@@ -175,7 +176,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 1 implementada, con el login diseñado (spec 002)**. El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts y las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 2 en curso (spec 003: consultorios y médicos)**; fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts y las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 
