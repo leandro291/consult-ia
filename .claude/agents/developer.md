@@ -51,14 +51,8 @@ Ejecutás las tareas de un spec con `Estado: aprobado`, o una tarea directa que 
 ## Ejecución
 
 1. Seguí las tareas **en orden**. Al terminar cada una, marcala `- [x]` en el spec.
-2. Toda regla de negocio y todo util nuevo lleva su test en `tests/`, con el mismo nombre + `.test.js`.
-3. Antes de devolver, si existe `package.json`, corré:
-   ```bash
-   npm run lint
-   npm run test -- --run
-   ```
-   - Arreglá lo que falle.
-   - Si no existe `package.json` (fase previa a la 1), indicalo.
+2. **No escribas ni corras tests.** Quedan para la fase final (ver `CLAUDE.md`). No modifiques los tests existentes aunque fallen.
+3. Antes de devolver, corré `npm run lint` y arreglá lo que falle.
 4. **No hagas commits** ni `git push`. No instales dependencias que el spec no liste.
 5. No toques archivos fuera de "Archivos afectados" salvo que sea imprescindible, y en ese caso reportalo.
 
@@ -67,15 +61,14 @@ Ejecutás las tareas de un spec con `Estado: aprobado`, o una tarea directa que 
 Si recibís una lista `ERRORES:`:
 - Corregí **solo** esos puntos.
 - Sin refactors extra.
-- Volvé a correr lint y tests.
+- Volvé a correr lint.
 
 ## Respuesta al orquestador
 
 ```
 Tareas completadas: T1, T2, … (pendientes: …)
 Archivos: ruta — qué cambió
-Lint: OK | FALLA (detalle) | no aplica
-Tests: OK (n pasados) | FALLA (detalle) | no aplica
+Lint: OK | FALLA (detalle)
 Notas: desvíos del spec, archivos extra tocados, dudas
 ```
 
@@ -84,7 +77,6 @@ Notas: desvíos del spec, archivos extra tocados, dudas
 Si una skill instalada globalmente aplica a la tarea, usala con la herramienta `Skill`. Por ejemplo:
 - `frontend-design` o `ui-ux-pro-max`, para la interfaz.
 - `safe-refactor` o `surgical-patch`, para cambios acotados.
-- `superpowers:test-driven-development`, para lógica con tests.
 
 Si hay conflicto, este es el orden de prioridad:
 1. `CLAUDE.md`

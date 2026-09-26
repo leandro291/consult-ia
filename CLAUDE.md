@@ -51,7 +51,7 @@ Definidos en `.claude/agents/`. Cada archivo tiene el detalle técnico de su rol
 
 - Ubicación: `specs/NNN-nombre-en-kebab.md`, con numeración correlativa de 3 dígitos (`001`, `002`, …).
 - Campo `Estado:` con uno de estos valores: `borrador`, `aprobado` o `implementado`.
-- Estructura obligatoria: la de [`specs/000-base-documental-sdd.md`](specs/000-base-documental-sdd.md).
+- Estructura obligatoria y límites de tamaño (máximo 120 líneas): la plantilla de [`spec-writer`](.claude/agents/spec-writer.md).
 
 ### Skills globales
 
@@ -388,6 +388,7 @@ Completar y verificar cada fase antes de pasar a la siguiente. Cada fase se ejec
    - Texto de demo
    
    Probar primero con el texto de demo y después con el micrófono.
+8. **Tests**: con todo construido, tests de Vitest según [`SETUP.md`](SETUP.md). Hasta esta fase, `developer` y `reviewer` no escriben ni corren tests.
 
 ## Limitaciones conocidas (documentar en el README)
 
