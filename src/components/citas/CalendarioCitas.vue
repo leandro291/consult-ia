@@ -8,6 +8,7 @@ import esLocale from '@fullcalendar/core/locales/es'
 import { ESTADOS_MOVIBLES_CITA, ETIQUETAS_ESTADO_CITA, formatearRango, nombreCompleto } from '@/utils/formato.js'
 import BarraCalendario from '@/components/citas/BarraCalendario.vue'
 import DetalleCita from '@/components/citas/DetalleCita.vue'
+import EventoCita from '@/components/citas/EventoCita.vue'
 import FiltroMedico from '@/components/citas/FiltroMedico.vue'
 import IconoAlergia from '@/components/citas/IconoAlergia.vue'
 import LeyendaCitas from '@/components/citas/LeyendaCitas.vue'
@@ -17,7 +18,9 @@ const props = defineProps({
   citas: { type: Array, required: true },
   pacientes: { type: Array, required: true },
   medicos: { type: Array, required: true },
-  consultorios: { type: Array, required: true }
+  consultorios: { type: Array, required: true },
+  // Agenda del médico: sin filtro de médico, sin arrastrar ni crear citas; abre en la vista Día.
+  soloLectura: { type: Boolean, default: false }
 })
 
 // Médico elegido en el filtro (null = todos).
@@ -25,12 +28,13 @@ const medicoId = defineModel('medicoId', { type: String, default: null })
 
 // Al soltar una cita se emite { id, fecha, hora, revertir }; el padre decide si revierte.
 // nueva-cita: { fecha, hora } del hueco elegido (hora null si la vista no tiene horas). cancelar: la cita del detalle.
-const emit = defineEmits(['reprogramar', 'nueva-cita', 'cancelar'])
+// atender y ver-historia: solo en modo de solo lectura.
+const emit = defineEmits(['reprogramar', 'nueva-cita', 'cancelar', 'atender', 'ver-historia'])
 
 const DIAS_CORTOS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
 const calendario = ref(null)
-const vista = ref('timeGridWeek')
+const vista = ref(props.soloLectura ? 'timeGridDay' : 'timeGridWeek')
 const titulo = ref('')
 const detalle = ref(null)
 const citaAbierta = ref(null)
@@ -52,8 +56,12 @@ const eventos = computed(() => props.citas.map((cita) => {
     extendedProps: {
       hora: cita.hora,
       paciente: paciente ? nombreCompleto(paciente) : 'Paciente desconocido',
+      pacienteId: cita.pacienteId,
       medico: medico ? nombreCompleto(medico) : 'Médico desconocido',
+      motivo: cita.motivo,
       estado: (ETIQUETAS_ESTADO_CITA[cita.estado] ?? cita.estado).toLowerCase(),
+      estadoCodigo: cita.estado,
+      atendible: ESTADOS_MOVIBLES_CITA.includes(cita.estado),
       alergico: Boolean(paciente?.alergias?.length)
     }
   }
@@ -72,7 +80,7 @@ const api = () => calendario.value.getApi()
 const opciones = computed(() => ({
   plugins: [timeGridPlugin, interactionPlugin],
   locale: esLocale,
-  initialView: 'timeGridWeek',
+  initialView: props.soloLectura ? 'timeGridDay' : 'timeGridWeek',
   headerToolbar: false,
   allDaySlot: false,
   hiddenDays: [0],
@@ -82,12 +90,14 @@ const opciones = computed(() => ({
   slotLabelFormat: { hour: '2-digit', minute: '2-digit', hour12: false },
   height: 'auto',
   nowIndicator: true,
-  editable: true,
+  editable: !props.soloLectura,
   eventDurationEditable: false,
   events: eventos.value,
   datesSet: actualizarRango,
   // FullCalendar no dispara eventClick al soltar un arrastre; con Enter sobre la cita sí.
+  // En modo de solo lectura no hay detalle: la cita ya muestra motivo, estado y "Atender".
   eventClick: ({ event, el }) => {
+    if (props.soloLectura) return
     citaAbierta.value = props.citas.find((c) => c.id === event.id) ?? null
     if (citaAbierta.value) detalle.value.abrir(el)
   },
@@ -98,10 +108,13 @@ const opciones = computed(() => ({
     revertir: revert
   }),
   // Clic en un hueco libre del calendario (los eventos capturan su propio clic, así que este solo llega en huecos vacíos).
-  dateClick: ({ date, view }) => emit('nueva-cita', {
-    fecha: dayjs(date).format('YYYY-MM-DD'),
-    hora: view.type.startsWith('timeGrid') ? dayjs(date).format('HH:mm') : null
-  })
+  dateClick: ({ date, view }) => {
+    if (props.soloLectura) return
+    emit('nueva-cita', {
+      fecha: dayjs(date).format('YYYY-MM-DD'),
+      hora: view.type.startsWith('timeGrid') ? dayjs(date).format('HH:mm') : null
+    })
+  }
 }))
 
 // El detalle solo emite; el calendario cierra el popover y reemite la cancelación hacia la vista.
@@ -134,6 +147,7 @@ defineExpose({ irAFecha })
       @cambiar-vista="(v) => api().changeView(v)"
     >
       <FiltroMedico
+        v-if="!soloLectura"
         v-model="medicoId"
         :medicos="medicos"
       />
@@ -151,7 +165,22 @@ defineExpose({ irAFecha })
         </span>
       </template>
       <template #eventContent="{ event }">
+        <EventoCita
+          v-if="soloLectura"
+          :id="event.id"
+          :hora="event.extendedProps.hora"
+          :paciente="event.extendedProps.paciente"
+          :paciente-id="event.extendedProps.pacienteId"
+          :motivo="event.extendedProps.motivo"
+          :estado-codigo="event.extendedProps.estadoCodigo"
+          :alergico="event.extendedProps.alergico"
+          :atendible="event.extendedProps.atendible"
+          :mostrar-detalle="vista === 'timeGridDay'"
+          @atender="(id) => emit('atender', id)"
+          @ver-historia="(pacienteId) => emit('ver-historia', pacienteId)"
+        />
         <div
+          v-else
           class="evento"
           role="group"
           :aria-label="etiquetaEvento(event.extendedProps)"

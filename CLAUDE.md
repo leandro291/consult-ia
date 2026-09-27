@@ -147,7 +147,7 @@ Las relaciones se hacen por id.
 - **`clinica_citas`**: `{ id, pacienteId, medicoId, consultorioId, fecha: 'YYYY-MM-DD', hora: 'HH:mm', duracionMin: 30, motivo, estado: 'programada' | 'confirmada' | 'atendida' | 'cancelada' | 'no_asistio' }`
 - **`clinica_consultas`**: `{ id, citaId, pacienteId, medicoId, fecha, motivo, signosVitales: { presion, frecuenciaCardiaca, temperatura, peso, talla }, examenFisico, diagnosticos: [{ codigo, descripcion }], plan, observaciones }`
 - **`clinica_recetas`**: `{ id, consultaId, pacienteId, medicoId, fecha, items: [{ medicamento, dosis, frecuencia, duracion, via, indicaciones }], indicacionesGenerales }`
-- **`clinica_sesion`**: `{ usuarioId, rol, nombre }`, el usuario logueado actualmente.
+- **`clinica_sesion`**: `{ usuarioId, rol, nombre, medicoId? }`, el usuario logueado actualmente. `medicoId` solo está presente cuando `rol` es `medico`.
 - **`clinica_config`**: `{ iaServidorUrl, iaActivada }`, configuración del asistente IA.
 - Las consultas creadas con ayuda del asistente llevan además:
   - `generadaConIA: true`
