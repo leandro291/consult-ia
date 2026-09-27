@@ -64,3 +64,21 @@ export function formatearRango(inicio, fin) {
   if (a.isSame(b, 'year')) return `${a.format('D [de] MMMM')} – ${b.format(completa)}`
   return `${a.format(completa)} – ${b.format(completa)}`
 }
+
+export const ETIQUETAS_ESTADO_CITA = {
+  programada: 'Programada',
+  confirmada: 'Confirmada',
+  atendida: 'Atendida',
+  cancelada: 'Cancelada',
+  no_asistio: 'No asistió'
+}
+
+// Estados en los que una cita se puede arrastrar a otro horario.
+export const ESTADOS_MOVIBLES_CITA = ['programada', 'confirmada']
+
+// "Sáb 26/09 · 10:30–11:00": día abreviado, fecha DD/MM y rango de horas de la cita.
+export function formatearHorarioCita({ fecha, hora, duracionMin }) {
+  const inicio = dayjs(`${fecha}T${hora}`)
+  const dia = inicio.format('ddd').replace('.', '')
+  return `${dia.charAt(0).toUpperCase() + dia.slice(1)} ${inicio.format('DD/MM')} · ${hora}–${inicio.add(duracionMin, 'minute').format('HH:mm')}`
+}

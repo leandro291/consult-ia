@@ -130,7 +130,7 @@ consult-ia/
 │   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion (esqueleto por rol: menú lateral + contenido), AlertaAlergias, ChipAlergia, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, CampoTexto (etiqueta + InputText + error), PaginaListado (cabecera, hoja con tabla y estado vacío), DialogoFormulario, BotonEditar, ...
 │   │   ├── pacientes/        # PacienteForm.vue, AlergiasField.vue, AvisoNoEliminable.vue, BuscadorPacientes.vue
 │   │   ├── medicos/          # MedicoForm.vue, HorarioFields.vue
-│   │   ├── citas/            # CalendarioCitas.vue (FullCalendar), BarraCalendario.vue, FiltroMedico.vue, LeyendaCitas.vue, IconoAlergia.vue
+│   │   ├── citas/            # CalendarioCitas.vue (FullCalendar), BarraCalendario.vue, FiltroMedico.vue, LeyendaCitas.vue, IconoAlergia.vue, DetalleCita.vue (popover de solo lectura)
 │   │   ├── consultas/
 │   │   ├── recetas/
 │   │   └── asistente/        # PanelAsistente, BotonMicrofono, ...
@@ -146,7 +146,7 @@ consult-ia/
 │   │
 │   ├── utils/                # Funciones puras, sin Vue ni persistencia
 │   │   ├── validaciones.js
-│   │   ├── formato.js        # formatearFecha, calcularEdad
+│   │   ├── formato.js        # formatearFecha, calcularEdad, ETIQUETAS_ESTADO_CITA, ESTADOS_MOVIBLES_CITA, formatearHorarioCita
 │   │   ├── roles.js          # Ruta de inicio por rol
 │   │   ├── alergias.js       # Cruce receta vs alergias (local, sin IA)
 │   │   └── anonimizar.js     # Quita datos identificables antes de llamar a la IA
@@ -178,7 +178,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 3 en curso: el spec 006 aportó la capa de datos de citas (`citasService` y store) y el spec 007 agrega la agenda de recepción con FullCalendar (ver, filtrar por médico y reprogramar arrastrando)**; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 3 en curso: el spec 006 aportó la capa de datos de citas (`citasService` y store) y el spec 007 agrega la agenda de recepción con FullCalendar (ver, filtrar por médico y reprogramar arrastrando) y el spec 008 el detalle de cita (popover de solo lectura al hacer clic)**; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 
