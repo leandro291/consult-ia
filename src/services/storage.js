@@ -9,7 +9,6 @@ export const CLAVES = {
   consultas: 'clinica_consultas',
   recetas: 'clinica_recetas',
   sesion: 'clinica_sesion',
-  config: 'clinica_config',
   version: 'clinica_version'
 }
 
