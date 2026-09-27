@@ -8,6 +8,7 @@ import PacientesView from '@/views/recepcion/PacientesView.vue'
 import PacienteDetalleView from '@/views/recepcion/PacienteDetalleView.vue'
 import MedicosView from '@/views/recepcion/MedicosView.vue'
 import AgendaView from '@/views/recepcion/AgendaView.vue'
+import DashboardView from '@/views/recepcion/DashboardView.vue'
 import RecepcionLayout from '@/layouts/RecepcionLayout.vue'
 import MedicoLayout from '@/layouts/MedicoLayout.vue'
 
@@ -23,7 +24,8 @@ const routes = [
     meta: { rol: 'recepcion' },
     redirect: '/recepcion/dashboard',
     children: [
-      ...['dashboard', 'respaldo'].map((path) => hija(path)),
+      hija('dashboard', DashboardView),
+      hija('respaldo'),
       hija('pacientes', PacientesView),
       hija('pacientes/:id', PacienteDetalleView),
       hija('agenda', AgendaView),

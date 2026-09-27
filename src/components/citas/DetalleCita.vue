@@ -2,7 +2,8 @@
 import { computed, nextTick, ref } from 'vue'
 import Popover from 'primevue/popover'
 import IconoAlergia from '@/components/citas/IconoAlergia.vue'
-import { ESTADOS_MOVIBLES_CITA, ETIQUETAS_ESTADO_CITA, formatearHorarioCita, nombreCompleto } from '@/utils/formato.js'
+import ChipEstadoCita from '@/components/citas/ChipEstadoCita.vue'
+import { ESTADOS_MOVIBLES_CITA, formatearHorarioCita, nombreCompleto } from '@/utils/formato.js'
 
 const props = defineProps({
   cita: { type: Object, default: null },
@@ -101,7 +102,7 @@ defineExpose({ abrir, cerrar })
         <dd>{{ cita.motivo || 'Sin motivo' }}</dd>
         <dt>Estado</dt>
         <dd>
-          <span :class="['detalle-estado', `estado-${cita.estado}`]">{{ ETIQUETAS_ESTADO_CITA[cita.estado] ?? cita.estado }}</span>
+          <ChipEstadoCita :estado="cita.estado" />
         </dd>
       </dl>
       <div
@@ -141,12 +142,6 @@ defineExpose({ abrir, cerrar })
 .detalle-datos dt { color: var(--color-texto-secundario); }
 .detalle-datos dd { margin: 0; }
 .detalle-dato { font-family: var(--fuente-dato); font-size: 13px; font-weight: 700; white-space: nowrap; }
-.detalle-estado { display: inline-block; padding: 3px 8px; border-radius: var(--radio-sm); font-size: 12px; font-weight: 700; }
-.detalle-estado.estado-programada { background: var(--color-papel); border: 1.5px solid var(--color-tinta); color: var(--color-tinta); padding: 1.5px 6.5px; }
-.detalle-estado.estado-confirmada { background: var(--color-tinta); color: var(--color-papel); }
-.detalle-estado.estado-atendida { background: var(--color-sello-suave); border: 1px solid var(--color-sello); color: var(--color-sello-oscuro); padding: 2px 7px; }
-.detalle-estado.estado-cancelada { background: var(--color-apagado); color: var(--color-texto-secundario); text-decoration: line-through; }
-.detalle-estado.estado-no_asistio { background: var(--color-papel); border: 1.5px dashed var(--color-texto-secundario); color: var(--color-texto-secundario); padding: 1.5px 6.5px; }
 .detalle-nota { margin: 0; font-size: 13px; color: var(--color-texto-secundario); }
 .detalle-acciones { display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid var(--color-linea); }
 .detalle-cancelar { flex-grow: 1; height: 40px; background: var(--color-papel); color: var(--color-alerta); border: 1.5px solid var(--color-alerta); border-radius: var(--radio-md); font-size: 14px; font-weight: 700; cursor: pointer; }
