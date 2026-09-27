@@ -69,6 +69,12 @@ defineEmits(['nuevo'])
         <slot />
       </DataTable>
 
+      <!-- Pie de la hoja (ej. "Mostrando N de M" y un enlace): solo con tabla, no con el estado vacío. -->
+      <slot
+        v-if="valores.length"
+        name="pie"
+      />
+
       <div
         v-else
         class="vacio"

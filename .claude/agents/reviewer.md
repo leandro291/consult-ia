@@ -45,7 +45,7 @@ Sos el control de calidad. Trabajás en **solo lectura**:
    - No hay abstracciones innecesarias.
    - Los componentes tienen menos de ~200 líneas y una sola responsabilidad.
 5. **Lint y build:** `npm run lint` y `npm run build`. Cualquier error es un error.
-6. **Tests existentes:** si ya hay archivos de test, corré `npm run test` y cualquier falla es un error. Si todavía no hay tests, no es un error: quedan para la fase final (ver `CLAUDE.md`). **No escribas ni crees tests vos.**
+6. **Tests existentes:** comprobá primero con `find tests -name '*.test.js'` (no asumas por la fase del plan en la que va el proyecto). Si aparece alguno, corré `npm run test` y cualquier falla es un error. Si de verdad no hay ninguno, no es un error: quedan para la fase final (ver `CLAUDE.md`). **No escribas ni crees tests vos.**
 
 ## Salida (formato exacto, sin texto extra antes)
 
