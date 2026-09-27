@@ -76,6 +76,11 @@ export const ETIQUETAS_ESTADO_CITA = {
 // Estados en los que una cita se puede arrastrar a otro horario.
 export const ESTADOS_MOVIBLES_CITA = ['programada', 'confirmada']
 
+// "09/2026": mes y año, para el resumen de la Historia clínica.
+export function formatearMesAnio(fecha) {
+  return dayjs(fecha).format('MM/YYYY')
+}
+
 // "Sáb 26/09 · 10:30–11:00": día abreviado, fecha DD/MM y rango de horas de la cita.
 export function formatearHorarioCita({ fecha, hora, duracionMin }) {
   const inicio = dayjs(`${fecha}T${hora}`)

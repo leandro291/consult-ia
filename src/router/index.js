@@ -9,6 +9,9 @@ import PacienteDetalleView from '@/views/recepcion/PacienteDetalleView.vue'
 import MedicosView from '@/views/recepcion/MedicosView.vue'
 import AgendaView from '@/views/recepcion/AgendaView.vue'
 import DashboardView from '@/views/recepcion/DashboardView.vue'
+import MiAgendaView from '@/views/medico/MiAgendaView.vue'
+import AtencionView from '@/views/medico/AtencionView.vue'
+import HistoriaView from '@/views/medico/HistoriaView.vue'
 import RecepcionLayout from '@/layouts/RecepcionLayout.vue'
 import MedicoLayout from '@/layouts/MedicoLayout.vue'
 
@@ -39,8 +42,12 @@ const routes = [
     meta: { rol: 'medico' },
     redirect: '/medico/agenda',
     children: [
-      'agenda', 'atencion/:citaId', 'historia/:pacienteId', 'receta/:consultaId', 'configuracion'
-    ].map((path) => hija(path))
+      hija('agenda', MiAgendaView),
+      hija('atencion/:citaId', AtencionView),
+      hija('historia/:pacienteId', HistoriaView),
+      hija('receta/:consultaId'),
+      hija('configuracion')
+    ]
   },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]

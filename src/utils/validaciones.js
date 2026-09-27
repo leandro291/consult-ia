@@ -88,6 +88,39 @@ export function validarCita(datos) {
   return errores
 }
 
+const FORMATO_PRESION = /^\d{1,3}\/\d{1,3}$/
+
+// Un signo vital numérico es válido si viene vacío (null/undefined/'') o es un número mayor que 0.
+function errorSignoNumerico(valor, etiqueta) {
+  if (valor === null || valor === undefined || valor === '') return null
+  return Number(valor) > 0 ? null : `${etiqueta} debe ser un número mayor que 0.`
+}
+
+// Motivo obligatorio, al menos un diagnóstico con descripción; los signos vitales son opcionales,
+// pero si vienen deben tener un formato o valor válido.
+export function validarConsulta(datos) {
+  const errores = {}
+  if (vacio(datos.motivo)) errores.motivo = 'El motivo es obligatorio.'
+  if (!datos.diagnosticos?.some((d) => !vacio(d.descripcion))) {
+    errores.diagnosticos = 'Ingrese al menos un diagnóstico.'
+  }
+
+  const { presion, frecuenciaCardiaca, temperatura, peso, talla } = datos.signosVitales ?? {}
+  if (!vacio(presion) && !FORMATO_PRESION.test(presion.trim())) {
+    errores.presion = 'La presión debe tener el formato sistólica/diastólica (ej. 120/80).'
+  }
+  const errFrecuencia = errorSignoNumerico(frecuenciaCardiaca, 'La frecuencia cardiaca')
+  if (errFrecuencia) errores.frecuenciaCardiaca = errFrecuencia
+  const errTemperatura = errorSignoNumerico(temperatura, 'La temperatura')
+  if (errTemperatura) errores.temperatura = errTemperatura
+  const errPeso = errorSignoNumerico(peso, 'El peso')
+  if (errPeso) errores.peso = errPeso
+  const errTalla = errorSignoNumerico(talla, 'La talla')
+  if (errTalla) errores.talla = errTalla
+
+  return errores
+}
+
 // "HH:mm" -> minutos desde las 00:00.
 function aMinutos(hora) {
   const [h, m] = hora.split(':').map(Number)

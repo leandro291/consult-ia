@@ -82,3 +82,11 @@ export function cancelarCita(id) {
   guardar(CLAVES.citas, citas)
   return { ...citas[indice] }
 }
+
+export function atenderCita(id) {
+  const citas = leer(CLAVES.citas)
+  const indice = buscarActiva(citas, id, 'atender')
+  citas[indice] = { ...citas[indice], estado: 'atendida' }
+  guardar(CLAVES.citas, citas)
+  return { ...citas[indice] }
+}

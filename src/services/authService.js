@@ -10,6 +10,8 @@ export function login(email, password) {
   )
   if (!usuario) throw new Error('Correo o contraseña incorrectos.')
   const sesion = { usuarioId: usuario.id, rol: usuario.rol, nombre: usuario.nombre }
+  // Solo los médicos tienen medicoId en clinica_usuarios; la sesión de recepción no lo incluye.
+  if (usuario.medicoId) sesion.medicoId = usuario.medicoId
   guardar(CLAVES.sesion, sesion)
   return { ...sesion }
 }
