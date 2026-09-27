@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import Button from 'primevue/button'
+import { useConsultoriosStore } from '@/stores/consultorios.js'
 import { useCitasStore } from '@/stores/citas.js'
 import { useMedicosStore } from '@/stores/medicos.js'
 import { usePacientesStore } from '@/stores/pacientes.js'
@@ -11,6 +12,7 @@ import { formatearFecha, nombreDia } from '@/utils/formato.js'
 const citas = useCitasStore()
 const medicos = useMedicosStore()
 const pacientes = usePacientesStore()
+const consultorios = useConsultoriosStore()
 const toast = useToast()
 
 const medicoId = ref(null)
@@ -24,7 +26,8 @@ function cargar() {
   citas.cargar()
   medicos.cargar()
   pacientes.cargar()
-  errorCarga.value = citas.error ?? medicos.error ?? pacientes.error
+  consultorios.cargar()
+  errorCarga.value = citas.error ?? medicos.error ?? pacientes.error ?? consultorios.error
   cargando.value = false
 }
 
@@ -87,6 +90,7 @@ function reprogramar({ id, fecha, hora, revertir }) {
         :citas="citasFiltradas"
         :pacientes="pacientes.lista"
         :medicos="medicos.lista"
+        :consultorios="consultorios.lista"
         @reprogramar="reprogramar"
       />
     </section>

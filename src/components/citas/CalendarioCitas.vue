@@ -5,8 +5,9 @@ import FullCalendar from '@fullcalendar/vue3'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import esLocale from '@fullcalendar/core/locales/es'
-import { formatearRango, nombreCompleto } from '@/utils/formato.js'
+import { ESTADOS_MOVIBLES_CITA, ETIQUETAS_ESTADO_CITA, formatearRango, nombreCompleto } from '@/utils/formato.js'
 import BarraCalendario from '@/components/citas/BarraCalendario.vue'
+import DetalleCita from '@/components/citas/DetalleCita.vue'
 import FiltroMedico from '@/components/citas/FiltroMedico.vue'
 import IconoAlergia from '@/components/citas/IconoAlergia.vue'
 import LeyendaCitas from '@/components/citas/LeyendaCitas.vue'
@@ -15,7 +16,8 @@ const props = defineProps({
   // Citas ya filtradas por el padre.
   citas: { type: Array, required: true },
   pacientes: { type: Array, required: true },
-  medicos: { type: Array, required: true }
+  medicos: { type: Array, required: true },
+  consultorios: { type: Array, required: true }
 })
 
 // Médico elegido en el filtro (null = todos).
@@ -24,19 +26,17 @@ const medicoId = defineModel('medicoId', { type: String, default: null })
 // Al soltar una cita se emite { id, fecha, hora, revertir }; el padre decide si revierte.
 const emit = defineEmits(['reprogramar'])
 
-const ESTADOS = {
-  programada: 'programada',
-  confirmada: 'confirmada',
-  atendida: 'atendida',
-  cancelada: 'cancelada',
-  no_asistio: 'no asistió'
-}
-const ESTADOS_MOVIBLES = ['programada', 'confirmada']
 const DIAS_CORTOS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
 const calendario = ref(null)
 const vista = ref('timeGridWeek')
 const titulo = ref('')
+const detalle = ref(null)
+const citaAbierta = ref(null)
+
+const pacienteAbierto = computed(() => props.pacientes.find((p) => p.id === citaAbierta.value?.pacienteId) ?? null)
+const medicoAbierto = computed(() => props.medicos.find((m) => m.id === citaAbierta.value?.medicoId) ?? null)
+const consultorioAbierto = computed(() => props.consultorios.find((c) => c.id === citaAbierta.value?.consultorioId) ?? null)
 
 const eventos = computed(() => props.citas.map((cita) => {
   const paciente = props.pacientes.find((p) => p.id === cita.pacienteId)
@@ -46,13 +46,13 @@ const eventos = computed(() => props.citas.map((cita) => {
     id: cita.id,
     start: inicio.format('YYYY-MM-DDTHH:mm:ss'),
     end: inicio.add(cita.duracionMin, 'minute').format('YYYY-MM-DDTHH:mm:ss'),
-    startEditable: ESTADOS_MOVIBLES.includes(cita.estado),
+    startEditable: ESTADOS_MOVIBLES_CITA.includes(cita.estado),
     classNames: [`evento-${cita.estado}`],
     extendedProps: {
       hora: cita.hora,
       paciente: paciente ? nombreCompleto(paciente) : 'Paciente desconocido',
       medico: medico ? nombreCompleto(medico) : 'Médico desconocido',
-      estado: ESTADOS[cita.estado] ?? cita.estado,
+      estado: (ETIQUETAS_ESTADO_CITA[cita.estado] ?? cita.estado).toLowerCase(),
       alergico: Boolean(paciente?.alergias?.length)
     }
   }
@@ -85,6 +85,11 @@ const opciones = computed(() => ({
   eventDurationEditable: false,
   events: eventos.value,
   datesSet: actualizarRango,
+  // FullCalendar no dispara eventClick al soltar un arrastre; con Enter sobre la cita sí.
+  eventClick: ({ event, el }) => {
+    citaAbierta.value = props.citas.find((c) => c.id === event.id) ?? null
+    if (citaAbierta.value) detalle.value.abrir(el)
+  },
   eventDrop: ({ event, revert }) => emit('reprogramar', {
     id: event.id,
     fecha: dayjs(event.start).format('YYYY-MM-DD'),
@@ -144,6 +149,14 @@ function etiquetaEvento({ hora, paciente, estado, medico, alergico }) {
         </div>
       </template>
     </FullCalendar>
+
+    <DetalleCita
+      ref="detalle"
+      :cita="citaAbierta"
+      :paciente="pacienteAbierto"
+      :medico="medicoAbierto"
+      :consultorio="consultorioAbierto"
+    />
 
     <LeyendaCitas />
   </div>
