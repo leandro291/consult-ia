@@ -54,6 +54,11 @@ const consultorio = computed(() =>
 )
 const editable = computed(() => ESTADOS_EDITABLES.includes(cita.value?.estado))
 
+// Consulta registrada para esta cita, si la hay (RF1): habilita "Generar receta PDF".
+const consultaDeLaCita = computed(() =>
+  cita.value ? consultas.lista.find((c) => c.citaId === cita.value.id) ?? null : null
+)
+
 // Consulta más reciente del paciente, de cualquier médico (RF3).
 const ultimaConsulta = computed(() => {
   if (!paciente.value) return null
@@ -65,6 +70,8 @@ const medicoUltimaConsulta = computed(() =>
   ultimaConsulta.value ? medicos.lista.find((m) => m.id === ultimaConsulta.value.medicoId) ?? null : null
 )
 
+// Al guardar, la pantalla se queda en la atención (RF1): la cita pasa a atendida y aparece
+// "Generar receta PDF", en vez de navegar a Mi agenda.
 function guardar(datos) {
   const guardada = consultas.registrar({ ...datos, citaId: cita.value.id })
   if (!guardada) {
@@ -73,7 +80,6 @@ function guardar(datos) {
   }
   citas.cargar()
   toast.add({ severity: 'success', summary: 'Consulta registrada.', life: 4000 })
-  router.push('/medico/agenda')
 }
 </script>
 
@@ -150,13 +156,21 @@ function guardar(datos) {
           :cita="cita"
           @guardar="guardar"
         />
-        <p
+        <div
           v-else
-          class="estado aviso-estado"
+          class="aviso-estado-wrap"
         >
-          Esta cita está {{ ETIQUETAS_ESTADO_CITA[cita.estado]?.toLowerCase() ?? cita.estado }};
-          no se puede registrar una consulta.
-        </p>
+          <p class="estado aviso-estado">
+            Esta cita está {{ ETIQUETAS_ESTADO_CITA[cita.estado]?.toLowerCase() ?? cita.estado }};
+            no se puede registrar una consulta.
+          </p>
+          <Button
+            v-if="consultaDeLaCita"
+            type="button"
+            label="Generar receta PDF"
+            @click="router.push(`/medico/receta/${consultaDeLaCita.id}`)"
+          />
+        </div>
       </div>
     </template>
   </div>
@@ -170,6 +184,7 @@ function guardar(datos) {
 .estado p { margin: 0; }
 .estado-titulo { font-size: 17px; font-weight: 700; color: var(--color-texto); }
 .contenido { flex-grow: 1; display: grid; grid-template-columns: 392px minmax(0, 1fr); align-items: start; gap: var(--espacio-2xl); padding: 28px 48px 40px; border-top: 2px dotted var(--color-perforacion); }
+.aviso-estado-wrap { display: flex; flex-direction: column; align-items: center; gap: var(--espacio-lg); }
 .aviso-estado { margin: 0; }
 
 @media (max-width: 1023px) {

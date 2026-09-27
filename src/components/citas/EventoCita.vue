@@ -14,10 +14,12 @@ defineProps({
   estadoCodigo: { type: String, required: true },
   alergico: { type: Boolean, default: false },
   atendible: { type: Boolean, default: false },
+  // Id de la consulta ya registrada para esta cita, si la hay (RF1 de spec 014).
+  consultaId: { type: String, default: null },
   mostrarDetalle: { type: Boolean, default: false }
 })
 
-defineEmits(['atender', 'ver-historia'])
+defineEmits(['atender', 'ver-historia', 'generar-receta'])
 </script>
 
 <template>
@@ -57,6 +59,15 @@ defineEmits(['atender', 'ver-historia'])
     >
       Ver historia
     </button>
+    <button
+      v-if="estadoCodigo === 'atendida' && consultaId"
+      type="button"
+      class="evento-receta"
+      :aria-label="`Generar receta de ${paciente}`"
+      @click.stop="$emit('generar-receta', consultaId)"
+    >
+      Generar receta PDF
+    </button>
   </div>
 </template>
 
@@ -68,4 +79,5 @@ defineEmits(['atender', 'ver-historia'])
 .evento-chip { flex-shrink: 0; }
 .evento-atender { flex-shrink: 0; height: 22px; padding: 0 8px; background: var(--color-papel); border: 1px solid currentColor; border-radius: var(--radio-sm); color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
 .evento-ver-historia { flex-shrink: 0; height: 22px; padding: 0 8px; background: none; border: none; color: inherit; font-size: 11px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.evento-receta { flex-shrink: 0; height: 22px; padding: 0 8px; background: var(--color-papel); border: 1px solid currentColor; border-radius: var(--radio-sm); color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
 </style>
