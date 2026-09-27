@@ -11,6 +11,7 @@ import { useRecetasStore } from '@/stores/recetas.js'
 import FranjaAlergias from '@/components/comunes/FranjaAlergias.vue'
 import RecetaForm, { medicamentoVacio } from '@/components/recetas/RecetaForm.vue'
 import VistaPreviaReceta from '@/components/recetas/VistaPreviaReceta.vue'
+import { useAlertasAlergias } from '@/composables/useAlertasAlergias.js'
 import { CLINICA } from '@/pdf/comunes.js'
 import { descargarRecetaPdf, imprimirRecetaPdf, nombreArchivoReceta } from '@/pdf/recetaPdf.js'
 import { formatearFecha, formatearFechaHora, nombreCompleto } from '@/utils/formato.js'
@@ -44,13 +45,29 @@ const recetaExistente = computed(() =>
 )
 const primerDiagnostico = computed(() => consulta.value?.diagnosticos?.[0] ?? null)
 
-// El formulario arranca con la receta ya guardada o con una fila vacía (RF5); solo una vez por carga.
+// El formulario arranca con la receta ya guardada, o si no hay, con el borrador de la IA que
+// dejó Atender cita o una fila vacía (RF6 del spec 018); solo una vez por carga.
 function inicializarFormulario() {
   const existente = recetaExistente.value
-  formulario.items = existente ? existente.items.map((item) => ({ ...item })) : [medicamentoVacio()]
-  formulario.indicacionesGenerales = existente?.indicacionesGenerales ?? ''
+  if (existente) {
+    formulario.items = existente.items.map((item) => ({ ...item }))
+    formulario.indicacionesGenerales = existente.indicacionesGenerales
+  } else {
+    const borrador = recetas.tomarBorrador(consulta.value.citaId)
+    formulario.items = borrador ? borrador.items.map((item) => ({ ...item })) : [medicamentoVacio()]
+    formulario.indicacionesGenerales = borrador?.indicacionesGenerales ?? ''
+  }
   formularioListo = true
 }
+
+// Cruce de los medicamentos con las alergias del paciente (RF4, RF6 del spec 018): las alertas
+// resueltas en Atender cita se vuelven a pedir acá.
+const {
+  pendientes: alergiasPendientes, mantener: mantenerAlergia, aviso: avisoAlergias
+} = useAlertasAlergias(
+  computed(() => formulario.items),
+  computed(() => paciente.value?.alergias ?? [])
+)
 
 function cargar() {
   cargando.value = true
@@ -69,7 +86,7 @@ const errores = computed(() => validarReceta(formulario))
 const valido = computed(() => !Object.keys(errores.value).length)
 
 // Primer dato faltante, para el aviso debajo de los botones (RF6, CA4).
-const avisoBloqueo = computed(() => {
+const avisoValidacion = computed(() => {
   const errItems = errores.value.items
   if (typeof errItems === 'string') return errItems
   if (!Array.isArray(errItems)) return null
@@ -82,6 +99,10 @@ const avisoBloqueo = computed(() => {
   }
   return null
 })
+
+// "Descargar" e "Imprimir" también se bloquean con alertas de alergia sin resolver (RF5 del spec 018).
+const bloqueadoPdf = computed(() => !valido.value || Boolean(avisoAlergias.value))
+const avisoPdf = computed(() => avisoValidacion.value ?? avisoAlergias.value)
 
 // "Descargar" e "Imprimir" guardan la receta primero (RF7); si falla, no se genera el PDF.
 async function generarPdf(accion) {
@@ -199,6 +220,8 @@ async function generarPdf(accion) {
           v-model:items="formulario.items"
           v-model:indicaciones-generales="formulario.indicacionesGenerales"
           :errores="errores"
+          :pendientes="alergiasPendientes"
+          @mantener="mantenerAlergia"
         />
 
         <div class="columna-vista-previa">
@@ -216,8 +239,8 @@ async function generarPdf(accion) {
           <div class="botones">
             <Button
               type="button"
-              :disabled="!valido"
-              :aria-describedby="!valido ? 'pdf-bloqueo' : undefined"
+              :disabled="bloqueadoPdf"
+              :aria-describedby="bloqueadoPdf ? 'pdf-bloqueo' : undefined"
               class="boton-pdf"
               @click="generarPdf('descargar')"
             >
@@ -232,8 +255,8 @@ async function generarPdf(accion) {
             </Button>
             <Button
               type="button"
-              :disabled="!valido"
-              :aria-describedby="!valido ? 'pdf-bloqueo' : undefined"
+              :disabled="bloqueadoPdf"
+              :aria-describedby="bloqueadoPdf ? 'pdf-bloqueo' : undefined"
               class="boton-pdf"
               @click="generarPdf('imprimir')"
             >
@@ -247,7 +270,7 @@ async function generarPdf(accion) {
               Imprimir
             </Button>
             <p
-              v-if="!valido"
+              v-if="bloqueadoPdf"
               id="pdf-bloqueo"
               class="aviso-bloqueo"
               role="alert"
@@ -263,7 +286,7 @@ async function generarPdf(accion) {
                 cy="12"
                 r="9"
               /><path d="M12 8v5M12 16v.01" /></svg>
-              {{ avisoBloqueo }}
+              {{ avisoPdf }}
             </p>
           </div>
         </div>
