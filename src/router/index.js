@@ -12,6 +12,7 @@ import DashboardView from '@/views/recepcion/DashboardView.vue'
 import MiAgendaView from '@/views/medico/MiAgendaView.vue'
 import AtencionView from '@/views/medico/AtencionView.vue'
 import HistoriaView from '@/views/medico/HistoriaView.vue'
+import RecetaView from '@/views/medico/RecetaView.vue'
 import RecepcionLayout from '@/layouts/RecepcionLayout.vue'
 import MedicoLayout from '@/layouts/MedicoLayout.vue'
 
@@ -45,7 +46,7 @@ const routes = [
       hija('agenda', MiAgendaView),
       hija('atencion/:citaId', AtencionView),
       hija('historia/:pacienteId', HistoriaView),
-      hija('receta/:consultaId'),
+      hija('receta/:consultaId', RecetaView),
       hija('configuracion')
     ]
   },

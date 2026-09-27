@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import Button from 'primevue/button'
 import { useAuthStore } from '@/stores/auth.js'
 import { useCitasStore } from '@/stores/citas.js'
+import { useConsultasStore } from '@/stores/consultas.js'
 import { useConsultoriosStore } from '@/stores/consultorios.js'
 import { useMedicosStore } from '@/stores/medicos.js'
 import { usePacientesStore } from '@/stores/pacientes.js'
@@ -15,6 +16,7 @@ const citas = useCitasStore()
 const medicos = useMedicosStore()
 const pacientes = usePacientesStore()
 const consultorios = useConsultoriosStore()
+const consultas = useConsultasStore()
 const router = useRouter()
 
 const hoy = new Date()
@@ -27,15 +29,19 @@ function cargar() {
   medicos.cargar()
   pacientes.cargar()
   consultorios.cargar()
-  errorCarga.value = citas.error ?? medicos.error ?? pacientes.error ?? consultorios.error
+  consultas.cargar()
+  errorCarga.value = citas.error ?? medicos.error ?? pacientes.error ?? consultorios.error ?? consultas.error
   cargando.value = false
 }
 
 onMounted(cargar)
 
-// Todas las citas del médico logueado, en cualquier estado.
+// Todas las citas del médico logueado, en cualquier estado, con el id de su consulta
+// registrada si la hay (habilita "Generar receta PDF" en una cita ya atendida, RF1 de spec 014).
 const citasDelMedico = computed(() =>
-  citas.lista.filter((c) => c.medicoId === auth.sesion?.medicoId)
+  citas.lista
+    .filter((c) => c.medicoId === auth.sesion?.medicoId)
+    .map((c) => ({ ...c, consultaId: consultas.lista.find((con) => con.citaId === c.id)?.id ?? null }))
 )
 
 function atender(citaId) {
@@ -44,6 +50,10 @@ function atender(citaId) {
 
 function verHistoria(pacienteId) {
   router.push(`/medico/historia/${pacienteId}`)
+}
+
+function generarReceta(consultaId) {
+  router.push(`/medico/receta/${consultaId}`)
 }
 </script>
 
@@ -95,6 +105,7 @@ function verHistoria(pacienteId) {
         :consultorios="consultorios.lista"
         @atender="atender"
         @ver-historia="verHistoria"
+        @generar-receta="generarReceta"
       />
     </section>
   </div>

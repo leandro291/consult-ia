@@ -14,6 +14,11 @@ export function calcularEdad(fechaNacimiento) {
   return dayjs().diff(dayjs(fechaNacimiento), 'year')
 }
 
+// "26/09/2026 · 10:48": fecha y hora, para sellos de registro (ej. "Consulta guardada").
+export function formatearFechaHora(fecha) {
+  return dayjs(fecha).format('DD/MM/YYYY · HH:mm')
+}
+
 // Minúsculas y sin tildes, para comparar textos al buscar.
 export function normalizarTexto(texto) {
   return (texto ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
@@ -25,6 +30,10 @@ export const SEXOS = [
 ]
 
 export const GRUPOS_SANGUINEOS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+
+export const VIAS_RECETA = [
+  'oral', 'sublingual', 'tópica', 'inhalatoria', 'intramuscular', 'endovenosa', 'rectal', 'oftálmica', 'ótica'
+]
 
 export const DIAS_SEMANA = [
   { numero: 1, abreviatura: 'Lu', nombre: 'lunes' },

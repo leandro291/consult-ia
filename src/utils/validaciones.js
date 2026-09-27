@@ -121,6 +121,36 @@ export function validarConsulta(datos) {
   return errores
 }
 
+// Cada medicamento necesita medicamento, dosis, frecuencia, duración y vía; las indicaciones son opcionales.
+// La receta necesita al menos un medicamento.
+export function validarReceta(datos) {
+  const items = datos.items ?? []
+  if (!items.length) return { items: 'Agregue al menos un medicamento.' }
+
+  const erroresPorItem = items.map((item) => {
+    const errores = {}
+    if (vacio(item.medicamento)) errores.medicamento = 'El medicamento es obligatorio.'
+    if (vacio(item.dosis)) errores.dosis = 'La dosis es obligatoria.'
+    if (vacio(item.frecuencia)) errores.frecuencia = 'La frecuencia es obligatoria.'
+    if (vacio(item.duracion)) errores.duracion = 'La duración es obligatoria.'
+    if (vacio(item.via)) errores.via = 'Seleccione una vía.'
+    return errores
+  })
+
+  return erroresPorItem.some((e) => Object.keys(e).length) ? { items: erroresPorItem } : {}
+}
+
+// Primer mensaje de `validarReceta`: "items" es un texto (sin medicamentos) o un arreglo de
+// errores por medicamento y por campo.
+export function primerErrorReceta(errores) {
+  if (typeof errores.items === 'string') return errores.items
+  for (const errorItem of errores.items ?? []) {
+    const mensaje = Object.values(errorItem)[0]
+    if (mensaje) return mensaje
+  }
+  return null
+}
+
 // "HH:mm" -> minutos desde las 00:00.
 function aMinutos(hora) {
   const [h, m] = hora.split(':').map(Number)

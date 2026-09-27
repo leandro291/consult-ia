@@ -39,7 +39,7 @@ Toda nueva carpeta, archivo o dependencia debe seguirlo. Si algo nuevo no encaja
 
 | Capa | Puede importar | No puede importar |
 |---|---|---|
-| `views/` | components, composables, stores, utils | services, storage |
+| `views/` | components, composables, stores, utils, pdf | services, storage |
 | `layouts/` | components, composables, stores, utils | services, storage |
 | `components/` | components, composables, stores, utils | services, storage |
 | `composables/` | stores, services, utils | views, components |
@@ -109,7 +109,7 @@ consult-ia/
 │   │   └── recetas.js
 │   │
 │   ├── composables/          # Lógica reactiva reutilizable
-│   │   ├── useCatalogo.js    # Estado y ejecución comunes de los stores de catálogo, de citas y de consultas
+│   │   ├── useCatalogo.js    # Estado y ejecución comunes de los stores de catálogo, de citas, de consultas y de recetas
 │   │   ├── useEliminarPaciente.js # Eliminación de paciente en dos pasos (confirmar o avisar)
 │   │   ├── useFecha.js
 │   │   ├── useConfirmacion.js
@@ -124,7 +124,7 @@ consult-ia/
 │   │   ├── LoginView.vue
 │   │   ├── EnConstruccionView.vue # Provisional para rutas de fases futuras
 │   │   ├── recepcion/        # ConsultoriosView, MedicosView, DashboardView, PacientesView, PacienteDetalleView, AgendaView, ...
-│   │   └── medico/           # MiAgendaView, AtencionView, HistoriaView, ...
+│   │   └── medico/           # MiAgendaView, AtencionView, HistoriaView, RecetaView, ...
 │   │
 │   ├── components/           # Componentes reutilizables, agrupados por dominio
 │   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion (esqueleto por rol: menú lateral + contenido), AlertaAlergias, FranjaAlergias (franja roja de todo el ancho de Atender cita y Emitir receta), ChipAlergia, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, CampoTexto (etiqueta + InputText + error), PaginaListado (cabecera, hoja con tabla, slot de pie y estado vacío), DialogoFormulario, BotonEditar, ...
@@ -132,7 +132,7 @@ consult-ia/
 │   │   ├── medicos/          # MedicoForm.vue, HorarioFields.vue
 │   │   ├── citas/            # CalendarioCitas.vue (FullCalendar; con soloLectura para la agenda del médico: sin filtro, sin arrastrar ni crear, abre en Día), EventoCita.vue (contenido de la cita en modo soloLectura, con "Atender" y, si está atendida, "Ver historia"), BarraCalendario.vue, FiltroMedico.vue, LeyendaCitas.vue, IconoAlergia.vue, DetalleCita.vue (popover de solo lectura), CitaForm.vue (diálogo de alta), ChipEstadoCita.vue (chip de estado), FiltroEstadosCita.vue (pestañas-filtro por estado)
 │   │   ├── consultas/        # CabeceraAtencion.vue (cabecera de Atender cita), UltimaConsulta.vue (panel con la consulta más reciente del paciente), ConsultaForm.vue (formulario de consulta y barra "Guardar consulta"), DiagnosticosField.vue (lista editable de diagnósticos con buscador CIE-10), TarjetaConsulta.vue (tarjeta de una consulta en la línea de tiempo de la Historia clínica, expandida o resumida)
-│   │   ├── recetas/
+│   │   ├── recetas/          # RecetaForm.vue (filas de medicamentos, agregar/quitar e indicaciones generales), VistaPreviaReceta.vue (hoja de vista previa de la receta, en vivo)
 │   │   └── asistente/        # PanelAsistente, BotonMicrofono, ...
 │   │
 │   ├── pdf/                  # Plantillas pdfmake
@@ -178,7 +178,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 4 en curso: el spec 011 inicia la fase con "Mi agenda" del médico (`/medico/agenda`, `CalendarioCitas.vue` en modo `soloLectura`) y la capa de datos de consultas (`consultasService.js`, `useConsultasStore`, `atenderCita` en `citasService.js`); el spec 012 agrega la pantalla "Atender cita" (`/medico/atencion/:citaId`), sin el asistente de consulta por voz: cabecera con el paciente y la cita, franja de alergias, última consulta y el formulario de consulta con diagnósticos CIE-10 (`src/data/cie10.js`); el spec 013 agrega la Historia clínica (`/medico/historia/:pacienteId`): ficha del paciente, línea de tiempo con todas las consultas (orden por fecha, expandidas o resumidas) y los accesos desde Mi agenda ("Ver historia" en las citas atendidas) y Atender cita ("Historia clínica" y "Ver historia clínica completa"); sin exportar a PDF, que queda para la fase 5**; fase 3 implementada: el spec 006 aportó la capa de datos de citas (`citasService` y store), el spec 007 agrega la agenda de recepción con FullCalendar (ver, filtrar por médico y reprogramar arrastrando), el spec 008 el detalle de cita (popover de solo lectura al hacer clic) y el spec 009 agrega crear citas (botón de cabecera y clic en un hueco libre) y cancelarlas desde la agenda de recepción; el spec 010 adelanta de la fase 6 el panel del día de recepción (`/recepcion/dashboard`), con las pestañas-filtro por estado y la tabla de citas de hoy; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 5 en curso: el spec 014 agrega "Emitir receta" (`/medico/receta/:consultaId`): cabecera con el paciente y la consulta, franja de alergias, formulario de medicamentos (`RecetaForm.vue`) y los botones "Descargar" e "Imprimir", que guardan la receta (una por consulta, `recetasService.js`, `useRecetasStore`) y generan el PDF con `pdf/comunes.js` y `pdf/recetaPdf.js`; Atender cita ya no navega a Mi agenda al guardar la consulta, y muestra "Generar receta PDF" en las citas atendidas; el spec 015 agrega la vista previa en vivo de la receta (`VistaPreviaReceta.vue`), la columna derecha de Emitir receta con el nombre del archivo y la hoja que refleja el PDF mientras se edita; sin el pie de receta en la Historia clínica, que queda para un spec aparte (016)**; fase 4 implementada: el spec 011 inicia la fase con "Mi agenda" del médico (`/medico/agenda`, `CalendarioCitas.vue` en modo `soloLectura`) y la capa de datos de consultas (`consultasService.js`, `useConsultasStore`, `atenderCita` en `citasService.js`); el spec 012 agrega la pantalla "Atender cita" (`/medico/atencion/:citaId`), sin el asistente de consulta por voz: cabecera con el paciente y la cita, franja de alergias, última consulta y el formulario de consulta con diagnósticos CIE-10 (`src/data/cie10.js`); el spec 013 agrega la Historia clínica (`/medico/historia/:pacienteId`): ficha del paciente, línea de tiempo con todas las consultas (orden por fecha, expandidas o resumidas) y los accesos desde Mi agenda ("Ver historia" en las citas atendidas) y Atender cita ("Historia clínica" y "Ver historia clínica completa"); fase 3 implementada: el spec 006 aportó la capa de datos de citas (`citasService` y store), el spec 007 agrega la agenda de recepción con FullCalendar (ver, filtrar por médico y reprogramar arrastrando), el spec 008 el detalle de cita (popover de solo lectura al hacer clic) y el spec 009 agrega crear citas (botón de cabecera y clic en un hueco libre) y cancelarlas desde la agenda de recepción; el spec 010 adelanta de la fase 6 el panel del día de recepción (`/recepcion/dashboard`), con las pestañas-filtro por estado y la tabla de citas de hoy; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 
@@ -200,7 +200,7 @@ npm install @fullcalendar/vue3 @fullcalendar/core @fullcalendar/daygrid \
 npm install pdfmake
 
 # Opcionales (solo si el spec de la fase lo requiere)
-npm install qrcode chart.js vue-chartjs
+npm install chart.js vue-chartjs
 ```
 
 Íconos: SVG inline de trazo 1.75; no se usa `primeicons`.
@@ -265,8 +265,7 @@ Los imports internos usan el alias `@/` (ej. `import { leer } from '@/services/s
 | `@fullcalendar/daygrid`, `@fullcalendar/timegrid` | Vistas de mes, semana y día |
 | `@fullcalendar/interaction` | Arrastrar para reprogramar y hacer clic para crear |
 | `dayjs` | Manejo de fechas (locale `es`) |
-| `pdfmake` | PDF de receta e historia clínica |
-| `qrcode` *(opcional)* | QR con el id de la receta |
+| `pdfmake` | PDF de receta e historia clínica; el QR de la receta usa su nodo `qr` nativo, sin la dependencia `qrcode` |
 | `chart.js`, `vue-chartjs` *(opcional)* | Gráficos del dashboard |
 
 **Sin dependencia**, se usan APIs nativas:

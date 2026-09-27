@@ -29,7 +29,7 @@ const medicoId = defineModel('medicoId', { type: String, default: null })
 // Al soltar una cita se emite { id, fecha, hora, revertir }; el padre decide si revierte.
 // nueva-cita: { fecha, hora } del hueco elegido (hora null si la vista no tiene horas). cancelar: la cita del detalle.
 // atender y ver-historia: solo en modo de solo lectura.
-const emit = defineEmits(['reprogramar', 'nueva-cita', 'cancelar', 'atender', 'ver-historia'])
+const emit = defineEmits(['reprogramar', 'nueva-cita', 'cancelar', 'atender', 'ver-historia', 'generar-receta'])
 
 const DIAS_CORTOS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
@@ -62,7 +62,9 @@ const eventos = computed(() => props.citas.map((cita) => {
       estado: (ETIQUETAS_ESTADO_CITA[cita.estado] ?? cita.estado).toLowerCase(),
       estadoCodigo: cita.estado,
       atendible: ESTADOS_MOVIBLES_CITA.includes(cita.estado),
-      alergico: Boolean(paciente?.alergias?.length)
+      alergico: Boolean(paciente?.alergias?.length),
+      // Id de la consulta ya registrada, si la hay (resuelto por el padre, RF1 de spec 014).
+      consultaId: cita.consultaId ?? null
     }
   }
 }))
@@ -175,9 +177,11 @@ defineExpose({ irAFecha })
           :estado-codigo="event.extendedProps.estadoCodigo"
           :alergico="event.extendedProps.alergico"
           :atendible="event.extendedProps.atendible"
+          :consulta-id="event.extendedProps.consultaId"
           :mostrar-detalle="vista === 'timeGridDay'"
           @atender="(id) => emit('atender', id)"
           @ver-historia="(pacienteId) => emit('ver-historia', pacienteId)"
+          @generar-receta="(consultaId) => emit('generar-receta', consultaId)"
         />
         <div
           v-else
