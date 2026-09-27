@@ -33,7 +33,8 @@ Es un proyecto **académico**: se priorizan código claro, bien organizado y fá
 6. Si tras 3 ciclos siguen los errores, el orquestador se detiene y reporta al hilo principal.
 7. Con `APROBADO`, el hilo principal:
    - Muestra el resultado al usuario.
-   - Cambia el spec a `Estado: implementado`.
+   - **Si el spec toca una pantalla o componente visual**, el usuario prueba el flujo principal en el navegador antes de seguir: el `reviewer` no ejecuta la app (no hay herramienta de navegador headless disponible), solo lee código, lintea, buildea y corre los tests existentes. Bugs de interacción o de estilo que aparezcan ahí vuelven al `developer` como una corrección más, dentro del límite de 3 ciclos (o uno nuevo si ya se agotó).
+   - Con el visto bueno, cambia el spec a `Estado: implementado`.
    - Hace el commit **solo con el OK del usuario**. Ningún subagente hace commits.
 
 ### Agentes
@@ -388,7 +389,7 @@ Completar y verificar cada fase antes de pasar a la siguiente. Cada fase se ejec
    - Texto de demo
    
    Probar primero con el texto de demo y después con el micrófono.
-8. **Tests**: con todo construido, tests de Vitest según [`SETUP.md`](SETUP.md). Hasta esta fase, `developer` y `reviewer` no escriben ni corren tests.
+8. **Tests**: con todo construido, tests de Vitest según [`SETUP.md`](SETUP.md). Hasta esta fase, `developer` y `reviewer` no escriben tests. El `reviewer` sí corre `npm run build` y los tests que ya existan (dentro del límite de 3 ciclos con el `developer`) para confirmar que lo implementado funciona; la falta de tests no es un error antes de esta fase.
 
 ## Limitaciones conocidas (documentar en el README)
 

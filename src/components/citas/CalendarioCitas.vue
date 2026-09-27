@@ -24,7 +24,8 @@ const props = defineProps({
 const medicoId = defineModel('medicoId', { type: String, default: null })
 
 // Al soltar una cita se emite { id, fecha, hora, revertir }; el padre decide si revierte.
-const emit = defineEmits(['reprogramar'])
+// nueva-cita: { fecha, hora } del hueco elegido (hora null si la vista no tiene horas). cancelar: la cita del detalle.
+const emit = defineEmits(['reprogramar', 'nueva-cita', 'cancelar'])
 
 const DIAS_CORTOS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
@@ -95,12 +96,31 @@ const opciones = computed(() => ({
     fecha: dayjs(event.start).format('YYYY-MM-DD'),
     hora: dayjs(event.start).format('HH:mm'),
     revertir: revert
+  }),
+  // Clic en un hueco libre del calendario (los eventos capturan su propio clic, así que este solo llega en huecos vacíos).
+  dateClick: ({ date, view }) => emit('nueva-cita', {
+    fecha: dayjs(date).format('YYYY-MM-DD'),
+    hora: view.type.startsWith('timeGrid') ? dayjs(date).format('HH:mm') : null
   })
 }))
+
+// El detalle solo emite; el calendario cierra el popover y reemite la cancelación hacia la vista.
+function cancelarDesdeDetalle(cita) {
+  detalle.value.cerrar()
+  emit('cancelar', cita)
+}
 
 function etiquetaEvento({ hora, paciente, estado, medico, alergico }) {
   return `${hora} ${paciente}, ${estado}, ${medico}${alergico ? ', alérgico' : ''}`
 }
+
+// El padre la llama tras crear una cita: sin esto, una cita fuera de la semana visible
+// se guarda bien pero no se ve hasta que alguien navegue hasta su fecha a mano.
+function irAFecha(fecha) {
+  api().gotoDate(fecha)
+}
+
+defineExpose({ irAFecha })
 </script>
 
 <template>
@@ -156,6 +176,7 @@ function etiquetaEvento({ hora, paciente, estado, medico, alergico }) {
       :paciente="pacienteAbierto"
       :medico="medicoAbierto"
       :consultorio="consultorioAbierto"
+      @cancelar="cancelarDesdeDetalle"
     />
 
     <LeyendaCitas />

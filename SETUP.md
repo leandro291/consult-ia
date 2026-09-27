@@ -130,7 +130,7 @@ consult-ia/
 │   │   ├── comunes/          # Piezas genéricas: MarcoAplicacion (esqueleto por rol: menú lateral + contenido), AlertaAlergias, ChipAlergia, MarcaClinica (logo + nombre), HojaCopias (hoja con copias apiladas), CampoError, CampoTexto (etiqueta + InputText + error), PaginaListado (cabecera, hoja con tabla y estado vacío), DialogoFormulario, BotonEditar, ...
 │   │   ├── pacientes/        # PacienteForm.vue, AlergiasField.vue, AvisoNoEliminable.vue, BuscadorPacientes.vue
 │   │   ├── medicos/          # MedicoForm.vue, HorarioFields.vue
-│   │   ├── citas/            # CalendarioCitas.vue (FullCalendar), BarraCalendario.vue, FiltroMedico.vue, LeyendaCitas.vue, IconoAlergia.vue, DetalleCita.vue (popover de solo lectura)
+│   │   ├── citas/            # CalendarioCitas.vue (FullCalendar), BarraCalendario.vue, FiltroMedico.vue, LeyendaCitas.vue, IconoAlergia.vue, DetalleCita.vue (popover de solo lectura), CitaForm.vue (diálogo de alta)
 │   │   ├── consultas/
 │   │   ├── recetas/
 │   │   └── asistente/        # PanelAsistente, BotonMicrofono, ...
@@ -178,7 +178,7 @@ Los componentes visuales no requieren tests unitarios.
 
 ## Instalación y comandos
 
-> Estado actual: **fase 3 en curso: el spec 006 aportó la capa de datos de citas (`citasService` y store) y el spec 007 agrega la agenda de recepción con FullCalendar (ver, filtrar por médico y reprogramar arrastrando) y el spec 008 el detalle de cita (popover de solo lectura al hacer clic)**; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
+> Estado actual: **fase 3 en curso: el spec 006 aportó la capa de datos de citas (`citasService` y store), el spec 007 agrega la agenda de recepción con FullCalendar (ver, filtrar por médico y reprogramar arrastrando), el spec 008 el detalle de cita (popover de solo lectura al hacer clic) y el spec 009 agrega crear citas (botón de cabecera y clic en un hueco libre) y cancelarlas desde la agenda de recepción**; fase 2 implementada (specs 003 y 004); fase 1 implementada, con el login diseñado (spec 002). El proyecto Vue está generado (Vite + Vue 3 en JS, Router, Pinia, PrimeVue tematizado con el preset de la clínica, login simulado y diseñado, layouts por rol y datos semilla). Los layouts tienen el menú lateral diseñado (spec 005); las demás pantallas siguen sin diseño. Las rutas de fases futuras usan `EnConstruccionView.vue`.
 
 ### Instalación por fase
 

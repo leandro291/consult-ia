@@ -12,6 +12,9 @@ const props = defineProps({
   consultorio: { type: Object, default: null }
 })
 
+// "Cancelar cita…" solo emite; el calendario cierra el detalle y reemite el evento.
+const emit = defineEmits(['cancelar'])
+
 const popover = ref(null)
 // Elemento de la cita al que se ancla el detalle; recibe el foco al cerrar.
 const ancla = ref(null)
@@ -43,7 +46,7 @@ function cerrar() {
   ancla.value?.focus()
 }
 
-defineExpose({ abrir })
+defineExpose({ abrir, cerrar })
 </script>
 
 <template>
@@ -101,6 +104,18 @@ defineExpose({ abrir })
           <span :class="['detalle-estado', `estado-${cita.estado}`]">{{ ETIQUETAS_ESTADO_CITA[cita.estado] ?? cita.estado }}</span>
         </dd>
       </dl>
+      <div
+        v-if="movible"
+        class="detalle-acciones"
+      >
+        <button
+          type="button"
+          class="detalle-cancelar"
+          @click="emit('cancelar', cita)"
+        >
+          Cancelar cita…
+        </button>
+      </div>
       <p
         v-if="movible"
         class="detalle-nota"
@@ -133,4 +148,6 @@ defineExpose({ abrir })
 .detalle-estado.estado-cancelada { background: var(--color-apagado); color: var(--color-texto-secundario); text-decoration: line-through; }
 .detalle-estado.estado-no_asistio { background: var(--color-papel); border: 1.5px dashed var(--color-texto-secundario); color: var(--color-texto-secundario); padding: 1.5px 6.5px; }
 .detalle-nota { margin: 0; font-size: 13px; color: var(--color-texto-secundario); }
+.detalle-acciones { display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid var(--color-linea); }
+.detalle-cancelar { flex-grow: 1; height: 40px; background: var(--color-papel); color: var(--color-alerta); border: 1.5px solid var(--color-alerta); border-radius: var(--radio-md); font-size: 14px; font-weight: 700; cursor: pointer; }
 </style>
