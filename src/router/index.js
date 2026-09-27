@@ -46,8 +46,7 @@ const routes = [
       hija('agenda', MiAgendaView),
       hija('atencion/:citaId', AtencionView),
       hija('historia/:pacienteId', HistoriaView),
-      hija('receta/:consultaId', RecetaView),
-      hija('configuracion')
+      hija('receta/:consultaId', RecetaView)
     ]
   },
   { path: '/:pathMatch(.*)*', redirect: '/' }

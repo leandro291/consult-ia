@@ -103,8 +103,7 @@ Es una sola aplicación con login. Según el rol del usuario se muestra un layou
 ### Rol: `medico`
 - **Mi agenda**: solo las citas del médico logueado (vista del día y de la semana).
 - **Atender cita**: muestra datos del paciente, alergias e historial, junto con el formulario de consulta. Al guardar, la cita pasa a estado `atendida`.
-  - Incluye el **Asistente de consulta por voz**: dictado → IA → formulario y borrador de receta prellenados.
-- **Configuración IA**: pantalla para configurar la URL del servidor de IA y probar la conexión.
+  - Incluye el **Asistente de consulta por voz**: dictado → IA → formulario y borrador de receta prellenados. La URL del servidor de IA es una variable de entorno de build (`VITE_IA_SERVIDOR_URL`), no una pantalla de configuración.
 - **Historia clínica**: línea de tiempo de todas las consultas de un paciente, con opción de exportarla a PDF.
 - **Emitir receta**: formulario de medicamentos ligado a una consulta. Genera el PDF.
 
@@ -123,7 +122,6 @@ Es una sola aplicación con login. Según el rol del usuario se muestra un layou
 /medico/atencion/:citaId
 /medico/historia/:pacienteId
 /medico/receta/:consultaId
-/medico/configuracion
 ```
 
 - Un **navigation guard** global revisa la sesión:
@@ -148,7 +146,6 @@ Las relaciones se hacen por id.
 - **`clinica_consultas`**: `{ id, citaId, pacienteId, medicoId, fecha, motivo, signosVitales: { presion, frecuenciaCardiaca, temperatura, peso, talla }, examenFisico, diagnosticos: [{ codigo, descripcion }], plan, observaciones }`
 - **`clinica_recetas`**: `{ id, consultaId, pacienteId, medicoId, fecha, items: [{ medicamento, dosis, frecuencia, duracion, via, indicaciones }], indicacionesGenerales }`
 - **`clinica_sesion`**: `{ usuarioId, rol, nombre, medicoId? }`, el usuario logueado actualmente. `medicoId` solo está presente cuando `rol` es `medico`.
-- **`clinica_config`**: `{ iaServidorUrl, iaActivada }`, configuración del asistente IA.
 - Las consultas creadas con ayuda del asistente llevan además:
   - `generadaConIA: true`
   - `transcripcion`: el texto dictado original
@@ -294,19 +291,13 @@ El servidor de IA responde **solo con JSON válido** con esta forma exacta (es e
 
 ### iaService.js
 
-- Hace `fetch` POST a la URL configurada en `iaServidorUrl` (`clinica_config`), enviando `{ transcripcion, contexto }` (el `contexto` es la salida de `anonimizar.js`; nunca nombre, DNI, teléfono, email ni dirección).
+- Hace `fetch` POST a la URL de `import.meta.env.VITE_IA_SERVIDOR_URL` (variable de entorno de build, no se guarda en `localStorage` ni se muestra en ninguna pantalla), enviando `{ transcripcion, contexto }` (el `contexto` es la salida de `anonimizar.js`; nunca nombre, DNI, teléfono, email ni dirección).
 - Recibe como respuesta el JSON con el formato del contrato (ver arriba).
-- Si no hay servidor configurado o el asistente está desactivado, el botón "Generar con IA" queda deshabilitado, con un enlace a `/medico/configuracion`.
+- El asistente se considera activo si `VITE_IA_SERVIDOR_URL` tiene valor. Si está vacía, el botón "Generar con IA" queda deshabilitado con un texto que explica que el asistente no está disponible.
 - Parámetros de la llamada:
   - Timeout de 30 s con `AbortController`.
 - Extraer el JSON de la respuesta de forma robusta: quitar bloques ```json si vienen incluidos.
 - Manejar los errores con mensajes en español: sin conexión o servidor no disponible, error del servidor (5xx), límite de uso (429), timeout y respuesta mal formada.
-
-### Configuración (`/medico/configuracion`)
-
-- Campo para la URL del servidor de IA.
-- Interruptor para activar o desactivar el asistente.
-- Botón "Probar conexión".
 
 ### Interfaz
 
@@ -383,7 +374,7 @@ Completar y verificar cada fase antes de pasar a la siguiente. Cada fase se ejec
    - `anonimizar.js`
    - `iaService.js` con validación de respuesta
    - `alergias.js`
-   - Pantalla de configuración
+   - `VITE_IA_SERVIDOR_URL` como variable de entorno de build (sin pantalla de configuración)
    - Integración en "Atender cita" (formulario y borrador de receta)
    - `indicacionesPaciente` en el PDF
    - Texto de demo
