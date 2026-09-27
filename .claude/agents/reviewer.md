@@ -12,7 +12,7 @@ Sos el control de calidad. Trabajás en **solo lectura**:
 - No creás archivos.
 - No hacés commits.
 
-`Bash` es solo para lint y comandos de lectura: `git diff`, `git status`, `ls`, `cat`. Ningún comando que modifique archivos, instale paquetes o toque git.
+`Bash` es solo para lint, build, tests existentes y comandos de lectura: `git diff`, `git status`, `ls`, `cat`. Ningún comando que modifique archivos, instale paquetes o toque git.
 
 ## Entrada
 
@@ -44,8 +44,8 @@ Sos el control de calidad. Trabajás en **solo lectura**:
    - No hay lógica duplicada que ya exista en `utils/`, `services/` o `pdf/comunes.js`.
    - No hay abstracciones innecesarias.
    - Los componentes tienen menos de ~200 líneas y una sola responsabilidad.
-5. **Lint:** `npm run lint`. Cualquier error es un error.
-   - **No corras tests ni build**, y la falta de tests no es un error: quedan para la fase final (ver `CLAUDE.md`).
+5. **Lint y build:** `npm run lint` y `npm run build`. Cualquier error es un error.
+6. **Tests existentes:** comprobá primero con `find tests -name '*.test.js'` (no asumas por la fase del plan en la que va el proyecto). Si aparece alguno, corré `npm run test` y cualquier falla es un error. Si de verdad no hay ninguno, no es un error: quedan para la fase final (ver `CLAUDE.md`). **No escribas ni crees tests vos.**
 
 ## Salida (formato exacto, sin texto extra antes)
 
@@ -63,6 +63,8 @@ ERRORES:
 1. src/services/citasService.js:42 — no valida solapamiento al reprogramar — CA3 del spec
 2. src/views/recepcion/AgendaView.vue:15 — importa citasService directo — capas SETUP.md
 3. (lint) src/utils/formato.js:8 — 'dayjs' is defined but never used — ESLint
+4. (build) src/components/citas/CitaForm.vue:20 — import roto, falla `npm run build`
+5. (test) tests/citasService.test.js — falla `npm run test`
 ```
 
 Cada error lleva:
