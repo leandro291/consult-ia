@@ -291,7 +291,7 @@ El servidor de IA responde **solo con JSON válido** con esta forma exacta (es e
 
 ### iaService.js
 
-- Hace `fetch` POST a la URL de `import.meta.env.VITE_IA_SERVIDOR_URL` (variable de entorno de build, no se guarda en `localStorage` ni se muestra en ninguna pantalla), enviando `{ transcripcion, contexto }` (el `contexto` es la salida de `anonimizar.js`; nunca nombre, DNI, teléfono, email ni dirección).
+- Hace `fetch` POST a la URL de `import.meta.env.VITE_IA_SERVIDOR_URL` (variable de entorno de build, no se guarda en `localStorage` ni se muestra en ninguna pantalla), enviando `{ texto, contexto }` (el cuerpo usa la clave `texto` para la transcripción, según el contrato del servidor de IA del proyecto; el `contexto` es la salida de `anonimizar.js`; nunca nombre, DNI, teléfono, email ni dirección).
 - Recibe como respuesta el JSON con el formato del contrato (ver arriba).
 - El asistente se considera activo si `VITE_IA_SERVIDOR_URL` tiene valor. Si está vacía, el botón "Generar con IA" queda deshabilitado con un texto que explica que el asistente no está disponible.
 - Parámetros de la llamada:

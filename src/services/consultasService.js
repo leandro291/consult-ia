@@ -26,7 +26,10 @@ export function registrarConsulta(datos) {
     examenFisico: datos.examenFisico ?? '',
     diagnosticos: datos.diagnosticos.map((d) => ({ ...d })),
     plan: datos.plan ?? '',
-    observaciones: datos.observaciones ?? ''
+    observaciones: datos.observaciones ?? '',
+    // Solo si se generó con el asistente de IA (RF10 del spec 017): la transcripción es la
+    // enviada en la última generación correcta, no la que quede editada en el textarea.
+    ...(datos.generadaConIA ? { generadaConIA: true, transcripcion: datos.transcripcion } : {})
   }
   guardar(CLAVES.consultas, [...leer(CLAVES.consultas), consulta])
   return { ...consulta }

@@ -28,6 +28,15 @@ function respuestaValida(json) {
   return true
 }
 
+function urlServidor() {
+  return (import.meta.env.VITE_IA_SERVIDOR_URL ?? '').trim()
+}
+
+// Indica si el asistente de IA está configurado en esta instalación (RF2).
+export function asistenteActivo() {
+  return Boolean(urlServidor())
+}
+
 function mensajeErrorHttp(status) {
   if (status === 429) return 'Se alcanzó el límite de uso del servidor de IA. Espere un momento y reintente.'
   if (status >= 500) return 'El servidor de IA tuvo un error. Intente de nuevo en unos minutos.'
@@ -37,7 +46,7 @@ function mensajeErrorHttp(status) {
 // Envía la transcripción y el contexto anonimizado al servidor de IA y valida la respuesta (RF2-RF5).
 // La URL sale de VITE_IA_SERVIDOR_URL (variable de build de Vite), no de un parámetro ni de localStorage.
 export async function generarSugerencias(transcripcion, contexto) {
-  const destino = (import.meta.env.VITE_IA_SERVIDOR_URL ?? '').trim()
+  const destino = urlServidor()
   if (!destino) throw new Error('El asistente de IA no está configurado en esta instalación.')
 
   const controlador = new AbortController()
@@ -48,7 +57,7 @@ export async function generarSugerencias(transcripcion, contexto) {
     respuesta = await fetch(destino, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ transcripcion, contexto }),
+      body: JSON.stringify({ texto: transcripcion, contexto }),
       signal: controlador.signal
     })
   } catch (e) {
