@@ -8,6 +8,7 @@ import esLocale from '@fullcalendar/core/locales/es'
 import { ESTADOS_MOVIBLES_CITA, ETIQUETAS_ESTADO_CITA, formatearRango, nombreCompleto } from '@/utils/formato.js'
 import BarraCalendario from '@/components/citas/BarraCalendario.vue'
 import DetalleCita from '@/components/citas/DetalleCita.vue'
+import DetalleCitaDialog from '@/components/citas/DetalleCitaDialog.vue'
 import EventoCita from '@/components/citas/EventoCita.vue'
 import FiltroMedico from '@/components/citas/FiltroMedico.vue'
 import IconoAlergia from '@/components/citas/IconoAlergia.vue'
@@ -38,6 +39,9 @@ const vista = ref(props.soloLectura ? 'timeGridDay' : 'timeGridWeek')
 const titulo = ref('')
 const detalle = ref(null)
 const citaAbierta = ref(null)
+// Diálogo de detalle en la agenda del médico (vista Semana): la vista Día ya
+// muestra motivo, estado y acciones en la propia franja de EventoCita.vue.
+const dialogoVisible = ref(false)
 
 const pacienteAbierto = computed(() => props.pacientes.find((p) => p.id === citaAbierta.value?.pacienteId) ?? null)
 const medicoAbierto = computed(() => props.medicos.find((m) => m.id === citaAbierta.value?.medicoId) ?? null)
@@ -97,11 +101,15 @@ const opciones = computed(() => ({
   events: eventos.value,
   datesSet: actualizarRango,
   // FullCalendar no dispara eventClick al soltar un arrastre; con Enter sobre la cita sí.
-  // En modo de solo lectura no hay detalle: la cita ya muestra motivo, estado y "Atender".
   eventClick: ({ event, el }) => {
-    if (props.soloLectura) return
     citaAbierta.value = props.citas.find((c) => c.id === event.id) ?? null
-    if (citaAbierta.value) detalle.value.abrir(el)
+    if (!citaAbierta.value) return
+    if (props.soloLectura) {
+      // En la vista Día la franja ya muestra motivo, estado y acciones: sin diálogo.
+      if (vista.value === 'timeGridWeek') dialogoVisible.value = true
+      return
+    }
+    detalle.value.abrir(el)
   },
   eventDrop: ({ event, revert }) => emit('reprogramar', {
     id: event.id,
@@ -210,6 +218,17 @@ defineExpose({ irAFecha })
       :medico="medicoAbierto"
       :consultorio="consultorioAbierto"
       @cancelar="cancelarDesdeDetalle"
+    />
+
+    <DetalleCitaDialog
+      v-model:visible="dialogoVisible"
+      :cita="citaAbierta"
+      :paciente="pacienteAbierto"
+      :medico="medicoAbierto"
+      :consultorio="consultorioAbierto"
+      @atender="(id) => emit('atender', id)"
+      @ver-historia="(pacienteId) => emit('ver-historia', pacienteId)"
+      @generar-receta="(consultaId) => emit('generar-receta', consultaId)"
     />
 
     <LeyendaCitas />
