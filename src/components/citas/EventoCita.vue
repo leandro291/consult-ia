@@ -77,7 +77,7 @@ defineEmits(['atender', 'ver-historia', 'generar-receta'])
 .evento-hora { font-family: var(--fuente-dato); font-weight: 700; }
 .evento-alergia { flex-shrink: 0; margin-top: 1px; color: var(--color-alerta); }
 .evento-chip { flex-shrink: 0; }
-.evento-atender { flex-shrink: 0; height: 22px; padding: 0 8px; background: var(--color-papel); border: 1px solid currentColor; border-radius: var(--radio-sm); color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+.evento-atender { flex-shrink: 0; height: 22px; padding: 0 8px; background: var(--color-papel); border: 1px solid currentColor; border-radius: var(--radio-sm); color: var(--color-tinta); font-size: 11px; font-weight: 700; cursor: pointer; }
 .evento-ver-historia { flex-shrink: 0; height: 22px; padding: 0 8px; background: none; border: none; color: inherit; font-size: 11px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
-.evento-receta { flex-shrink: 0; height: 22px; padding: 0 8px; background: var(--color-papel); border: 1px solid currentColor; border-radius: var(--radio-sm); color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+.evento-receta { flex-shrink: 0; height: 22px; padding: 0 8px; background: var(--color-papel); border: 1px solid currentColor; border-radius: var(--radio-sm); color: var(--color-tinta); font-size: 11px; font-weight: 700; cursor: pointer; }
 </style>
