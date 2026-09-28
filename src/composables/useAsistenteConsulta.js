@@ -7,7 +7,7 @@ const CLAVES_SIGNOS = ['presion', 'frecuenciaCardiaca', 'temperatura', 'peso', '
 
 // Da forma a la respuesta de la IA como la espera ConsultaForm (RF6): signos vitales como
 // texto y sin claves null ni arrays vacíos, para no pisar lo que ya tiene el formulario.
-function limpiarSugerencia(json) {
+export function limpiarSugerencia(json) {
   const sugerencia = {}
   if (json.motivo) sugerencia.motivo = json.motivo
   if (json.examenFisico) sugerencia.examenFisico = json.examenFisico
@@ -29,7 +29,7 @@ function limpiarSugerencia(json) {
 // Arma el borrador de receta (RF1 del spec 018) con la forma de fila de RecetaForm.vue: el
 // composable no puede importar componentes (tabla de capas de SETUP.md), así que arma la fila él
 // mismo. Sin medicamentos ni indicaciones para el paciente, no hay borrador (RF1, CA4).
-function limpiarBorradorReceta(json) {
+export function limpiarBorradorReceta(json) {
   const items = (json.receta ?? []).map((item) => ({
     medicamento: item.medicamento,
     dosis: item.dosis ?? '',

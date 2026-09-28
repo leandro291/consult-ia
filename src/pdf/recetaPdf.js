@@ -7,7 +7,9 @@ pdfMake.addVirtualFileSystem(vfsFonts)
 
 // Documento de la receta (RF8): membrete, médico, paciente, tabla de medicamentos, indicaciones
 // generales, firma, pie con el id de la receta y QR (nodo nativo de pdfmake).
-function documentoReceta({ receta, paciente, medico }) {
+// Exportada para poder testearla directo: función pura, sin estado reactivo (igual criterio
+// que limpiarSugerencia/limpiarBorradorReceta en useAsistenteConsulta.js).
+export function documentoReceta({ receta, paciente, medico }) {
   return {
     content: [
       {

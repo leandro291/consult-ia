@@ -164,7 +164,7 @@ funciones puras separables, y no se lista aquí (ver nota final).
 | `lineaDivisoria()` | `src/pdf/comunes.js` | Arma una línea horizontal de separación para pdfmake |
 | `piePagina(identificador, etiqueta)` | `src/pdf/comunes.js` | Devuelve la función de pie de página con el identificador del documento y la numeración |
 | `nombreArchivoReceta({ apellidos }, fecha)` | `src/pdf/recetaPdf.js` | Arma el nombre `receta_<apellido>_<YYYY-MM-DD>.pdf` |
-| `documentoReceta({ receta, paciente, medico })` **(interna)** | `src/pdf/recetaPdf.js` | Arma la estructura de datos (definición de documento) que pdfmake usa para generar el PDF de la receta |
+| `documentoReceta({ receta, paciente, medico })` | `src/pdf/recetaPdf.js` | Arma la estructura de datos (definición de documento) que pdfmake usa para generar el PDF de la receta |
 
 ## Router (lógica pura del guard)
 
