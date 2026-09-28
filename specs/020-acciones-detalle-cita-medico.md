@@ -39,6 +39,6 @@ En "Mi agenda" (`/medico/agenda`), vista Semana, un clic en una cita abre `src/c
 - Marcar una cita como `no_asistio`, confirmarla o cancelarla desde el diálogo del médico.
 - Diseño nuevo del diálogo: `docs/diseno/pantallas/MiAgendaMedico.dc.html` solo muestra la vista Día; los botones siguen el estilo de "Atender" y "Ver historia" de esa maqueta y los componentes de PrimeVue ya usados en el diálogo.
 
-## Decisiones cerradas
-- Etiqueta del botón de receta: "Generar receta PDF", para coincidir con `EventoCita.vue`, `AtencionView.vue` y `CLAUDE.md` (confirmado por el usuario).
-- `DetalleCitaDialog.vue` (diálogo con clic en la vista Semana) y el montaje en `CalendarioCitas.vue` se toman como base aprobada de este spec (confirmado por el usuario).
+## Decisiones abiertas
+- Etiqueta del botón de receta: el requerimiento dice "Generar receta"; el spec usa "Generar receta PDF" para coincidir con `EventoCita.vue`, `AtencionView.vue` y `CLAUDE.md`. Confirmar cuál se prefiere.
+- `DetalleCitaDialog.vue` y el cambio de `CalendarioCitas.vue` que lo monta están sin commitear en la rama actual y no figuran en ningún spec ni en `SETUP.md` (por eso T1). Confirmar que ese trabajo previo se da por aprobado como base de este spec.
