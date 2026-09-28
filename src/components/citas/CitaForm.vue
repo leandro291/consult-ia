@@ -180,4 +180,10 @@ function guardar() {
   border-bottom: 1.5px solid var(--color-texto);
   border-radius: 0;
 }
+
+/* El input del AutoComplete de Paciente siempre tiene botón dropdown pegado a su derecha:
+   se aplana solo esa esquina para que encaje con el botón cuadrado, sin tocar las demás. */
+.campo :deep(.p-autocomplete-input) {
+  border-top-right-radius: 0;
+}
 </style>
