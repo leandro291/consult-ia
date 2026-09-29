@@ -260,7 +260,7 @@ Restringida: neutros fríos de papel y mesa, un acento de tinta, y tres colores 
 
 - **Esqueleto por rol:** menú lateral fijo de 256px (papel, borde derecho `linea`) y área principal con cabecera y contenido. Mismo esqueleto para médico y recepción; cambian el menú y la etiqueta de rol.
 - **Cabecera:** título y fecha a la izquierda, acciones de pantalla a la derecha, separada del contenido por la perforación (2px punteado `perforacion`). Padding 28px 48px 22px.
-- **Contenido:** padding 32px 48px 48px sobre la mesa; una hoja principal por pantalla.
+- **Contenido:** padding 32px 48px 48px sobre la mesa; una hoja principal por pantalla. El panel del día suma la hoja secundaria "Resumen de la semana" bajo la principal.
 - **Ritmo:** escala de 4/8 (`spacing`). Grupos internos a 8–12px; entre bloques 20–32px; más aire sobre un título que debajo.
 - **Menú de íconos (72px):** en las pantallas donde el médico redacta un documento (Atender cita, Emitir receta) el menú lateral se reduce a íconos con `aria-label` para ganar ancho. En el resto va el menú completo.
 - **Bloque "Siguiente paciente":** fijo en el menú completo del médico, en todas sus pantallas.
@@ -358,6 +358,12 @@ Riel vertical de 2px en `linea` con un punto por consulta; el más reciente en c
 
 ### Receta y vista previa
 El formulario de receta es una hoja con franja superior rosa de 8px. Cada medicamento confirma "Sin cruce con las alergias registradas". La vista previa del PDF (A5) muestra membrete, médico, paciente, "Rp/" con la tabla, indicaciones, firma, id y QR; nada por debajo de 10px en pantalla y 10–11pt en el PDF. Descargar e Imprimir se deshabilitan con el motivo escrito debajo.
+
+### Gráficos (panel del día)
+- Hoja simple aparte bajo la tabla ("Resumen de la semana"), nunca dentro de la hoja del listado; dos gráficos lado a lado desde 1024px y apilados por debajo.
+- Colores por estado, leídos de los tokens: Programadas `tinta`, Atendidas `sello`, Canceladas `apagado` con borde `texto-secundario`, No asistió `texto-secundario`. La carga por médico va en `tinta`.
+- Ningún estado solo con color: leyenda con el texto de cada serie, tooltip con serie y cantidad, y `role="img"` con `aria-label` que resume los totales.
+- Sin datos: "No hay citas esta semana." en lugar del gráfico. Sin tarjetas de métrica.
 
 ### Diálogos
 - **Formulario:** `Dialog` de 680px sobre velo, título en 22px, perforación bajo el título, acciones abajo a la derecha.

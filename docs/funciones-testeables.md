@@ -129,6 +129,13 @@ Funciones puras sin Vue ni persistencia.
 | `formatearMesAnio(fecha)` | `src/utils/formato.js` | Formatea una fecha como `MM/YYYY` |
 | `formatearHorarioCita({ fecha, hora, duracionMin })` | `src/utils/formato.js` | Arma el texto "Sáb 26/09 · 10:30–11:00" de una cita |
 
+### estadisticas.js
+
+| Función | Archivo | Qué hace |
+|---|---|---|
+| `citasPorDiaYEstado(citas, lunes)` | `src/utils/estadisticas.js` | Cuenta las citas de lunes a sábado por estado (`programadas` suma programada y confirmada); ignora fechas fuera de esos 6 días |
+| `citasPorMedico(citas, medicos)` | `src/utils/estadisticas.js` | Cuenta las citas no canceladas por médico (incluye 0), con etiqueta "Dr. <apellido> · <especialidad>" y de mayor a menor |
+
 ### alergias.js y anonimizar.js
 
 | Función | Archivo | Qué hace |

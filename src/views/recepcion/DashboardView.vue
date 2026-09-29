@@ -13,6 +13,7 @@ import ChipAlergia from '@/components/comunes/ChipAlergia.vue'
 import ChipEstadoCita from '@/components/citas/ChipEstadoCita.vue'
 import FiltroEstadosCita from '@/components/citas/FiltroEstadosCita.vue'
 import CitaForm from '@/components/citas/CitaForm.vue'
+import ResumenSemana from '@/components/citas/ResumenSemana.vue'
 
 const citas = useCitasStore()
 const medicos = useMedicosStore()
@@ -144,6 +145,11 @@ function citaCreada() {
       </div>
     </template>
   </PaginaListado>
+
+  <ResumenSemana
+    :citas="citas.lista"
+    :medicos="medicos.lista"
+  />
 
   <CitaForm
     v-model:visible="formularioVisible"
