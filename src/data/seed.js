@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export const VERSION_SEMILLA = 1
+export const VERSION_SEMILLA = 2
 
 export const TRANSCRIPCION_DEMO =
   'Paciente refiere fiebre desde hace tres días y dolor de garganta al tragar. Temperatura 38.5, presión 120 sobre 80, frecuencia cardiaca 92. Amígdalas inflamadas con placas blanquecinas, sin tos. Impresión diagnóstica faringitis bacteriana. Indico amoxicilina 500 miligramos cada 8 horas por 7 días y paracetamol 500 miligramos cada 8 horas si hay fiebre. Control en una semana.'
@@ -31,7 +31,7 @@ const PACIENTES = [
 const MEDICOS = [
   {
     nombres: 'Fernando', apellidos: 'Salas Vega', especialidad: 'Medicina General', colegiatura: 'CMP 45123',
-    telefono: '955111222', consultorio: 0, horario: { dias: [1, 2, 3, 4, 5, 6], inicio: '08:00', fin: '14:00' },
+    telefono: '955111222', consultorio: 0, horario: { dias: [1, 2, 3, 4, 5, 6], inicio: '08:00', fin: '22:00' },
     pacientes: [0, 1, 2, 3],
     plantillas: [
       {
@@ -70,7 +70,7 @@ const MEDICOS = [
   },
   {
     nombres: 'Lucía', apellidos: 'Paredes Díaz', especialidad: 'Pediatría', colegiatura: 'CMP 51877',
-    telefono: '955333444', consultorio: 1, horario: { dias: [1, 2, 3, 4, 5], inicio: '09:00', fin: '15:00' },
+    telefono: '955333444', consultorio: 1, horario: { dias: [1, 2, 3, 4, 5], inicio: '09:00', fin: '22:00' },
     pacientes: [7, 8, 9],
     plantillas: [
       {
@@ -107,7 +107,7 @@ const MEDICOS = [
   },
   {
     nombres: 'Ricardo', apellidos: 'Montoya Silva', especialidad: 'Cardiología', colegiatura: 'CMP 38456',
-    telefono: '955555666', consultorio: 2, horario: { dias: [1, 3, 5], inicio: '10:00', fin: '16:00' },
+    telefono: '955555666', consultorio: 2, horario: { dias: [1, 3, 5], inicio: '10:00', fin: '22:00' },
     pacientes: [4, 5, 6],
     plantillas: [
       {

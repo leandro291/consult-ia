@@ -127,7 +127,7 @@ describe('constantes de la semilla', () => {
     )
   })
 
-  it('la versión de la semilla es 1', () => {
-    expect(VERSION_SEMILLA).toBe(1)
+  it('la versión de la semilla es 2', () => {
+    expect(VERSION_SEMILLA).toBe(2)
   })
 })

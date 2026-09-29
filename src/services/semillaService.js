@@ -8,7 +8,11 @@ export function cargarSemilla() {
   guardar(CLAVES.version, VERSION_SEMILLA)
 }
 
-// Carga la semilla solo la primera vez (cuando no existe clinica_version).
+// Carga la semilla si no hay versión guardada o si es distinta de la actual.
+// Al recargar por cambio de versión se limpia la sesión: la semilla regenera los ids.
 export function inicializarDatos() {
-  if (leer(CLAVES.version, null) === null) cargarSemilla()
+  const version = leer(CLAVES.version, null)
+  if (version === VERSION_SEMILLA) return
+  if (version !== null) guardar(CLAVES.sesion, null)
+  cargarSemilla()
 }
