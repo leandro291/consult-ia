@@ -27,7 +27,7 @@ import IconoAlergia from '@/components/citas/IconoAlergia.vue'
     <span class="item"><IconoAlergia />Paciente con alergias</span>
     <span class="relleno" />
     <!-- ponytail: texto fijo; si el horario se vuelve configurable, leerlo de los médicos. -->
-    <span>Horario de atención: <span class="dato">Lun–Sáb 08:00–14:00</span></span>
+    <span>Horario de atención: <span class="dato">Lun–Sáb 08:00–22:00</span></span>
   </div>
 </template>
 

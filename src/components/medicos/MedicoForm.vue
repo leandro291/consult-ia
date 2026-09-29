@@ -30,7 +30,7 @@ function vacio() {
   return {
     nombres: '', apellidos: '', especialidad: '', colegiatura: '', telefono: '',
     consultorioId: '', email: '', password: '',
-    horario: { dias: [1, 2, 3, 4, 5], inicio: '08:00', fin: '14:00' }
+    horario: { dias: [1, 2, 3, 4, 5], inicio: '08:00', fin: '22:00' }
   }
 }
 

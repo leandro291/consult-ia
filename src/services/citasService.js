@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { DURACION_CITA_MIN } from '@/data/seed.js'
 import { CLAVES, guardar, leer } from '@/services/storage.js'
 import {
@@ -12,7 +13,11 @@ const ESTADOS_ACTIVOS = ['programada', 'confirmada']
 // Aplica las reglas de horario y solapamiento. `idIgnorado` evita comparar la cita consigo misma al reprogramar.
 function validarAgenda(medico, cita, idIgnorado = null) {
   if (!citaDentroDelHorario(cita, medico.horario)) {
-    throw new Error('La cita está fuera del horario de atención del médico.')
+    const { inicio, fin } = medico.horario
+    const ultima = dayjs(`2000-01-01T${fin}`).subtract(cita.duracionMin, 'minute').format('HH:mm')
+    throw new Error(
+      `La cita está fuera del horario de atención del médico (${inicio}–${fin}; la última cita puede empezar a las ${ultima}).`
+    )
   }
   const choca = leer(CLAVES.citas).some(
     (c) => c.id !== idIgnorado && c.medicoId === medico.id && c.estado !== 'cancelada' && citasSeSolapan(c, cita)

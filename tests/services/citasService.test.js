@@ -72,7 +72,7 @@ describe('citasService', () => {
     })
 
     it('rechaza una hora fuera del horario de atención del médico', () => {
-      expect(() => crearCita(datosCita({ hora: '07:00' }))).toThrow('La cita está fuera del horario de atención del médico.')
+      expect(() => crearCita(datosCita({ hora: '07:00' }))).toThrow('La cita está fuera del horario de atención del médico')
     })
 
     it('acepta una cita que termina justo al cierre del horario (límite)', () => {
@@ -80,7 +80,13 @@ describe('citasService', () => {
     })
 
     it('rechaza una cita que se pasa un minuto del cierre del horario (límite)', () => {
-      expect(() => crearCita(datosCita({ hora: '13:31' }))).toThrow('La cita está fuera del horario de atención del médico.')
+      expect(() => crearCita(datosCita({ hora: '13:31' }))).toThrow('La cita está fuera del horario de atención del médico')
+    })
+
+    it('el error de horario indica el rango y la última hora de inicio posible', () => {
+      expect(() => crearCita(datosCita({ hora: '13:31' }))).toThrow(
+        'La cita está fuera del horario de atención del médico (08:00–14:00; la última cita puede empezar a las 13:30).'
+      )
     })
 
     it('rechaza dos citas del mismo médico que se solapan', () => {
@@ -125,7 +131,7 @@ describe('citasService', () => {
     it('rechaza reprogramar fuera del horario de atención', () => {
       const cita = crearCita(datosCita({ hora: '09:00' }))
       expect(() => reprogramarCita(cita.id, { fecha: cita.fecha, hora: '23:00' })).toThrow(
-        'La cita está fuera del horario de atención del médico.'
+        'La cita está fuera del horario de atención del médico'
       )
     })
 
